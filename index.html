@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VECHTCLUB XL — Schoolproject</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,900;1,500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --xl-blue: #55b8f7;
+      --xl-dark: #272625;
+      --xl-bg:   #f3f1ee;
+      --xl-meta: #a2a2a2;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #f3f1ee;
+      color: #000;
+      letter-spacing: -.02em;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+    ::selection { background: #55b8f7; }
+
+    /* Nav */
+    .nav-frosted {
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      background: rgba(243,241,238,.9);
+    }
+    .nav-link {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: .875rem;
+      color: #000;
+      text-decoration: none;
+      letter-spacing: -.01em;
+      transition: color .15s ease;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+    }
+    .nav-link:hover { color: #55b8f7; }
+    .nav-link:focus-visible { outline: 2px solid #55b8f7; outline-offset: 3px; border-radius: 3px; }
+
+    /* Dropdown */
+    .dropdown-wrap {
+      position: relative;
+      display: inline-block;
+    }
+    .dropdown-button {
+      display: flex;
+      align-items: center;
+      gap: .3rem;
+      padding: 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      font-weight: 600;
+      font-size: .875rem;
+      color: #000;
+      transition: color .15s ease;
+    }
+    .dropdown-button:hover {
+      color: #55b8f7;
+    }
+    .dropdown-button svg {
+      transition: transform .2s ease;
+    }
+    .dropdown-button[aria-expanded="true"] svg {
+      transform: rotate(180deg);
+    }
+    .dropdown-panel {
+      position: absolute;
+      top: calc(100% + 0.8rem);
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      background: #fff;
+      border-radius: 1rem;
+      box-shadow: 0 12px 48px rgba(0,0,0,.15), 0 2px 8px rgba(0,0,0,.08);
+      padding: .5rem;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity .2s ease, visibility .2s ease;
+      z-index: 60;
+    }
+    .dropdown-panel.open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+    .dropdown-item {
+      display: block;
+      width: 100%;
+      padding: .6rem .85rem;
+      font-size: .85rem;
+      font-weight: 600;
+      color: #000;
+      text-decoration: none;
+      border-radius: .6rem;
+      transition: all .15s ease;
+      letter-spacing: -.01em;
+      text-align: left;
+      border: none;
+      background: none;
+      cursor: pointer;
+    }
+    .dropdown-item:hover {
+      background: #f3f1ee;
+      color: #55b8f7;
+    }
+    .dropdown-item:active {
+      background: #e8e5e0;
+    }
+    .dropdown-item {
+      display: block;
+      padding: .5rem .75rem;
+      font-size: .8rem;
+      font-weight: 600;
+      color: #000;
+      text-decoration: none;
+      border-radius: .5rem;
+      transition: background .15s, color .15s;
+      letter-spacing: -.01em;
+    }
+    .dropdown-item:hover { background: #f3f1ee; color: #55b8f7; }
+
+    /* Display heading */
+    .display { letter-spacing: -.035em; line-height: 1; font-weight: 900; }
+
+    /* Cards */
+    .card-lift { transition: box-shadow .25s ease, transform .25s ease; }
+    .card-lift:hover {
+      box-shadow: 0 20px 48px rgba(0,0,0,.1), 0 4px 12px rgba(0,0,0,.06);
+      transform: translateY(-4px);
+    }
+
+    /* Buttons */
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      border-radius: 10rem;
+      padding: .7rem 1.5rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: .875rem;
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: -.01em;
+      transition: transform .15s ease, box-shadow .15s ease;
+      cursor: pointer;
+    }
+    .pill:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.16); }
+    .pill:active { transform: none; }
+    .pill:focus-visible { outline: 2px solid #55b8f7; outline-offset: 2px; }
+    .pill-black { background: #000; color: #fff; border: 2px solid #000; }
+    .pill-outline { background: transparent; color: #000; border: 2px solid #000; }
+
+    /* Footer links */
+    .fl { display: block; margin-bottom: .45rem; font-size: .875rem; font-weight: 500; color: #fff; text-decoration: none; transition: color .15s; }
+    .fl:hover { color: #55b8f7; }
+
+    /* Grids (inline-style overrides with responsive) */
+    .g-hero   { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; width: 100%; }
+    .g-stats  { display: grid; grid-template-columns: 1fr 1fr 1fr 2fr; gap: 2.5rem; align-items: start; }
+    .g-footer { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 3rem; }
+
+    /* Mobile menu */
+    #mob { display: none; position: absolute; opacity: 0; pointer-events: none; }
+    .mob-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: #000;
+      z-index: 45;
+      padding: 5.5rem 2rem 3rem;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+    #mob:checked ~ .mob-overlay { display: flex; }
+
+    /* Fade-up entrance */
+    @keyframes fu { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:translateY(0); } }
+    .fu1 { animation: fu .55s .1s ease both; }
+    .fu2 { animation: fu .55s .25s ease both; }
+    .fu3 { animation: fu .55s .4s ease both; }
+    .fu4 { animation: fu .55s .55s ease both; }
+    .fu5 { animation: fu .55s .7s ease both; }
+
+    /* Responsive breakpoints */
+    @media (max-width: 960px) {
+      .g-hero   { grid-template-columns: 1fr; gap: 2.5rem; }
+      .hero-img { display: none; }
+      .g-stats  { grid-template-columns: 1fr 1fr; }
+      .stat-last { grid-column: 1 / -1; border-right: none !important; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,.12); }
+      .g-footer { grid-template-columns: 1fr; gap: 2rem; }
+    }
+    @media (max-width: 600px) {
+      .g-stats { grid-template-columns: 1fr; }
+      .stat-div { border-right: none !important; padding-right: 0 !important; border-bottom: 1px solid rgba(255,255,255,.12); padding-bottom: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Checkbox for mobile menu -->
+<input type="checkbox" id="mob" />
+
+<!-- NAVIGATION -->
+<nav class="nav-frosted" style="position:fixed; top:0; left:0; width:100%; z-index:50; border-bottom:1px solid rgba(0,0,0,.08);">
+  <div style="max-width:1280px; margin:0 auto; padding:0 1.5rem; height:4rem; display:flex; align-items:center; justify-content:center; position:relative;">
+
+    <!-- Logo (Centered) -->
+    <a href="index.html" style="display:flex; align-items:center; gap:.5rem; text-decoration:none;">
+      <span style="font-weight:900; font-size:1.1rem; letter-spacing:-.035em; color:#000;">VECHTCLUB</span>
+      <span style="font-weight:900; font-size:1.1rem; letter-spacing:-.035em; background:#55b8f7; color:#000; padding:.12rem .5rem; border-radius:6px;">XL</span>
+    </a>
+
+    <!-- Desktop links (Right) -->
+    <ul class="hidden md:flex" style="align-items:center; gap:2rem; list-style:none; position:absolute; right:1.5rem;">
+      <li class="dropdown-wrap">
+        <button class="dropdown-button" aria-expanded="false" aria-haspopup="true">
+          Over VECHTCLUB XL
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="dropdown-panel">
+          <a href="scaling-futures.html" class="dropdown-item">Scaling Futures</a>
+          <a href="deelvraag-1.html" class="dropdown-item">Deelvraag 1</a>
+          <a href="deelvraag-2.html" class="dropdown-item">Deelvraag 2</a>
+          <a href="deelvraag-3.html" class="dropdown-item">Deelvraag 3</a>
+          <a href="deelvraag-4.html" class="dropdown-item">Deelvraag 4</a>
+          <a href="deelvraag-5.html" class="dropdown-item">Deelvraag 5</a>
+        </div>
+      </li>
+    </ul>
+
+    <!-- Hamburger -->
+    <label for="mob" class="md:hidden" style="cursor:pointer; padding:.5rem; z-index:51; position:absolute; right:1.5rem;">
+      <svg width="24" height="18" viewBox="0 0 24 18" fill="none" aria-label="Menu openen">
+        <rect width="24" height="2" rx="1" fill="#000"/>
+        <rect y="8" width="24" height="2" rx="1" fill="#000"/>
+        <rect y="16" width="16" height="2" rx="1" fill="#000"/>
+      </svg>
+    </label>
+  </div>
+</nav>
+
+<!-- Mobile overlay -->
+<div class="mob-overlay">
+  <label for="mob" style="position:absolute; top:1.25rem; right:1.5rem; cursor:pointer; color:#fff; font-size:1.75rem; line-height:1; font-weight:300;">✕</label>
+  <a href="index.html"           style="font-weight:900; font-size:2rem; color:#fff; text-decoration:none; margin-bottom:1.25rem; letter-spacing:-.035em;">Home</a>
+  <a href="scaling-futures.html" style="font-weight:900; font-size:2rem; color:#fff; text-decoration:none; margin-bottom:1.25rem; letter-spacing:-.035em;">Scaling Futures</a>
+  <p style="font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:#55b8f7; margin: 1.25rem 0 .75rem;">Deelvragen</p>
+  <a href="deelvraag-1.html" style="font-weight:700; font-size:1.5rem; color:#fff; text-decoration:none; margin-bottom:.9rem; letter-spacing:-.02em;">Deelvraag 1</a>
+  <a href="deelvraag-2.html" style="font-weight:700; font-size:1.5rem; color:#fff; text-decoration:none; margin-bottom:.9rem; letter-spacing:-.02em;">Deelvraag 2</a>
+  <a href="deelvraag-3.html" style="font-weight:700; font-size:1.5rem; color:#fff; text-decoration:none; margin-bottom:.9rem; letter-spacing:-.02em;">Deelvraag 3</a>
+  <a href="deelvraag-4.html" style="font-weight:700; font-size:1.5rem; color:#fff; text-decoration:none; margin-bottom:.9rem; letter-spacing:-.02em;">Deelvraag 4</a>
+  <a href="deelvraag-5.html" style="font-weight:700; font-size:1.5rem; color:#fff; text-decoration:none; margin-bottom:.9rem; letter-spacing:-.02em;">Deelvraag 5</a>
+</div>
+
+<!-- Nav spacer -->
+<div style="height:4rem;"></div>
+
+
+<!-- ═══════════════════════════════════════════════
+     SECTIE 1 — HERO
+═══════════════════════════════════════════════ -->
+<section style="background:#55b8f7; min-height:calc(100vh - 4rem); display:flex; align-items:center;">
+  <div style="max-width:1280px; margin:0 auto; padding:5rem 1.5rem;" class="g-hero">
+
+    <!-- Tekst -->
+    <div>
+      <p class="fu1" style="font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.12em; color:#272625; margin-bottom:1.25rem;">
+        Utrecht · Pijlkruidstraat 2 · Schoolproject
+      </p>
+      <h1 class="display fu2" style="font-size:clamp(4rem, 11vw, 9rem); color:#000; margin-bottom:1.5rem;">
+        VECHT<br>CLUB<br>XL
+      </h1>
+      <p class="fu3" style="font-size:1.05rem; font-weight:500; max-width:460px; line-height:1.65; color:#272625; margin-bottom:2.5rem;">
+        [Introductietekst volgt — een korte beschrijving van VECHTCLUB XL als creatieve broedplaats in Utrecht-Noord en het centrale onderwerp van dit schoolproject.]
+      </p>
+      <div class="fu4" style="display:flex; flex-wrap:wrap; gap:.75rem;">
+        <a href="scaling-futures.html" class="pill pill-black">
+          Lees Scaling Futures
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7H11M11 7L7.5 3.5M11 7L7.5 10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="deelvraag-1.html" class="pill pill-outline">Deelvragen</a>
+      </div>
+    </div>
+
+    <!-- Afbeelding (verborgen op mobiel) -->
+    <div class="hero-img fu3">
+      <img
+        src="https://placehold.co/700x600/4aaae0/1a3d5c?text=Foto+VECHTCLUB+XL"
+        alt="Indruk VECHTCLUB XL"
+        style="width:100%; border-radius:1.25rem; object-fit:cover; box-shadow:0 28px 64px rgba(0,0,0,.2);"
+      />
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     SECTIE 2 — STATISTIEKEN / CONTEXT
+═══════════════════════════════════════════════ -->
+<section style="background:#272625; padding:5rem 1.5rem;">
+  <div style="max-width:1280px; margin:0 auto;" class="g-stats">
+
+    <!-- Stat 1 -->
+    <div class="stat-div" style="border-right:1px solid rgba(255,255,255,.1); padding-right:2rem;">
+      <p class="display" style="font-size:clamp(2.5rem, 5vw, 4.5rem); color:#55b8f7;">[00]</p>
+      <p style="font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:#a2a2a2; margin-top:.5rem;">[Statistiek label]</p>
+    </div>
+
+    <!-- Stat 2 -->
+    <div class="stat-div" style="border-right:1px solid rgba(255,255,255,.1); padding-right:2rem;">
+      <p class="display" style="font-size:clamp(2.5rem, 5vw, 4.5rem); color:#55b8f7;">[00]</p>
+      <p style="font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:#a2a2a2; margin-top:.5rem;">[Statistiek label]</p>
+    </div>
+
+    <!-- Stat 3 -->
+    <div class="stat-div" style="border-right:1px solid rgba(255,255,255,.1); padding-right:2rem;">
+      <p class="display" style="font-size:clamp(2.5rem, 5vw, 4.5rem); color:#55b8f7;">[00]</p>
+      <p style="font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:#a2a2a2; margin-top:.5rem;">[Statistiek label]</p>
+    </div>
+
+    <!-- Context alinea -->
+    <div class="stat-last">
+      <p style="font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:#55b8f7; margin-bottom:1rem;">Over dit project</p>
+      <p style="font-size:1rem; font-weight:500; color:#fff; line-height:1.7; max-width:480px;">
+        [Context tekst volgt — de aanleiding, het doel en de centrale onderzoeksvraag van dit schoolproject over VECHTCLUB XL komen hier te staan.]
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     SECTIE 3 — FOTOGALERIJ (IMPRESSIES)
+═══════════════════════════════════════════════ -->
+<section style="background:#f3f1ee; padding:6rem 1.5rem;">
+  <div style="max-width:1280px; margin:0 auto;">
+
+    <div style="display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:3rem;">
+      <h2 class="display" style="font-size:clamp(2.25rem, 5vw, 4rem);">Impressies</h2>
+      <p style="font-size:.7rem; font-weight:700; color:#a2a2a2; text-transform:uppercase; letter-spacing:.1em;">Foto's worden later toegevoegd</p>
+    </div>
+
+    <!-- Masonry kolommen -->
+    <div style="columns:3 260px; column-gap:1.25rem;">
+
+      <div class="card-lift" style="border-radius:1rem; overflow:hidden; margin-bottom:1.25rem; break-inside:avoid;">
+        <img src="https://placehold.co/600x420/ddd8d3/aaa5a0?text=Foto+1" alt="Foto 1" style="width:100%; display:block;" />
+      </div>
+
+      <div class="card-lift" style="border-radius:1rem; overflow:hidden; margin-bottom:1.25rem; break-inside:avoid;">
+        <img src="https://placehold.co/600x680/ddd8d3/aaa5a0?text=Foto+2" alt="Foto 2" style="width:100%; display:block;" />
+      </div>
+
+      <div class="card-lift" style="border-radius:1rem; overflow:hidden; margin-bottom:1.25rem; break-inside:avoid;">
+        <img src="https://placehold.co/600x380/ddd8d3/aaa5a0?text=Foto+3" alt="Foto 3" style="width:100%; display:block;" />
+      </div>
+
+      <div class="card-lift" style="border-radius:1rem; overflow:hidden; margin-bottom:1.25rem; break-inside:avoid;">
+        <img src="https://placehold.co/600x540/ddd8d3/aaa5a0?text=Foto+4" alt="Foto 4" style="width:100%; display:block;" />
+      </div>
+
+      <div class="card-lift" style="border-radius:1rem; overflow:hidden; margin-bottom:1.25rem; break-inside:avoid;">
+        <img src="https://placehold.co/600x360/ddd8d3/aaa5a0?text=Foto+5" alt="Foto 5" style="width:100%; display:block;" />
+      </div>
+
+      <div class="card-lift" style="border-radius:1rem; overflow:hidden; margin-bottom:1.25rem; break-inside:avoid;">
+        <img src="https://placehold.co/600x600/ddd8d3/aaa5a0?text=Foto+6" alt="Foto 6" style="width:100%; display:block;" />
+      </div>
+
+      <div class="card-lift" style="border-radius:1rem; overflow:hidden; margin-bottom:1.25rem; break-inside:avoid;">
+        <img src="https://placehold.co/600x440/ddd8d3/aaa5a0?text=Foto+7" alt="Foto 7" style="width:100%; display:block;" />
+      </div>
+
+      <div class="card-lift" style="border-radius:1rem; overflow:hidden; margin-bottom:1.25rem; break-inside:avoid;">
+        <img src="https://placehold.co/600x500/ddd8d3/aaa5a0?text=Foto+8" alt="Foto 8" style="width:100%; display:block;" />
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     SECTIE 4 — NAVIGATIEKAARTEN
+═══════════════════════════════════════════════ -->
+<section style="background:#55b8f7; padding:6rem 1.5rem;">
+  <div style="max-width:1280px; margin:0 auto;">
+
+    <p style="font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:#272625; margin-bottom:.75rem;">Onderzoek</p>
+    <h2 class="display" style="font-size:clamp(2rem, 5vw, 3.5rem); margin-bottom:3rem; max-width:580px;">Verken het onderzoek</h2>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:1.25rem;">
+
+      <!-- Scaling Futures -->
+      <a href="scaling-futures.html" class="card-lift" style="background:#fff; border-radius:1.25rem; padding:2rem; text-decoration:none; display:flex; flex-direction:column; gap:1rem; min-height:220px;">
+        <span style="display:inline-block; background:#000; color:#fff; font-size:.65rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; border-radius:10rem; padding:.3rem .8rem; width:fit-content;">Hoofdvraag</span>
+        <h3 style="font-size:1.25rem; font-weight:900; letter-spacing:-.025em; color:#000; line-height:1.2; flex:1;">Scaling Futures</h3>
+        <p style="font-size:.875rem; font-weight:500; color:#a2a2a2; line-height:1.55;">[Beschrijving volgt]</p>
+        <span style="font-size:.875rem; font-weight:700; color:#55b8f7;">Lees meer →</span>
+      </a>
+
+      <!-- Deelvraag 1 -->
+      <a href="deelvraag-1.html" class="card-lift" style="background:#fff; border-radius:1.25rem; padding:2rem; text-decoration:none; display:flex; flex-direction:column; gap:1rem; min-height:220px;">
+        <span style="display:inline-block; background:#000; color:#fff; font-size:.65rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; border-radius:10rem; padding:.3rem .8rem; width:fit-content;">Deelvraag 1</span>
+        <h3 style="font-size:1.25rem; font-weight:900; letter-spacing:-.025em; color:#000; line-height:1.2; flex:1;">Brede welvaart, maakbedrijven & broedplaatsen</h3>
+        <p style="font-size:.875rem; font-weight:500; color:#a2a2a2; line-height:1.55;">Hoe kunnen steden creatieve ondernemers en innovatie meer waarderen in hun stedelijke beleid?</p>
+        <span style="font-size:.875rem; font-weight:700; color:#55b8f7;">Lees meer →</span>
+      </a>
+
+      <!-- Deelvraag 2 -->
+      <a href="deelvraag-2.html" class="card-lift" style="background:#fff; border-radius:1.25rem; padding:2rem; text-decoration:none; display:flex; flex-direction:column; gap:1rem; min-height:220px;">
+        <span style="display:inline-block; background:#000; color:#fff; font-size:.65rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; border-radius:10rem; padding:.3rem .8rem; width:fit-content;">Deelvraag 2</span>
+        <h3 style="font-size:1.25rem; font-weight:900; letter-spacing:-.025em; color:#000; line-height:1.2; flex:1;">De plek & stakeholders</h3>
+        <p style="font-size:.875rem; font-weight:500; color:#a2a2a2; line-height:1.55;">Wie zijn de spelers die het verhaal en de toekomst van Vechtclub XL bepalen?</p>
+        <span style="font-size:.875rem; font-weight:700; color:#55b8f7;">Lees meer →</span>
+      </a>
+
+      <!-- Deelvraag 3 -->
+      <a href="deelvraag-3.html" class="card-lift" style="background:#fff; border-radius:1.25rem; padding:2rem; text-decoration:none; display:flex; flex-direction:column; gap:1rem; min-height:220px;">
+        <span style="display:inline-block; background:#000; color:#fff; font-size:.65rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; border-radius:10rem; padding:.3rem .8rem; width:fit-content;">Deelvraag 3</span>
+        <h3 style="font-size:1.25rem; font-weight:900; letter-spacing:-.025em; color:#000; line-height:1.2; flex:1;">Waar staat Vechtclub XL sterk?</h3>
+        <p style="font-size:.875rem; font-weight:500; color:#a2a2a2; line-height:1.55;">SWOT-analyse: Wat zijn de sterktes, zwaktes, kansen en bedreigingen?</p>
+        <span style="font-size:.875rem; font-weight:700; color:#55b8f7;">Lees meer →</span>
+      </a>
+
+      <!-- Deelvraag 4 -->
+      <a href="deelvraag-4.html" class="card-lift" style="background:#fff; border-radius:1.25rem; padding:2rem; text-decoration:none; display:flex; flex-direction:column; gap:1rem; min-height:220px;">
+        <span style="display:inline-block; background:#000; color:#fff; font-size:.65rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; border-radius:10rem; padding:.3rem .8rem; width:fit-content;">Deelvraag 4</span>
+        <h3 style="font-size:1.25rem; font-weight:900; letter-spacing:-.025em; color:#000; line-height:1.2; flex:1;">De toekomst van Vechtclub XL</h3>
+        <p style="font-size:.875rem; font-weight:500; color:#a2a2a2; line-height:1.55;">Welke onzekerheden bepalen de toekomst van deze broedplaats?</p>
+        <span style="font-size:.875rem; font-weight:700; color:#55b8f7;">Lees meer →</span>
+      </a>
+
+      <!-- Deelvraag 5 -->
+      <a href="deelvraag-5.html" class="card-lift" style="background:#fff; border-radius:1.25rem; padding:2rem; text-decoration:none; display:flex; flex-direction:column; gap:1rem; min-height:220px;">
+        <span style="display:inline-block; background:#000; color:#fff; font-size:.65rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; border-radius:10rem; padding:.3rem .8rem; width:fit-content;">Deelvraag 5</span>
+        <h3 style="font-size:1.25rem; font-weight:900; letter-spacing:-.025em; color:#000; line-height:1.2; flex:1;">Rol van de overheid</h3>
+        <p style="font-size:.875rem; font-weight:500; color:#a2a2a2; line-height:1.55;">Hoe kan de gemeente plekken zoals Vechtclub XL beschermen?</p>
+        <span style="font-size:.875rem; font-weight:700; color:#55b8f7;">Lees meer →</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════ -->
+<footer style="background:#272625;">
+  <div class="g-footer" style="max-width:1280px; margin:0 auto; padding:4.5rem 1.5rem;">
+
+    <!-- Branding -->
+    <div>
+      <div style="display:flex; align-items:center; gap:.5rem; margin-bottom:1.25rem;">
+        <span style="font-weight:900; font-size:1rem; letter-spacing:-.035em; color:#fff;">VECHTCLUB</span>
+        <span style="font-weight:900; font-size:1rem; letter-spacing:-.035em; background:#55b8f7; color:#000; padding:.12rem .45rem; border-radius:6px;">XL</span>
+      </div>
+      <p style="font-size:.875rem; font-weight:500; color:#a2a2a2; line-height:1.75;">
+        Schoolproject<br>
+        [Naam student / klas]<br>
+        [Schoolnaam] · [Jaar]
+      </p>
+    </div>
+
+    <!-- Pagina's -->
+    <div>
+      <h4 style="font-size:.65rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:#a2a2a2; margin-bottom:1.25rem;">Pagina's</h4>
+      <a href="index.html"           class="fl">Home</a>
+      <a href="scaling-futures.html" class="fl">Scaling Futures</a>
+      <a href="deelvraag-1.html"     class="fl">Deelvraag 1</a>
+      <a href="deelvraag-2.html"     class="fl">Deelvraag 2</a>
+      <a href="deelvraag-3.html"     class="fl">Deelvraag 3</a>
+      <a href="deelvraag-4.html"     class="fl">Deelvraag 4</a>
+      <a href="deelvraag-5.html"     class="fl">Deelvraag 5</a>
+    </div>
+
+    <!-- Locatie -->
+    <div>
+      <h4 style="font-size:.65rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:#a2a2a2; margin-bottom:1.25rem;">Locatie</h4>
+      <address style="font-style:normal; font-size:.875rem; font-weight:500; color:#a2a2a2; line-height:1.85;">
+        Pijlkruidstraat 2<br>
+        3554 XE Utrecht<br>
+        <a href="https://vechtclubxl.nl" style="color:#55b8f7; text-decoration:none; transition:opacity .15s;" onmouseover="this.style.opacity='.75'" onmouseout="this.style.opacity='1'">vechtclubxl.nl</a>
+      </address>
+    </div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div style="border-top:1px solid rgba(255,255,255,.1); padding:.875rem 1.5rem;">
+    <div style="max-width:1280px; margin:0 auto; display:flex; justify-content:space-between; flex-wrap:wrap; gap:.5rem; font-size:.75rem; color:#a2a2a2; font-weight:500;">
+      <span>© [Jaar] Schoolproject — niet gelieerd aan VECHTCLUB XL</span>
+      <span>Utrecht, Nederland</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.dropdown-wrap').forEach(wrap => {
+    const button = wrap.querySelector('.dropdown-button');
+    const panel = wrap.querySelector('.dropdown-panel');
+    const items = panel.querySelectorAll('.dropdown-item');
+
+    // Toggle dropdown on button click
+    button.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = button.getAttribute('aria-expanded') === 'true';
+      button.setAttribute('aria-expanded', !isOpen);
+      panel.classList.toggle('open');
+    });
+
+    // Close dropdown when clicking a menu item
+    items.forEach(item => {
+      item.addEventListener('click', () => {
+        button.setAttribute('aria-expanded', 'false');
+        panel.classList.remove('open');
+      });
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!wrap.contains(e.target)) {
+        button.setAttribute('aria-expanded', 'false');
+        panel.classList.remove('open');
+      }
+    });
+  });
+</script>
+</body>
+</html>

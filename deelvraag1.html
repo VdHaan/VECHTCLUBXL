@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deelvraag 1 - Vechtclub XL</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --yellow: #FFFF00;
+            --turquoise: #00D9FF;
+            --green: #66CC66;
+            --pink: #FF69B4;
+            --coral: #FF6B5B;
+            --black: #000000;
+            --white: #FFFFFF;
+            --lightgray: #F5F5F5;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--white);
+            color: var(--black);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header section with Vechtclub style color blocks */
+        header {
+            position: relative;
+            padding: 0;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .header-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        .header-bg-left {
+            background: var(--coral);
+            clip-path: polygon(0 0, 100% 0, 60% 100%, 0 100%);
+        }
+
+        .header-bg-center {
+            background: var(--yellow);
+        }
+
+        .header-bg-right {
+            background: var(--green);
+            clip-path: polygon(40% 0, 100% 0, 100% 100%, 0 100%);
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 5rem;
+            font-weight: 900;
+            letter-spacing: 8px;
+            color: var(--black);
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            font-size: 1.4rem;
+            color: var(--black);
+            font-weight: 600;
+            margin-top: 15px;
+            letter-spacing: 2px;
+        }
+
+        /* Main container */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+
+        /* Question box with color accent */
+        .question-box {
+            background: var(--lightgray);
+            padding: 50px;
+            margin: 60px 0;
+            position: relative;
+            border-top: 8px solid var(--turquoise);
+            animation: fadeIn 0.8s ease-out 0.3s both;
+        }
+
+        .question-box h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.2rem;
+            color: var(--black);
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .question-box p {
+            font-size: 1.15rem;
+            color: var(--black);
+            line-height: 1.8;
+        }
+
+        /* Concepts section */
+        .concepts {
+            margin: 100px 0;
+        }
+
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 80px;
+            color: var(--black);
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            position: relative;
+            animation: fadeIn 0.8s ease-out 0.4s both;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            height: 6px;
+            background: var(--yellow);
+            width: 150px;
+            margin-top: 15px;
+        }
+
+        /* Asymmetric card layout - Vechtclub style */
+        .concepts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 40px;
+            margin-bottom: 60px;
+            align-items: start;
+        }
+
+        .concept-card {
+            background: var(--white);
+            padding: 50px;
+            border-radius: 0;
+            position: relative;
+            transition: all 0.4s ease;
+            animation: fadeInUp 0.8s ease-out both;
+            border: 3px solid transparent;
+        }
+
+        .concept-card:nth-child(1) {
+            border-top: 8px solid var(--turquoise);
+            animation-delay: 0.5s;
+        }
+
+        .concept-card:nth-child(2) {
+            border-top: 8px solid var(--pink);
+            animation-delay: 0.7s;
+            background: var(--lightgray);
+        }
+
+        .concept-card:nth-child(3) {
+            border-top: 8px solid var(--green);
+            animation-delay: 0.9s;
+            grid-column: 1 / -1;
+            max-width: 60%;
+            margin: 40px 0;
+        }
+
+        .concept-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .concept-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .concept-card h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: var(--black);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .concept-card p {
+            color: var(--black);
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        /* Connection section */
+        .connection-section {
+            margin: 100px 0;
+            position: relative;
+        }
+
+        .connection-box {
+            background: var(--yellow);
+            padding: 60px;
+            text-align: center;
+            border-radius: 0;
+            animation: fadeIn 0.8s ease-out 1s both;
+            position: relative;
+        }
+
+        .connection-box::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 100px;
+            background: var(--turquoise);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        .connection-box h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            color: var(--black);
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .connection-box p {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            max-width: 900px;
+            margin: 0 auto;
+            color: var(--black);
+        }
+
+        /* Conclusion with color block */
+        .conclusion-section {
+            margin: 100px 0;
+        }
+
+        .conclusion-wrapper {
+            position: relative;
+            padding-top: 40px;
+        }
+
+        .conclusion-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 300px;
+            background: var(--pink);
+            z-index: -1;
+            opacity: 0.3;
+            clip-path: polygon(100% 0, 100% 100%, 0 100%);
+        }
+
+        .conclusion-box {
+            background: var(--lightgray);
+            padding: 60px;
+            border-top: 8px solid var(--coral);
+            animation: slideInRight 0.8s ease-out 1.2s both;
+            position: relative;
+            z-index: 1;
+        }
+
+        .conclusion-box h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            color: var(--black);
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .conclusion-box p {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            margin-bottom: 20px;
+            color: var(--black);
+        }
+
+        .conclusion-box strong {
+            background: var(--yellow);
+            padding: 2px 6px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 50px 20px;
+            background: var(--black);
+            color: var(--white);
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 1px;
+            margin-top: 100px;
+        }
+
+        footer p {
+            font-size: 0.95rem;
+            text-transform: uppercase;
+        }
+
+        /* Animations */
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+
+            .concepts-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .concept-card:nth-child(3) {
+                max-width: 100%;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .connection-box,
+            .conclusion-box {
+                padding: 40px 30px;
+            }
+
+            main {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-background">
+            <div class="header-bg-left"></div>
+            <div class="header-bg-center"></div>
+            <div class="header-bg-right"></div>
+        </div>
+        <div class="header-content">
+            <h1>DEELVRAAG 1</h1>
+            <p class="subtitle">VECHTCLUB XL</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="question-box">
+            <h2>Onderzoeksvraag</h2>
+            <p>Wat betekenen de begrippen <strong>brede welvaart</strong>, <strong>maakbedrijven</strong> en <strong>creatieve broedplaatsen</strong> en hoe verhouden deze begrippen zich tot elkaar?</p>
+        </div>
+
+        <section class="concepts">
+            <h2 class="section-title">De Drie Kernbegrippen</h2>
+
+            <div class="concepts-grid">
+                <div class="concept-card">
+                    <div class="concept-icon">🌍</div>
+                    <h3>Brede Welvaart</h3>
+                    <p>Brede welvaart gaat over meer dan alleen economische groei en inkomen. Het omvat leefbaarheid, gezondheid, duurzaamheid, sociale verbinding en de kwaliteit van leven. Overheden moeten steeds bredere keuzes maken in stedelijke ontwikkeling en gebiedsontwikkeling, gericht op maatschappelijke en ecologische gevolgen op lange termijn.</p>
+                </div>
+
+                <div class="concept-card">
+                    <div class="concept-icon">🔧</div>
+                    <h3>Maakbedrijven</h3>
+                    <p>Maakbedrijven zijn bedrijven waarin productie, creativiteit, innovatie en ambacht samenkomen. Ze hebben behoefte aan betaalbare werkruimtes binnen stedelijke gebieden, maar deze ruimte komt steeds meer onder druk te staan door woningbouw en stijgende vastgoedprijzen. Maakbedrijven dragen bij aan werkgelegenheid, innovatie en economische activiteit.</p>
+                </div>
+
+                <div class="concept-card">
+                    <div class="concept-icon">🎨</div>
+                    <h3>Creatieve Broedplaatsen</h3>
+                    <p>Creatieve broedplaatsen zijn gedeelde werk- en ontmoetingsplekken waar creatieve ondernemers, kunstenaars en makers samenwerken. Ze bijdragen aan innovatie, samenwerking en levendige stedelijke gebieden. Deze plekken ontstaan vaak in oude bedrijfsgebouwen of leegstaand vastgoed en spelen een belangrijke rol in stedelijke ontwikkeling.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="connection-section">
+            <div class="connection-box">
+                <h2>🔗 Hoe Hangen Deze Samen?</h2>
+                <p>De begrippen brede welvaart, maakbedrijven en creatieve broedplaatsen zijn sterk met elkaar verbonden. Maakbedrijven en creatieve broedplaatsen dragen bij aan brede welvaart doordat zij zorgen voor werkgelegenheid, innovatie, sociale verbinding en levendige steden. Gemeenten spelen een belangrijke rol bij het ondersteunen van deze plekken via beleid, subsidies en gebiedsontwikkeling.</p>
+            </div>
+        </section>
+
+        <section class="conclusion-section">
+            <div class="conclusion-wrapper">
+                <div class="conclusion-box">
+                    <h2>Conclusie</h2>
+                    <p>Door de toenemende druk op stedelijke ruimte wordt het steeds belangrijker om een goede balans te vinden tussen wonen, werken en leefbaarheid. Hierdoor kunnen creatieve broedplaatsen en maakbedrijven een belangrijke bijdrage leveren aan <strong>duurzame stedelijke ontwikkeling</strong> binnen steden zoals Utrecht en in het project Vechtclub XL.</p>
+                    <p>Deze drie concepten vormen samen een sterke basis voor het creëren van levendige, innovatieve en welvarende stedelijke gebieden.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Vechtclub XL Onderzoeksproject | Deelvraag 1</p>
+    </footer>
+</body>
+</html>

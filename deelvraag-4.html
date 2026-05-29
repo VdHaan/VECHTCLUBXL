@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Deelvraag 4 — VECHTCLUB XL Schoolproject</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,900;1,500&display=swap" rel="stylesheet" />
+  <style>
+    :root{--xl-blue:#55b8f7;--xl-dark:#272625;--xl-bg:#f3f1ee;--xl-meta:#a2a2a2;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Montserrat',sans-serif;background:#f3f1ee;color:#000;letter-spacing:-.02em;line-height:1.5;overflow-x:hidden;}
+    ::selection{background:#55b8f7;}
+    .nav-frosted{backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(243,241,238,.9);}
+    .nav-link{font-family:'Montserrat',sans-serif;font-weight:600;font-size:.875rem;color:#000;text-decoration:none;letter-spacing:-.01em;transition:color .15s ease;background:none;border:none;cursor:pointer;padding:0;}
+    .nav-link:hover{color:#55b8f7;}
+    .dropdown-wrap{position:relative;display:inline-block;}
+    .dropdown-button{display:flex;align-items:center;gap:.3rem;padding:0;background:none;border:none;cursor:pointer;font-family:inherit;font-weight:600;font-size:.875rem;color:#000;transition:color .15s ease;}
+    .dropdown-button:hover{color:#55b8f7;}
+    .dropdown-button svg{transition:transform .2s ease;}
+    .dropdown-button[aria-expanded="true"] svg{transform:rotate(180deg);}
+    .dropdown-panel{position:absolute;top:calc(100% + 0.8rem);left:50%;transform:translateX(-50%);width:200px;background:#fff;border-radius:1rem;box-shadow:0 12px 48px rgba(0,0,0,.15),0 2px 8px rgba(0,0,0,.08);padding:.5rem;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .2s ease,visibility .2s ease;z-index:60;}
+    .dropdown-panel.open{opacity:1;visibility:visible;pointer-events:auto;}
+    .dropdown-item{display:block;width:100%;padding:.6rem .85rem;font-size:.85rem;font-weight:600;color:#000;text-decoration:none;border-radius:.6rem;transition:all .15s ease;letter-spacing:-.01em;text-align:left;border:none;background:none;cursor:pointer;}
+    .dropdown-item:hover{background:#f3f1ee;color:#55b8f7;}
+    .dropdown-item:active{background:#e8e5e0;}
+    .display{letter-spacing:-.035em;line-height:1.05;font-weight:900;}
+    .fl{display:block;margin-bottom:.45rem;font-size:.875rem;font-weight:500;color:#fff;text-decoration:none;transition:color .15s;}
+    .fl:hover{color:#55b8f7;}
+    .g-content{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+    .g-footer{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:3rem;}
+    .g-pn{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:2rem;}
+    #mob{display:none;position:absolute;opacity:0;pointer-events:none;}
+    .mob-overlay{display:none;position:fixed;inset:0;background:#000;z-index:45;padding:5.5rem 2rem 3rem;flex-direction:column;overflow-y:auto;}
+    #mob:checked~.mob-overlay{display:flex;}
+    @keyframes fu{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);}}
+    .fu1{animation:fu .55s .1s ease both;}.fu2{animation:fu .55s .25s ease both;}
+    @media(max-width:960px){.g-content{grid-template-columns:1fr;gap:2.5rem;}.img-right{order:-1;}.g-footer{grid-template-columns:1fr;gap:2rem;}}
+  </style>
+</head>
+<body>
+
+<input type="checkbox" id="mob" />
+
+<nav class="nav-frosted" style="position:fixed; top:0; left:0; width:100%; z-index:50; border-bottom:1px solid rgba(0,0,0,.08);">
+  <div style="max-width:1280px; margin:0 auto; padding:0 1.5rem; height:4rem; display:flex; align-items:center; justify-content:center; position:relative;">
+
+    <!-- Logo (Centered) -->
+    <a href="index.html" style="display:flex; align-items:center; gap:.5rem; text-decoration:none;">
+      <span style="font-weight:900; font-size:1.1rem; letter-spacing:-.035em; color:#000;">VECHTCLUB</span>
+      <span style="font-weight:900; font-size:1.1rem; letter-spacing:-.035em; background:#55b8f7; color:#000; padding:.12rem .5rem; border-radius:6px;">XL</span>
+    </a>
+
+    <!-- Desktop links (Right) -->
+    <ul class="hidden md:flex" style="align-items:center; gap:2rem; list-style:none; position:absolute; right:1.5rem;">
+      <li class="dropdown-wrap">
+        <button class="dropdown-button" aria-expanded="false" aria-haspopup="true">
+          Over VECHTCLUB XL
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="dropdown-panel">
+          <a href="scaling-futures.html" class="dropdown-item">Scaling Futures</a>
+          <a href="deelvraag-1.html" class="dropdown-item">Deelvraag 1</a>
+          <a href="deelvraag-2.html" class="dropdown-item">Deelvraag 2</a>
+          <a href="deelvraag-3.html" class="dropdown-item">Deelvraag 3</a>
+          <a href="deelvraag-4.html" class="dropdown-item">Deelvraag 4</a>
+          <a href="deelvraag-5.html" class="dropdown-item">Deelvraag 5</a>
+        </div>
+      </li>
+    </ul>
+
+    <!-- Hamburger -->
+    <label for="mob" class="md:hidden" style="cursor:pointer; padding:.5rem; z-index:51; position:absolute; right:1.5rem;">
+      <svg width="24" height="18" viewBox="0 0 24 18" fill="none" aria-label="Menu openen">
+        <rect width="24" height="2" rx="1" fill="#000"/>
+        <rect y="8" width="24" height="2" rx="1" fill="#000"/>
+        <rect y="16" width="16" height="2" rx="1" fill="#000"/>
+      </svg>
+    </label>
+  </div>
+</nav>
+
+<div class="mob-overlay">
+  <label for="mob" style="position:absolute;top:1.25rem;right:1.5rem;cursor:pointer;color:#fff;font-size:1.75rem;line-height:1;font-weight:300;">✕</label>
+  <a href="index.html"           style="font-weight:900;font-size:2rem;color:#fff;text-decoration:none;margin-bottom:1.25rem;letter-spacing:-.035em;">Home</a>
+  <a href="scaling-futures.html" style="font-weight:900;font-size:2rem;color:#fff;text-decoration:none;margin-bottom:1.25rem;letter-spacing:-.035em;">Scaling Futures</a>
+  <p style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#55b8f7;margin:1.25rem 0 .75rem;">Deelvragen</p>
+  <a href="deelvraag-1.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 1</a>
+  <a href="deelvraag-2.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 2</a>
+  <a href="deelvraag-3.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 3</a>
+  <a href="deelvraag-4.html" style="font-weight:700;font-size:1.5rem;color:#55b8f7;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 4</a>
+  <a href="deelvraag-5.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 5</a>
+</div>
+<div style="height:4rem;"></div>
+
+<!-- HERO -->
+<section style="background:#55b8f7;padding:5rem 1.5rem;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <nav style="font-size:.8rem;font-weight:600;color:#272625;margin-bottom:1.5rem;"><a href="index.html" style="color:#272625;text-decoration:none;">Home</a><span style="margin:0 .6rem;">／</span><span>Deelvraag 4</span></nav>
+    <div class="fu1" style="display:flex;align-items:center;gap:.75rem;margin-bottom:1.25rem;flex-wrap:wrap;">
+      <span style="display:inline-block;background:#000;color:#fff;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;border-radius:10rem;padding:.3rem .8rem;">Deelvraag 4</span>
+      <span style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#272625;">Onderzoek · VECHTCLUB XL</span>
+    </div>
+    <h1 class="display fu2" style="font-size:clamp(3rem,9vw,7.5rem);color:#000;max-width:14ch;">De toekomst<br>van Vechtclub<br>XL</h1>
+  </div>
+</section>
+
+<!-- LEAD -->
+<section style="background:#f3f1ee;padding:5rem 1.5rem;">
+  <div style="max-width:860px;margin:0 auto;">
+    <p style="font-size:clamp(1.2rem,2.5vw,1.65rem);font-weight:600;line-height:1.55;letter-spacing:-.02em;color:#272625;">De toekomst van Vechtclub XL is geen uitgemaakte zaak. Er zijn kansen, maar ook reële risico's die bepalen hoe de locatie er over tien jaar uitziet.</p>
+  </div>
+</section>
+
+<!-- INHOUD -->
+<section style="background:#fff;padding:6rem 1.5rem;">
+  <div style="max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:6rem;">
+    <div class="g-content">
+      <div>
+        <h2 class="display" style="font-size:clamp(1.75rem,4vw,2.75rem);margin-bottom:1.25rem;">Economisch</h2>
+        <p style="font-size:1rem;font-weight:500;color:#272625;line-height:1.7;">Economisch gezien groeit de erkenning voor creatieve werkruimtes. Gemeenten zien steeds vaker dat broedplaatsen bijdragen aan innovatie en stedelijke kwaliteit. Dat kan leiden tot meer subsidies en betere samenwerkingen. Maar tegelijkertijd stijgen vastgoedprijzen en neemt de druk op de Merwedekanaalzone toe door grootschalige woningbouw. Voor kleine maakbedrijven betekent dat: hogere kosten, minder ruimte, minder zekerheid.</p>
+      </div>
+      <img class="img-right" src="https://placehold.co/640x480/e2dfd9/aaa5a0?text=Economisch" alt="Economische toekomst" style="width:100%;border-radius:1.25rem;object-fit:cover;" />
+    </div>
+    <div class="g-content">
+      <img src="https://placehold.co/640x480/e2dfd9/aaa5a0?text=Sociaal" alt="Sociale aspecten" style="width:100%;border-radius:1.25rem;object-fit:cover;" />
+      <div>
+        <h2 class="display" style="font-size:clamp(1.75rem,4vw,2.75rem);margin-bottom:1.25rem;">Sociaal</h2>
+        <p style="font-size:1rem;font-weight:500;color:#272625;line-height:1.7;">Sociaal heeft Vechtclub XL een sterke positie. Het is een netwerk- en kenniscentrum waar makers, onderwijs en cultuur samenkomen. Die sociale waarde is echter kwetsbaar: als de huren stijgen of de toegankelijkheid afneemt, verdwijnt de diversiteit die de broedplaats juist bijzonder maakt.</p>
+      </div>
+    </div>
+    <div class="g-content">
+      <div>
+        <h2 class="display" style="font-size:clamp(1.75rem,4vw,2.75rem);margin-bottom:1.25rem;">Duurzaamheid</h2>
+        <p style="font-size:1rem;font-weight:500;color:#272625;line-height:1.7;">Duurzaamheid is een kans. Het hergebruik van het farmaceutisch pand is al een uiting van circulaire stedelijke ontwikkeling. Lokaal produceren en duurzaam ondernemen zijn trends waar Vechtclub XL op kan inhaken. Toch brengen stijgende energiekosten en strengere milieueisen ook druk met zich mee.</p>
+      </div>
+      <img class="img-right" src="https://placehold.co/640x480/e2dfd9/aaa5a0?text=Duurzaamheid" alt="Duurzaamheid" style="width:100%;border-radius:1.25rem;object-fit:cover;" />
+    </div>
+    <div class="g-content">
+      <img src="https://placehold.co/640x480/e2dfd9/aaa5a0?text=Beleid" alt="Beleidsmatige factoren" style="width:100%;border-radius:1.25rem;object-fit:cover;" />
+      <div>
+        <h2 class="display" style="font-size:clamp(1.75rem,4vw,2.75rem);margin-bottom:1.25rem;">Beleidsmatig</h2>
+        <p style="font-size:1rem;font-weight:500;color:#272625;line-height:1.7;">Beleidsmatig is de gemeente Utrecht een cruciale factor. Via bestemmingsplannen en convenanten kan ze de broedplaats beschermen of juist blootstellen aan marktdruk. Een stabiel, langdurig beleid is essentieel. Maar beleidswijzigingen of nieuwe politieke prioriteiten kunnen de situatie snel omdraaien.</p>
+      </div>
+    </div>
+    <blockquote style="background:#55b8f7;border-radius:1.5rem;padding:3.5rem;">
+      <p class="display" style="font-size:clamp(1.4rem,3.5vw,2.25rem);max-width:28ch;color:#000;">"Vechtclub XL heeft de wind mee als er samengewerkt wordt. En de wind tegen als marktwerking en korte termijn beslissingen het overnemen."</p>
+      <footer style="margin-top:1.25rem;font-size:.875rem;font-weight:700;color:#272625;">— Toekomstanalyse</footer>
+    </blockquote>
+    <div style="border-radius:1.25rem;padding:2.5rem;background:#f3f1ee;border-left:4px solid #55b8f7;">
+      <p style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a2a2a2;margin-bottom:.75rem;">Conclusie</p>
+      <p class="display" style="font-size:clamp(1.2rem,2.5vw,1.6rem);max-width:640px;line-height:1.35;color:#000;">De toekomst van Vechtclub XL hangt af van hoe vier krachten samenkomen: economische druk, sociale cohesie, duurzame ambities en beleidsmatig bewustzijn. Alle vier moeten in balans zijn voor voortbestaan.</p>
+    </div>
+  </div>
+</section>
+
+<!-- VORIGE / VOLGENDE -->
+<section style="background:#272625;padding:4rem 1.5rem;">
+  <div class="g-pn" style="max-width:1280px;margin:0 auto;">
+    <a href="deelvraag-3.html" style="text-decoration:none;">
+      <span style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a2a2a2;display:block;margin-bottom:.4rem;">← Vorige</span>
+      <span style="font-size:1.5rem;font-weight:900;color:#fff;letter-spacing:-.025em;display:block;">Deelvraag 3</span>
+    </a>
+    <a href="deelvraag-5.html" style="text-decoration:none;text-align:right;">
+      <span style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a2a2a2;display:block;margin-bottom:.4rem;">Volgende →</span>
+      <span style="font-size:1.5rem;font-weight:900;color:#fff;letter-spacing:-.025em;display:block;">Deelvraag 5</span>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:#272625;">
+  <div class="g-footer" style="max-width:1280px;margin:0 auto;padding:4.5rem 1.5rem;">
+    <div>
+      <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:1.25rem;">
+        <span style="font-weight:900;font-size:1rem;letter-spacing:-.035em;color:#fff;">VECHTCLUB</span>
+        <span style="font-weight:900;font-size:1rem;letter-spacing:-.035em;background:#55b8f7;color:#000;padding:.12rem .45rem;border-radius:6px;">XL</span>
+      </div>
+      <p style="font-size:.875rem;font-weight:500;color:#a2a2a2;line-height:1.75;">Schoolproject<br>[Naam student / klas]<br>[Schoolnaam] · [Jaar]</p>
+    </div>
+    <div>
+      <h4 style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a2a2a2;margin-bottom:1.25rem;">Pagina's</h4>
+      <a href="index.html" class="fl">Home</a><a href="scaling-futures.html" class="fl">Scaling Futures</a><a href="deelvraag-1.html" class="fl">Deelvraag 1</a><a href="deelvraag-2.html" class="fl">Deelvraag 2</a><a href="deelvraag-3.html" class="fl">Deelvraag 3</a><a href="deelvraag-4.html" class="fl">Deelvraag 4</a><a href="deelvraag-5.html" class="fl">Deelvraag 5</a>
+    </div>
+    <div>
+      <h4 style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a2a2a2;margin-bottom:1.25rem;">Locatie</h4>
+      <address style="font-style:normal;font-size:.875rem;font-weight:500;color:#a2a2a2;line-height:1.85;">Pijlkruidstraat 2<br>3554 XE Utrecht<br><a href="https://vechtclubxl.nl" style="color:#55b8f7;text-decoration:none;">vechtclubxl.nl</a></address>
+    </div>
+  </div>
+  <div style="border-top:1px solid rgba(255,255,255,.1);padding:.875rem 1.5rem;">
+    <div style="max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.75rem;color:#a2a2a2;font-weight:500;">
+      <span>© [Jaar] Schoolproject — niet gelieerd aan VECHTCLUB XL</span><span>Utrecht, Nederland</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.dropdown-wrap').forEach(wrap => {
+    const button = wrap.querySelector('.dropdown-button');
+    const panel = wrap.querySelector('.dropdown-panel');
+    const items = panel.querySelectorAll('.dropdown-item');
+
+    button.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = button.getAttribute('aria-expanded') === 'true';
+      button.setAttribute('aria-expanded', !isOpen);
+      panel.classList.toggle('open');
+    });
+
+    items.forEach(item => {
+      item.addEventListener('click', () => {
+        button.setAttribute('aria-expanded', 'false');
+        panel.classList.remove('open');
+      });
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!wrap.contains(e.target)) {
+        button.setAttribute('aria-expanded', 'false');
+        panel.classList.remove('open');
+      }
+    });
+  });
+</script>
+</body>
+</html>

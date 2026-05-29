@@ -1,0 +1,13 @@
+{
+  "name": "naamloze-map-website",
+  "version": "1.0.0",
+  "description": "Website met deelvragen",
+  "main": "serve.mjs",
+  "scripts": {
+    "start": "node serve.mjs",
+    "dev": "node serve.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
