@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Deelvraag 5 · Value Case — VECHTCLUB XL Schoolproject</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,900;1,500&display=swap" rel="stylesheet" />
+  <style>
+    :root { --xl-blue:#55b8f7; --xl-dark:#272625; --xl-bg:#f3f1ee; --xl-meta:#a2a2a2; }
+    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+    html { scroll-behavior:smooth; }
+    body { font-family:'Montserrat',sans-serif; background:#f3f1ee; color:#000; letter-spacing:-.02em; line-height:1.5; overflow-x:hidden; }
+    ::selection { background:#55b8f7; }
+
+    .nav-frosted { backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); background:rgba(243,241,238,.9); }
+    .nav-link { font-family:'Montserrat',sans-serif; font-weight:600; font-size:.875rem; color:#000; text-decoration:none; letter-spacing:-.01em; transition:color .15s ease; background:none; border:none; cursor:pointer; padding:0; }
+    .nav-link:hover { color:#55b8f7; }
+    .nav-link:focus-visible { outline:2px solid #55b8f7; outline-offset:3px; border-radius:3px; }
+
+    .dropdown-wrap { position:relative; display:inline-block; }
+    .dropdown-button { display:flex; align-items:center; gap:.3rem; padding:0; background:none; border:none; cursor:pointer; font-family:inherit; font-weight:600; font-size:.875rem; color:#000; transition:color .15s ease; }
+    .dropdown-button:hover { color:#55b8f7; }
+    .dropdown-button svg { transition:transform .2s ease; }
+    .dropdown-button[aria-expanded="true"] svg { transform:rotate(180deg); }
+    .dropdown-panel { position:absolute; top:calc(100% + 0.8rem); left:50%; transform:translateX(-50%); width:200px; background:#fff; border-radius:1rem; box-shadow:0 12px 48px rgba(0,0,0,.15),0 2px 8px rgba(0,0,0,.08); padding:.5rem; opacity:0; visibility:hidden; pointer-events:none; transition:opacity .2s ease,visibility .2s ease; z-index:60; }
+    .dropdown-panel.open { opacity:1; visibility:visible; pointer-events:auto; }
+    .dropdown-item { display:block; width:100%; padding:.6rem .85rem; font-size:.85rem; font-weight:600; color:#000; text-decoration:none; border-radius:.6rem; transition:all .15s ease; letter-spacing:-.01em; text-align:left; border:none; background:none; cursor:pointer; }
+    .dropdown-item:hover { background:#f3f1ee; color:#55b8f7; }
+    .dropdown-item:active { background:#e8e5e0; }
+    .dropdown-toggle { display:flex; align-items:center; justify-content:space-between; width:100%; }
+    .dropdown-toggle-chevron { transition:transform .2s ease; flex-shrink:0; margin-left:.4rem; }
+    .dropdown-toggle[aria-expanded="true"] .dropdown-toggle-chevron { transform:rotate(180deg); }
+    .dropdown-subpanel { max-height:0; overflow:hidden; transition:max-height .25s ease; }
+    .dropdown-subpanel.open { max-height:320px; }
+    .dropdown-subitem { padding-left:1.6rem; font-size:.8rem; }
+
+    .display { letter-spacing:-.035em; line-height:1.05; font-weight:900; }
+    .card-lift { transition:box-shadow .25s ease,transform .25s ease; }
+    .card-lift:hover { box-shadow:0 20px 48px rgba(0,0,0,.1),0 4px 12px rgba(0,0,0,.06); transform:translateY(-4px); }
+
+    .fl { display:block; margin-bottom:.45rem; font-size:.875rem; font-weight:500; color:#fff; text-decoration:none; transition:color .15s; }
+    .fl:hover { color:#55b8f7; }
+
+    .g-pn { display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:2rem; }
+    .g-footer { display:grid; grid-template-columns:1.2fr 1fr 1fr; gap:3rem; }
+
+    /* Resultaten per waardegebied */
+    .g-indicators { display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem; margin:2.25rem 0 1.25rem; }
+    .stat-card { background:#fff; border-radius:1rem; padding:1.5rem; border:1px solid #e8e5e0; }
+    .stat-card .stat-label { font-size:.8rem; font-weight:700; color:#272625; line-height:1.4; margin-bottom:.7rem; min-height:2.2em; }
+    .stat-card .stat-value { font-size:1.85rem; font-weight:900; letter-spacing:-.025em; margin-bottom:.6rem; }
+    .stat-card .stat-desc { font-size:.8rem; font-weight:500; color:#a2a2a2; line-height:1.6; }
+    .src-note { font-size:.75rem; font-weight:600; color:#a2a2a2; margin-top:.25rem; }
+
+    /* Belangrijkste lessen */
+    .g-lessons { display:grid; grid-template-columns:repeat(2,1fr); gap:1.75rem; }
+    .lesson-card { background:#fff; border-radius:1.25rem; padding:2.25rem; }
+    .lesson-card .lesson-num { display:inline-flex; align-items:center; justify-content:center; width:2.5rem; height:2.5rem; border-radius:50%; background:#55b8f7; color:#000; font-weight:900; font-size:1rem; margin-bottom:1.25rem; }
+    .lesson-card h3 { font-size:1.15rem; font-weight:900; letter-spacing:-.02em; margin-bottom:.85rem; line-height:1.3; }
+    .lesson-card p { font-size:.95rem; font-weight:500; color:#272625; line-height:1.7; margin-bottom:.85rem; }
+    .lesson-card p:last-child { margin-bottom:0; }
+    .lesson-card ul { margin:0 0 .85rem 1.25rem; }
+    .lesson-card li { font-size:.95rem; font-weight:500; color:#272625; line-height:1.7; margin-bottom:.4rem; }
+
+    /* Accordions FM/VGK */
+    details.vc-acc { background:#fff; border-radius:1rem; padding:1.25rem 1.5rem; margin-bottom:1rem; }
+    details.vc-acc summary { font-weight:700; font-size:.95rem; cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center; gap:1rem; letter-spacing:-.01em; }
+    details.vc-acc summary::-webkit-details-marker { display:none; }
+    details.vc-acc summary::after { content:"+"; font-size:1.5rem; font-weight:300; color:#55b8f7; flex-shrink:0; }
+    details.vc-acc[open] summary::after { content:"\2212"; }
+    details.vc-acc p { margin-top:1rem; font-size:.9rem; font-weight:500; color:#272625; line-height:1.75; }
+
+    #mob { display:none; position:absolute; opacity:0; pointer-events:none; }
+    .mob-overlay { display:none; position:fixed; inset:0; background:#000; z-index:45; padding:5.5rem 2rem 3rem; flex-direction:column; overflow-y:auto; }
+    #mob:checked ~ .mob-overlay { display:flex; }
+
+    @keyframes fu { from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);} }
+    .fu1{animation:fu .55s .1s ease both;} .fu2{animation:fu .55s .25s ease both;} .fu3{animation:fu .55s .4s ease both;}
+
+    @media(max-width:960px){
+      .g-footer{grid-template-columns:1fr; gap:2rem;}
+      .g-indicators{grid-template-columns:repeat(2,1fr);}
+      .g-lessons{grid-template-columns:1fr;}
+    }
+    @media(max-width:640px){
+      .g-indicators{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+
+<input type="checkbox" id="mob" />
+
+<!-- NAV -->
+<nav class="nav-frosted" style="position:fixed; top:0; left:0; width:100%; z-index:50; border-bottom:1px solid rgba(0,0,0,.08);">
+  <div style="max-width:1280px; margin:0 auto; padding:0 1.5rem; height:4rem; display:flex; align-items:center; justify-content:center; position:relative;">
+
+    <a href="index.html" style="display:flex; align-items:center; gap:.5rem; text-decoration:none;">
+      <span style="font-weight:900; font-size:1.1rem; letter-spacing:-.035em; color:#000;">VECHTCLUB</span>
+      <span style="font-weight:900; font-size:1.1rem; letter-spacing:-.035em; background:#55b8f7; color:#000; padding:.12rem .5rem; border-radius:6px;">XL</span>
+    </a>
+
+    <ul class="hidden md:flex" style="align-items:center; gap:2rem; list-style:none; position:absolute; right:1.5rem;">
+      <li class="dropdown-wrap">
+        <button class="dropdown-button" aria-expanded="false" aria-haspopup="true">
+          Over VECHTCLUB XL
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="dropdown-panel">
+          <a href="index.html" class="dropdown-item">HOME</a>
+          <a href="scaling-futures.html" class="dropdown-item">SCALING FUTURES</a>
+          <button class="dropdown-item dropdown-toggle" type="button" aria-expanded="false" aria-controls="verkenning-panel">
+            <span>VERKENNING</span>
+            <svg class="dropdown-toggle-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="dropdown-subpanel" id="verkenning-panel">
+            <a href="deelvraag-1.html" class="dropdown-item dropdown-subitem">Deelvraag 1</a>
+            <a href="deelvraag-2.html" class="dropdown-item dropdown-subitem">Deelvraag 2</a>
+            <a href="deelvraag-3.html" class="dropdown-item dropdown-subitem">Deelvraag 3</a>
+            <a href="deelvraag-4.html" class="dropdown-item dropdown-subitem">Deelvraag 4</a>
+            <a href="deelvraag-5.html" class="dropdown-item dropdown-subitem">Deelvraag 5</a>
+          </div>
+          <button class="dropdown-item dropdown-toggle" type="button" aria-expanded="false" aria-controls="valuecase-panel">
+            <span>VALUE CASE</span>
+            <svg class="dropdown-toggle-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="dropdown-subpanel" id="valuecase-panel">
+            <a href="value-case.html" class="dropdown-item dropdown-subitem">Overzicht</a>
+            <a href="valuecase-1.html" class="dropdown-item dropdown-subitem">Deelvraag 1</a>
+            <a href="valuecase-2.html" class="dropdown-item dropdown-subitem">Deelvraag 2</a>
+            <a href="valuecase-3.html" class="dropdown-item dropdown-subitem">Deelvraag 3</a>
+            <a href="valuecase-4.html" class="dropdown-item dropdown-subitem">Deelvraag 4</a>
+            <a href="valuecase-5.html" class="dropdown-item dropdown-subitem">Deelvraag 5</a>
+          </div>
+        </div>
+      </li>
+    </ul>
+
+    <label for="mob" class="md:hidden" style="cursor:pointer; padding:.5rem; z-index:51; position:absolute; right:1.5rem;">
+      <svg width="24" height="18" viewBox="0 0 24 18" fill="none" aria-label="Menu openen">
+        <rect width="24" height="2" rx="1" fill="#000"/>
+        <rect y="8" width="24" height="2" rx="1" fill="#000"/>
+        <rect y="16" width="16" height="2" rx="1" fill="#000"/>
+      </svg>
+    </label>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mob-overlay">
+  <label for="mob" style="position:absolute;top:1.25rem;right:1.5rem;cursor:pointer;color:#fff;font-size:1.75rem;line-height:1;font-weight:300;">✕</label>
+  <a href="index.html"           style="font-weight:900;font-size:2rem;color:#fff;text-decoration:none;margin-bottom:1.25rem;letter-spacing:-.035em;">HOME</a>
+  <a href="scaling-futures.html" style="font-weight:900;font-size:2rem;color:#fff;text-decoration:none;margin-bottom:1.25rem;letter-spacing:-.035em;">SCALING FUTURES</a>
+  <p style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#55b8f7;margin:1.25rem 0 .75rem;">VERKENNING</p>
+  <a href="deelvraag-1.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 1</a>
+  <a href="deelvraag-2.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 2</a>
+  <a href="deelvraag-3.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 3</a>
+  <a href="deelvraag-4.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 4</a>
+  <a href="deelvraag-5.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 5</a>
+  <p style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#55b8f7;margin:1.25rem 0 .75rem;">VALUE CASE</p>
+  <a href="value-case.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Overzicht</a>
+  <a href="valuecase-1.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 1</a>
+  <a href="valuecase-2.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 2</a>
+  <a href="valuecase-3.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 3</a>
+  <a href="valuecase-4.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 4</a>
+  <a href="valuecase-5.html" style="font-weight:700;font-size:1.5rem;color:#55b8f7;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 5</a>
+</div>
+
+<div style="height:4rem;"></div>
+
+
+<!-- ═══════ HERO ═══════ -->
+<section style="background:#55b8f7;padding:5rem 1.5rem;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <nav style="font-size:.8rem;font-weight:600;color:#272625;margin-bottom:1.5rem;letter-spacing:-.01em;">
+      <a href="index.html" style="color:#272625;text-decoration:none;">Home</a>
+      <span style="margin:0 .6rem;">／</span>
+      <a href="value-case.html" style="color:#272625;text-decoration:none;">Value Case</a>
+      <span style="margin:0 .6rem;">／</span>
+      <span>Deelvraag 5</span>
+    </nav>
+    <div class="fu1" style="display:flex;align-items:center;gap:.75rem;margin-bottom:1.25rem;flex-wrap:wrap;">
+      <span style="display:inline-block;background:#000;color:#fff;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;border-radius:10rem;padding:.3rem .8rem;">Deelvraag 5</span>
+      <span style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#272625;">Value Case · VECHTCLUB XL</span>
+    </div>
+    <h1 class="display fu2" style="font-size:clamp(3rem,9vw,7.5rem);color:#000;max-width:18ch;">Resultaten<br>en lessen</h1>
+  </div>
+</section>
+
+
+<!-- ═══════ LEAD ═══════ -->
+<section style="background:#f3f1ee;padding:5rem 1.5rem;">
+  <div style="max-width:860px;margin:0 auto;">
+    <blockquote style="border-left:4px solid #55b8f7;padding-left:1.5rem;margin-bottom:1.5rem;">
+      <p style="font-size:1rem;font-weight:600;font-style:italic;color:#272625;line-height:1.6;">"Wat zijn de resultaten en lessen als het model wordt toegepast op het eigen gebied/plaats (casus)?"</p>
+    </blockquote>
+    <p style="font-size:clamp(1.2rem,2.5vw,1.65rem);font-weight:600;line-height:1.55;letter-spacing:-.02em;color:#272625;margin-bottom:1.5rem;">
+      Door het Value Case model uit te werken op Vechtclub XL zijn inzichten ontstaan over verschillende vormen van waarde die de creatieve broedplaats genereert. In tegenstelling tot gebruikelijke vastgoedanalyses is bij deze toepassing ook gekeken naar sociale, economische, ruimtelijke en kennis gerelateerde waarde.
+    </p>
+    <p style="font-size:1rem;font-weight:500;line-height:1.75;letter-spacing:-.01em;color:#272625;margin-bottom:1rem;">
+      De resultaten laten zien dat Vechtclub XL niet alleen functioneert als werkplek voor ondernemers, maar als een ecosysteem waarin waarden worden versterkt. Hierdoor ontstaat een vorm van meervoudige waardecreatie die niet zichtbaar is met normale vastgoedanalyses.
+    </p>
+    <p style="font-size:1rem;font-weight:500;line-height:1.75;letter-spacing:-.01em;color:#272625;">
+      Hieronder volgen de resultaten per waardegebied, met de beredenering voor de gekozen waarden. Indicatoren met een <strong>*</strong> zijn schattingen, gebaseerd op publiek beschikbare informatie en logische redenering — exacte registratiedata ontbreken voor deze locatie.
+    </p>
+  </div>
+</section>
+
+
+<!-- ═══════ 01 ECONOMISCHE VITALITEIT ═══════ -->
+<section style="background:#fff;padding:5.5rem 1.5rem;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:1rem;">
+      <span style="width:.7rem;height:.7rem;border-radius:50%;background:#2e6fad;display:inline-block;"></span>
+      <p style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a2a2a2;">Waardegebied 01</p>
+    </div>
+    <h2 class="display" style="font-size:clamp(1.6rem,3.5vw,2.5rem);color:#000;max-width:32ch;margin-bottom:1.25rem;">Economische vitaliteit</h2>
+    <div style="max-width:860px;display:flex;flex-direction:column;gap:1.1rem;">
+      <p style="font-size:1rem;font-weight:500;color:#272625;line-height:1.7;">Uit de toepassing van het model blijkt dat Vechtclub XL een belangrijke functie vervult binnen de Merwedekanaalzone. De locatie biedt een groot aantal creatieve ondernemers en makers de ruimte om te ondernemen. Hierdoor ontstaat niet alleen economische bedrijvigheid, maar ook werkgelegenheid en mogelijke samenwerkingen tussen de creatieve ondernemers.</p>
+      <p style="font-size:1rem;font-weight:500;color:#272625;line-height:1.7;">Daarnaast is te zien dat de economische waarde verder gaat dan alleen huurinkomsten. De concentratie van bedrijven kan leiden tot nieuwe samenwerkingen en een innovatiegerichte manier van werken. Hierdoor ontstaat een economisch netwerk dat zichzelf kan versterken. Het begrip economische vitaliteit is hiermee een belangrijk begrip en waarde om de focus op te leggen.</p>
+    </div>
+
+    <div class="g-indicators">
+      <div class="stat-card">
+        <p class="stat-label">Aantal gevestigde bedrijven</p>
+        <p class="stat-value" style="color:#2e6fad;">99 bedrijven</p>
+        <p class="stat-desc">Op de website van Vechtclub XL wordt gesproken over 99 ondernemersbedrijven en individuele en collectieve makers.</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Nieuwe ondernemingen per jaar</p>
+        <p class="stat-value" style="color:#2e6fad;">±10-15*</p>
+        <p class="stat-desc">Schatting. Bij een stabiele bezetting van ±100 huurders en een gemiddelde verblijfsduur van 8-10 jaar ontstaat jaarlijks ongeveer 10-15% natuurlijke doorstroom.</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Percentage bezette werkruimtes</p>
+        <p class="stat-value" style="color:#2e6fad;">95-100%</p>
+        <p class="stat-desc">Uit eigen observatie bij Vechtclub XL wordt gezien dat de vraag naar ruimte groot is en leegstand beperkt is. Er zijn zelfs wachtlijsten.</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Gemiddelde verblijfsduur huurders</p>
+        <p class="stat-value" style="color:#2e6fad;">5-8 jaar*</p>
+        <p class="stat-desc">Afgeleid uit het feit dat veel ondernemers langdurig gevestigd blijven en er weinig leegstand is. Exacte cijfers ontbreken.</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Aantal betaalde arbeidsplaatsen</p>
+        <p class="stat-value" style="color:#2e6fad;">200-300*</p>
+        <p class="stat-desc">Schatting. Bij 100 bedrijven en gemiddeld 2-3 werknemers per bedrijf ontstaat een bandbreedte van 200-300 banen.</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Opdrachten tussen huurders</p>
+        <p class="stat-value" style="color:#2e6fad;">&gt;50 per jaar*</p>
+        <p class="stat-desc">Samenwerking vormt een kernfunctie van de broedplaats. Exacte registratie ontbreekt.</p>
+      </div>
+    </div>
+    <p class="src-note">Bronnen: Zuidwester (2021); Stedebouw &amp; Architectuur (2011)</p>
+  </div>
+</section>
+
+
+<!-- ═══════ 02 COMMUNITY VORMING ═══════ -->
+<section style="background:#f3f1ee;padding:5.5rem 1.5rem;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:1rem;">
+      <span style="width:.7rem;height:.7rem;border-radius:50%;background:#e8832a;display:inline-block;"></span>
+      <p style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a2a2a2;">Waardegebied 02</p>
+    </div>
+    <h2 class="display" style="font-size:clamp(1.6rem,3.5vw,2.5rem);color:#000;max-width:32ch;margin-bottom:1.25rem;">Community vorming</h2>
+    <div style="max-width:860px;display:flex;flex-direction:column;gap:1.1rem;">
+      <p style="font-size:1rem;font-weight:500;color:#272625;line-height:1.7;">Het BMT-model laat zien dat sociale waarde een belangrijke rol speelt en een sterk onderdeel van Vechtclub XL is. De locatie faciliteert tal van ontmoetingen tussen creatieve ondernemers, bezoekers en omliggende bewoners. Hierdoor kunnen netwerken ontstaan en groeien.</p>
+      <p style="font-size:1rem;font-weight:500;color:#272625;line-height:1.7;">De sociale cohesie die hiermee ontstaat draagt niet alleen bij aan het welzijn, maar heeft ook een positief effect op de economische en culturele prestaties van de ondernemers. De sociale waarde staat hiermee los van de andere waardegebieden, maar vormt wel een belangrijke factor binnen het systeem van Vechtclub XL. Hiermee is het een belangrijke waarde om de focus op te leggen.</p>
+    </div>
+
+    <div class="g-indicators">
+      <div class="stat-card">
+        <p class="stat-label">Verbondenheid (schaal 1-5)</p>
+        <p class="stat-value" style="color:#e8832a;">4,2*</p>
+        <p class="stat-desc">Schatting gebaseerd op de sterke community cultuur die in publicaties wordt beschreven.</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Informele ontmoetingen per week</p>
+        <p class="stat-value" style="color:#e8832a;">&gt;100*</p>
+        <p class="stat-desc">Afgeleid uit gedeelde voorzieningen, horeca en gemeenschappelijke ruimtes. Geschat vanwege de aanwezigheid van de bar.</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Gezamenlijke evenementen</p>
+        <p class="stat-value" style="color:#e8832a;">300-500/jaar*</p>
+        <p class="stat-desc">Gebaseerd op programmering van Beton-T, workshops en netwerkbijeenkomsten.</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Gemiddeld bezoekersaantal</p>
+        <p class="stat-value" style="color:#e8832a;">5.000-10.000*</p>
+        <p class="stat-desc">Gebaseerd op de hoeveelheid evenementen en Beton-T.</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Samenwerkende huurders</p>
+        <p class="stat-value" style="color:#e8832a;">60-70%*</p>
+        <p class="stat-desc">Schatting op basis van het broedplaatsconcept waarbij samenwerking een expliciete doelstelling is.</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Projecten met buurtinitiatieven</p>
+        <p class="stat-value" style="color:#e8832a;">5-10/jaar*</p>
+        <p class="stat-desc">Gebaseerd op activiteiten richting de Merwedekanaalzone en wijkgerichte programmering.</p>
+      </div>
+    </div>
+    <p class="src-note">Bron: Vechtclub (z.d.)</p>
+  </div>
+</section>
+
+
+<!-- ═══════ 03 CREATIEVE GEBIEDSIDENTITEIT ═══════ -->
+<section style="background:#fff;padding:5.5rem 1.5rem;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:1rem;">
+      <span style="width:.7rem;height:.7rem;border-radius:50%;background:#c23b7a;display:inline-block;"></span>
+      <p style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a2a2a2;">Waardegebied 03</p>
+    </div>
+    <h2 class="display" style="font-size:clamp(1.6rem,3.5vw,2.5rem);color:#000;max-width:32ch;margin-bottom:1.25rem;">Creatieve gebiedsidentiteit</h2>
+    <div style="max-width:860px;display:flex;flex-direction:column;gap:1.1rem;">
+      <p style="font-size:1rem;font-weight:500;color:#272625;line-height:1.7;">Vechtclub XL draagt sterk bij aan de identiteit van de Merwedekanaalzone en Utrecht als creatieve stad. De aanwezigheid van kunstenaars, ontwerpers, makers en culturele activiteiten zorgt voor een herkenbaar profiel dat niet eenvoudig te vervangen is door reguliere kantoor- of woonfuncties.</p>
+      <p style="font-size:1rem;font-weight:500;color:#272625;line-height:1.7;">De uitwerking van het BMT-model maakt zichtbaar dat deze culturele waarde niet alleen voor bezoekers belangrijk is, maar ook voor de aantrekkelijkheid van het gebied als vestigingslocatie voor ondernemers. Hiermee is het een belangrijk kernpunt om de focus op te leggen.</p>
+    </div>
+
+    <div class="g-indicators">
+      <div class="stat-card">
+        <p class="stat-label">Culturele evenementen</p>
+        <p class="stat-value" style="color:#c23b7a;">±100/jaar*</p>
+        <p class="stat-desc">Gebaseerd op openbare agenda's van Vechtclub XL en Beton-T.</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Exposities, workshops &amp; optredens</p>
+        <p class="stat-value" style="color:#c23b7a;">300-600/jaar*</p>
+        <p class="stat-desc">Afgeleid van het brede culturele programma en agenda.</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Kunstenaars / makers</p>
+        <p class="stat-value" style="color:#c23b7a;">70-90*</p>
+        <p class="stat-desc">Schatting op basis van 120 huurders waarvan een groot deel actief is in creatieve sectoren.</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Creatieve disciplines</p>
+        <p class="stat-value" style="color:#c23b7a;">&gt;15</p>
+        <p class="stat-desc">Gebaseerd op de diversiteit aan ontwerpers, makers, architecten, kunstenaars, media- en productontwikkelaars.</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Culturele waardering bezoekers</p>
+        <p class="stat-value" style="color:#c23b7a;">85-90%*</p>
+        <p class="stat-desc">Schatting op basis van het bezoekersprofiel van creatieve broedplaatsen.</p>
+      </div>
+    </div>
+    <p class="src-note">Bron: Vechtclub (z.d.)</p>
+  </div>
+</section>
+
+
+<!-- ═══════ 04 KENNISONTWIKKELING ═══════ -->
+<section style="background:#f3f1ee;padding:5.5rem 1.5rem;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:1rem;">
+      <span style="width:.7rem;height:.7rem;border-radius:50%;background:#c99a0a;display:inline-block;"></span>
+      <p style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a2a2a2;">Waardegebied 04</p>
+    </div>
+    <h2 class="display" style="font-size:clamp(1.6rem,3.5vw,2.5rem);color:#000;max-width:32ch;margin-bottom:1.25rem;">Kennisontwikkeling</h2>
+    <div style="max-width:860px;">
+      <p style="font-size:1rem;font-weight:500;color:#272625;line-height:1.7;">De aanwezigheid van een grote concentratie aan ondernemers zorgt voor een omgeving waarin kennisuitwisseling wordt gestimuleerd. Het BMT-model laat zien dat kennis waarde kan ontstaan doordat stakeholders — in dit geval ondernemers — samenwerken en ervaringen delen. Hiermee is het een belangrijk punt om op te focussen. Daarnaast biedt Vechtclub XL ruimte voor stages, experimenten en samenwerking met onderwijsinstellingen. Hierdoor levert de locatie een bijdrage aan talentontwikkeling en innovatie binnen de creatieve sector.</p>
+    </div>
+
+    <div class="g-indicators">
+      <div class="stat-card">
+        <p class="stat-label">Kennisdelingssessies</p>
+        <p class="stat-value" style="color:#c99a0a;">10-15/jaar*</p>
+        <p class="stat-desc">Afgeleid van netwerkbijeenkomsten en community activiteiten.</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Huurders die kennis delen</p>
+        <p class="stat-value" style="color:#c99a0a;">70%*</p>
+        <p class="stat-desc">Schatting gebaseerd op het collaboratieve karakter van creatieve broedplaatsen.</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Stageplaatsen</p>
+        <p class="stat-value" style="color:#c99a0a;">20-30/jaar*</p>
+        <p class="stat-desc">Afgeleid van de aanwezigheid van creatieve bedrijven en samenwerking met onderwijs.</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Onderwijsinstellingen</p>
+        <p class="stat-value" style="color:#c99a0a;">3-5</p>
+        <p class="stat-desc">Waarschijnlijk o.a. samenwerking met het Grafisch Lyceum Utrecht en andere Utrechtse onderwijsinstellingen.</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Innovatieprojecten</p>
+        <p class="stat-value" style="color:#c99a0a;">10-20/jaar*</p>
+        <p class="stat-desc">Gebaseerd op de aanwezigheid van ontwerp- en maakbedrijven.</p>
+      </div>
+    </div>
+    <p class="src-note">Bron: Vechtclub (z.d.)</p>
+  </div>
+</section>
+
+
+<!-- ═══════ 05 DUURZAME GEBIEDSONTWIKKELING ═══════ -->
+<section style="background:#fff;padding:5.5rem 1.5rem;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:1rem;">
+      <span style="width:.7rem;height:.7rem;border-radius:50%;background:#2e7d66;display:inline-block;"></span>
+      <p style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a2a2a2;">Waardegebied 05</p>
+    </div>
+    <h2 class="display" style="font-size:clamp(1.6rem,3.5vw,2.5rem);color:#000;max-width:32ch;margin-bottom:1.25rem;">Duurzame gebiedsontwikkeling</h2>
+    <div style="max-width:860px;">
+      <p style="font-size:1rem;font-weight:500;color:#272625;line-height:1.7;">De herbestemming van het oude farmaceutische pand laat zien dat Vechtclub XL ook een belangrijke ecologische waarde vertegenwoordigt. Door het bestaande vastgoed te hergebruiken wordt verspilling verminderd en blijft de ruimtelijke kwaliteit op niveau of wordt deze verhoogd. Daarnaast biedt de locatie ruimte aan creatieve ondernemers die actief zijn in het hergebruik van (productie)bronnen. Dit maakt het ook een belangrijke waarde om de focus op te leggen.</p>
+    </div>
+
+    <div class="g-indicators">
+      <div class="stat-card">
+        <p class="stat-label">Hergebruik vastgoed</p>
+        <p class="stat-value" style="color:#2e7d66;">100%</p>
+        <p class="stat-desc">Feitelijk. Vechtclub XL is gevestigd in een herbestemd voormalig farmaceutisch complex.</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Ondernemers met circulaire materialen</p>
+        <p class="stat-value" style="color:#2e7d66;">30-40%*</p>
+        <p class="stat-desc">Schatting op basis van het profiel van creatieve makers en circulaire initiatieven.</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Duurzame projecten</p>
+        <p class="stat-value" style="color:#2e7d66;">±10/jaar*</p>
+        <p class="stat-desc">Afgeleid van de duurzame positionering van de locatie.</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Circulaire initiatieven</p>
+        <p class="stat-value" style="color:#2e7d66;">5-10*</p>
+        <p class="stat-desc">Schatting op basis van aanwezige makers en hergebruikprojecten.</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Lokaal geproduceerde producten</p>
+        <p class="stat-value" style="color:#2e7d66;">60%*</p>
+        <p class="stat-desc">Afgeleid van het maakbedrijf karakter en lokale productieprocessen.</p>
+      </div>
+    </div>
+    <p class="src-note">Bronnen: Ontdek Utrecht (z.d.); Creatieve Hubs Nederland (z.d.)</p>
+  </div>
+</section>
+
+
+<!-- ═══════ 06 RUIMTELIJKE KWALITEIT ═══════ -->
+<section style="background:#f3f1ee;padding:5.5rem 1.5rem;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:1rem;">
+      <span style="width:.7rem;height:.7rem;border-radius:50%;background:#7b4ea0;display:inline-block;"></span>
+      <p style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a2a2a2;">Waardegebied 06</p>
+    </div>
+    <h2 class="display" style="font-size:clamp(1.6rem,3.5vw,2.5rem);color:#000;max-width:32ch;margin-bottom:1.25rem;">Ruimtelijke kwaliteit</h2>
+    <div style="max-width:860px;display:flex;flex-direction:column;gap:1.1rem;">
+      <p style="font-size:1rem;font-weight:500;color:#272625;line-height:1.7;">De toepassing van het model laat zien dat Vechtclub XL een belangrijke bijdrage levert aan de ruimtelijke kwaliteit van de Merwedekanaalzone. De combinatie van werken, cultuur, ontmoeting, horeca en evenementen zorgt voor een levendig gebied waarin verschillende functies samenkomen.</p>
+      <p style="font-size:1rem;font-weight:500;color:#272625;line-height:1.7;">Deze functiemenging draagt bij aan een aantrekkelijker en veerkrachtiger stedelijk gebied dan wanneer uitsluitend woningen of traditionele kantoorfuncties aanwezig zouden zijn.</p>
+    </div>
+
+    <div class="g-indicators">
+      <div class="stat-card">
+        <p class="stat-label">Betaalbare werkruimte</p>
+        <p class="stat-value" style="color:#7b4ea0;">9.000-10.000 m²*</p>
+        <p class="stat-desc">Gebaseerd op openbare informatie over de omvang van het complex.</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Werkruimte voor makers</p>
+        <p class="stat-value" style="color:#7b4ea0;">70%*</p>
+        <p class="stat-desc">Afgeleid van de primaire functie van de locatie als creatieve werkplaats.</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Aantrekkelijkheid locatie</p>
+        <p class="stat-value" style="color:#7b4ea0;">8,5/10*</p>
+        <p class="stat-desc">Schatting op basis van uitstraling, bezettingsgraad en bezoekersaantallen.</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Bezoekers per maand</p>
+        <p class="stat-value" style="color:#7b4ea0;">1.500-3.000*</p>
+        <p class="stat-desc">Afgeleid van evenementen, horeca en dagelijkse gebruikers.</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Multifunctionele ruimtes</p>
+        <p class="stat-value" style="color:#7b4ea0;">10-15*</p>
+        <p class="stat-desc">Gebaseerd op werkruimten, evenementenlocaties, horeca en gemeenschappelijke ruimtes.</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Functiemenging</p>
+        <p class="stat-value" style="color:#7b4ea0;">5/5</p>
+        <p class="stat-desc">Feitelijke observatie: combinatie van werken, cultuur, horeca, ontmoeting en evenementen.</p>
+      </div>
+    </div>
+    <p class="src-note">Bronnen: Vechtclub (z.d.); Creatieve Hubs Nederland (z.d.)</p>
+  </div>
+</section>
+
+
+<!-- ═══════ BELANGRIJKSTE LESSEN ═══════ -->
+<section style="background:#fff;padding:6rem 1.5rem;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <p style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a2a2a2;margin-bottom:.75rem;">Reflectie</p>
+    <h2 class="display" style="font-size:clamp(1.6rem,3.5vw,2.5rem);color:#000;max-width:32ch;margin-bottom:2.5rem;">Belangrijkste lessen uit de toepassing van het model</h2>
+
+    <div class="g-lessons">
+      <div class="lesson-card card-lift">
+        <span class="lesson-num">1</span>
+        <h3>Betaalbare werkruimte is de basis van het systeem</h3>
+        <p>Een van de belangrijkste inzichten uit de toepassing van het model is dat betaalbare werkruimte fungeert als een voorwaarde voor vrijwel alle andere vormen van waardecreatie.</p>
+        <p>Wanneer creatieve ondernemers toegang hebben tot betaalbare ruimte ontstaan mogelijkheden voor samenwerking, kennisdeling, culturele activiteiten en innovatie. Zonder deze basis zouden veel van de gemeten waarden niet kunnen ontstaan of gemeten worden.</p>
+        <p>Dit bevestigt het uitgangspunt van systeemdenken dat — volgens meneer van der Pluijm (persoonlijke communicatie, 9 juni 2026) — gedrag voortkomt uit structuren. De aanwezigheid van betaalbare werkruimte beïnvloedt het gedrag van ondernemers en vormt daarmee de basis voor de bredere impact van Vechtclub XL.</p>
+      </div>
+
+      <div class="lesson-card card-lift">
+        <span class="lesson-num">2</span>
+        <h3>De waarde van Vechtclub XL is groter dan de vastgoedwaarde</h3>
+        <p>De toepassing van het model laat zien dat een traditionele vastgoedanalyse slechts een beperkt deel van de werkelijke waarde van Vechtclub XL zichtbaar maakt. Wanneer uitsluitend wordt gekeken naar financiële prestaties ontstaat een incompleet beeld.</p>
+        <p>Het model maakt duidelijk dat economische, sociale, culturele, kennis- en ruimtelijke waarden sterk met elkaar verweven zijn door het hele systeem.</p>
+      </div>
+
+      <div class="lesson-card card-lift">
+        <span class="lesson-num">3</span>
+        <h3>Waarden versterken elkaar</h3>
+        <p>Een belangrijk inzicht uit de analyse is dat de verschillende waardegebieden elkaar niet vervangen, maar versterken:</p>
+        <ul>
+          <li>Meer ontmoetingen leiden tot meer samenwerking.</li>
+          <li>Meer samenwerking leidt tot meer kennisdeling.</li>
+          <li>Meer kennisdeling leidt tot innovatie.</li>
+          <li>Innovatie draagt vervolgens weer bij aan economische vitaliteit en culturele ontwikkeling.</li>
+        </ul>
+        <p>Hierdoor ontstaat een zichzelf versterkend systeem van meervoudige waardecreatie.</p>
+      </div>
+
+      <div class="lesson-card card-lift">
+        <span class="lesson-num">4</span>
+        <h3>Creatieve broedplaatsen dragen bij aan brede welvaart</h3>
+        <p>Het model laat zien dat Vechtclub XL niet alleen waarde creëert voor de huurders, maar ook voor bezoekers, buurtbewoners, onderwijsinstellingen en de gemeente.</p>
+        <p>Hierdoor draagt de locatie bij aan verschillende aspecten van brede welvaart, zoals werkgelegenheid, sociale cohesie, cultuur, leefbaarheid en duurzaamheid.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════ FM- EN VGK-SPECIFIEKE DEELVRAGEN ═══════ -->
+<section style="background:#272625;padding:6rem 1.5rem;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <p style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#55b8f7;margin-bottom:.75rem;">Verdieping</p>
+    <h2 class="display" style="font-size:clamp(1.6rem,3.5vw,2.5rem);color:#fff;max-width:32ch;margin-bottom:1.25rem;">FM- en VGK-specifieke deelvragen</h2>
+    <p style="font-size:1rem;font-weight:500;color:#a2a2a2;line-height:1.7;max-width:760px;margin-bottom:3rem;">Naast de algemene deelvragen van de Value Case zijn er ook deelvragen beantwoord die specifiek aansluiten op de opleidingsrichtingen Facility Management (FM) en Vastgoed &amp; Makelaardij (VGK). Hieronder zijn de antwoorden per richting uitklapbaar.</p>
+
+    <div style="margin-bottom:2.5rem;">
+      <h3 style="font-size:1.1rem;font-weight:900;letter-spacing:-.02em;color:#55b8f7;margin-bottom:1.25rem;">FM-specifieke deelvragen</h3>
+
+      <details class="vc-acc" open>
+        <summary>1. In hoeverre is meervoudige waardecreatie relevant voor de twee facility management-rollen?</summary>
+        <p>Meervoudige waardecreatie is zeer relevant voor zowel de property manager als de locatiemanager, omdat beide rollen sturen op meer dan alleen financiële prestaties. In het model wordt duidelijk dat een locatie zoals Vechtclub XL pas goed functioneert wanneer economische, sociale en maatschappelijke waarden in balans zijn.</p>
+        <p>De property manager kijkt vooral naar de lange termijn waarde en exploitatie van het vastgoed, terwijl de locatiemanager zich juist richt op het dagelijks functioneren en de community. Beide rollen hebben dus direct invloed op meerdere waardegebieden en zijn onmisbaar voor het realiseren van brede welvaart.</p>
+      </details>
+
+      <details class="vc-acc">
+        <summary>2. Hoe draagt een facility manager bij vanuit zijn/haar expliciete rol in het 'systeem'?</summary>
+        <p>De facility manager (in dit geval property- en locatiemanager) draagt bij door actief te sturen op de indicatoren in het model. De property manager zorgt voor randvoorwaarden zoals betaalbare werkruimte, onderhoud en een stabiele bezettingsgraad. De locatiemanager versterkt de sociale en inhoudelijke waarde door community vorming, samenwerking en programmering te stimuleren. Samen zorgen zij ervoor dat de verschillende indicatoren positief ontwikkelen en elkaar versterken. Daarmee spelen zij een centrale rol in het functioneren van het systeem en het bewaken van de balans tussen de verschillende waarden.</p>
+      </details>
+
+      <details class="vc-acc">
+        <summary>3. Hoe verschilt het perspectief op meervoudige waardecreatie tussen de twee rollen en bijbehorende veel voorkomende (business)modellen?</summary>
+        <p>Het perspectief verschilt vooral in focus en planning. De property manager kijkt vanuit een exploitatie- en investeringsperspectief, waarbij waardecreatie gericht is op stabiliteit, rendement en toekomstbestendigheid van het vastgoed. De locatiemanager kijkt meer vanuit een operationeel en community-gericht perspectief, waarbij waarde ontstaat door interactie, samenwerking en programmering.</p>
+        <p>In termen van businessmodellen betekent dit dat de property manager meer aansluit bij een traditioneel vastgoedmodel (huurinkomsten en waardebehoud), terwijl de locatiemanager werkt vanuit een meer hybride model waarin ook sociale en culturele waarde een belangrijke rol speelt. Juist de combinatie van deze perspectieven maakt meervoudige waardecreatie mogelijk binnen het systeem van Vechtclub XL.</p>
+      </details>
+    </div>
+
+    <div>
+      <h3 style="font-size:1.1rem;font-weight:900;letter-spacing:-.02em;color:#55b8f7;margin-bottom:1.25rem;">VGK-specifieke deelvragen</h3>
+
+      <details class="vc-acc">
+        <summary>1. In hoeverre is meervoudige waardecreatie relevant voor de vier vastgoedkunde-rollen?</summary>
+        <p>Meervoudige waardecreatie is relevant voor alle vier de vastgoedkunde-rollen: projectontwikkelaar, taxateur, belegger en property manager. Binnen een locatie zoals Vechtclub XL draait vastgoed namelijk niet alleen om financiële waarde, maar ook om sociale, maatschappelijke en ruimtelijke waarde. Iedere beroepsrol kijkt vanuit een eigen perspectief naar deze waarden en heeft invloed op het functioneren van de locatie.</p>
+        <p>De projectontwikkelaar kijkt vooral naar de haalbaarheid van een gebiedsontwikkeling en de manier waarop verschillende functies samen een aantrekkelijk en toekomstbestendig gebied vormen. De taxateur richt zich voornamelijk op marktwaarde, verhuurbaarheid en risico's, maar houdt indirect ook rekening met sociale en maatschappelijke factoren wanneer deze invloed hebben op vastgoedwaarde. De belegger kijkt naar rendement, stabiliteit en waardeontwikkeling op lange termijn, waarbij leefbaarheid, duurzaamheid en aantrekkelijkheid van de locatie een steeds grotere rol spelen. De property manager richt zich vooral op het dagelijks beheer, de exploitatie en de tevredenheid van gebruikers, waardoor sociale cohesie en communityvorming belangrijk worden binnen het vastgoedbeheer.</p>
+        <p>Hierdoor blijkt dat meervoudige waardecreatie voor alle vastgoedrollen relevant is, omdat economische prestaties steeds sterker verbonden raken met maatschappelijke kwaliteit en duurzame gebiedsontwikkeling.</p>
+      </details>
+
+      <details class="vc-acc">
+        <summary>2. Hoe draagt een vastgoedkundige bij vanuit zijn/haar expliciete rol in het 'systeem'?</summary>
+        <p>Een vastgoedkundige draagt bij aan het systeem door vanuit zijn of haar expertise invloed uit te oefenen op de ontwikkeling, waarde en kwaliteit van vastgoed en de omgeving. Iedere rol binnen vastgoedkunde beïnvloedt andere onderdelen van het systeem, maar samen dragen de rollen bij aan het functioneren van een locatie zoals Vechtclub XL.</p>
+        <p>De projectontwikkelaar draagt bij door functies, doelgroepen en programma's samen te brengen in een haalbare gebiedsontwikkeling. De taxateur levert een bijdrage door objectief inzicht te geven in marktwaarde, risico's en toekomstbestendigheid van vastgoed. De belegger zorgt voor financiële continuïteit en investeringen op lange termijn, waardoor de locatie zich verder kan ontwikkelen. De property manager draagt bij door het vastgoed dagelijks te beheren en randvoorwaarden te creëren voor een goed functionerende community.</p>
+        <p>Binnen Vechtclub XL versterken deze rollen elkaar. Betaalbare werkruimte, een sterke community en een aantrekkelijk gebied ontstaan alleen wanneer economische, sociale en ruimtelijke belangen met elkaar in balans blijven.</p>
+      </details>
+
+      <details class="vc-acc">
+        <summary>3. Hoe verschilt het perspectief op meervoudige waardecreatie tussen de vier rollen en bijbehorende businessmodellen?</summary>
+        <p>De vier vastgoedkunde-rollen verschillen vooral in focus, belangen en het type businessmodel waarmee zij werken. De projectontwikkelaar werkt vanuit een ontwikkelmodel waarin haalbaarheid, verkoopbaarheid en gebiedskwaliteit centraal staan; hierbij wordt gekeken hoe verschillende functies samen economische én maatschappelijke waarde kunnen creëren. De taxateur werkt vanuit een waarderingsmodel waarin marktwaarde en risicobeoordeling centraal staan — sociale en maatschappelijke factoren worden vooral meegenomen wanneer zij invloed hebben op vastgoedwaarde, verhuurbaarheid of toekomstbestendigheid.</p>
+        <p>De belegger kijkt voornamelijk vanuit een investeringsmodel, waarin rendement, stabiele huurinkomsten en waardeontwikkeling een belangrijke rol spelen. Tegelijkertijd worden duurzaamheid, leefbaarheid en ESG-factoren steeds belangrijker, omdat deze bijdragen aan een lager risicoprofiel en hogere waarde op lange termijn. De property manager werkt vanuit een exploitatie- en beheermodel, met de focus op gebruikerstevredenheid, bezettingsgraad, communityvorming en het dagelijks functioneren van de locatie. Sociale en maatschappelijke waarde spelen binnen deze rol een grotere directe rol dan bij bijvoorbeeld de taxateur.</p>
+        <p>De verschillende perspectieven vullen elkaar aan binnen het systeem van Vechtclub XL. Juist door de combinatie van financiële, sociale en ruimtelijke belangen ontstaat meervoudige waardecreatie binnen de broedplaats.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════ VORIGE / VOLGENDE ═══════ -->
+<section style="background:#55b8f7;padding:4rem 1.5rem;">
+  <div class="g-pn" style="max-width:1280px;margin:0 auto;">
+    <a href="valuecase-4.html" style="text-decoration:none;">
+      <span style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#272625;display:block;margin-bottom:.4rem;">← Vorige</span>
+      <span style="font-size:1.5rem;font-weight:900;color:#000;letter-spacing:-.025em;display:block;">Deelvraag 4</span>
+    </a>
+    <a href="value-case.html" style="text-decoration:none;text-align:right;">
+      <span style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#272625;display:block;margin-bottom:.4rem;">Volgende →</span>
+      <span style="font-size:1.5rem;font-weight:900;color:#000;letter-spacing:-.025em;display:block;">Overzicht Value Case</span>
+    </a>
+  </div>
+</section>
+
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer style="background:#272625;">
+  <div class="g-footer" style="max-width:1280px;margin:0 auto;padding:4.5rem 1.5rem;">
+    <div>
+      <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:1.25rem;">
+        <span style="font-weight:900;font-size:1rem;letter-spacing:-.035em;color:#fff;">VECHTCLUB</span>
+        <span style="font-weight:900;font-size:1rem;letter-spacing:-.035em;background:#55b8f7;color:#000;padding:.12rem .45rem;border-radius:6px;">XL</span>
+      </div>
+      <p style="font-size:.875rem;font-weight:500;color:#a2a2a2;line-height:1.75;">Schoolproject<br>Groep 36<br>Hogeschool Rotterdam</p>
+    </div>
+    <div>
+      <h4 style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a2a2a2;margin-bottom:1.25rem;">Pagina's</h4>
+      <a href="index.html"           class="fl">HOME</a>
+      <a href="scaling-futures.html" class="fl">SCALING FUTURES</a>
+      <p style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a2a2a2;margin:.9rem 0 .45rem;">VERKENNING</p>
+      <a href="deelvraag-1.html"     class="fl">Deelvraag 1</a>
+      <a href="deelvraag-2.html"     class="fl">Deelvraag 2</a>
+      <a href="deelvraag-3.html"     class="fl">Deelvraag 3</a>
+      <a href="deelvraag-4.html"     class="fl">Deelvraag 4</a>
+      <a href="deelvraag-5.html"     class="fl">Deelvraag 5</a>
+      <p style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a2a2a2;margin:.9rem 0 .45rem;">VALUE CASE</p>
+      <a href="value-case.html"  class="fl">Overzicht</a>
+      <a href="valuecase-1.html" class="fl">Deelvraag 1</a>
+      <a href="valuecase-2.html" class="fl">Deelvraag 2</a>
+      <a href="valuecase-3.html" class="fl">Deelvraag 3</a>
+      <a href="valuecase-4.html" class="fl">Deelvraag 4</a>
+      <a href="valuecase-5.html" class="fl">Deelvraag 5</a>
+    </div>
+    <div>
+      <h4 style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a2a2a2;margin-bottom:1.25rem;">Locatie</h4>
+      <address style="font-style:normal;font-size:.875rem;font-weight:500;color:#a2a2a2;line-height:1.85;">Pijlkruidstraat 2<br>3554 XE Utrecht<br><a href="https://vechtclubxl.nl" style="color:#55b8f7;text-decoration:none;">vechtclubxl.nl</a></address>
+    </div>
+  </div>
+  <div style="border-top:1px solid rgba(255,255,255,.1);padding:.875rem 1.5rem;">
+    <div style="max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.75rem;color:#a2a2a2;font-weight:500;">
+      <span>Schoolproject - Groep 36 - Hogeschool Rotterdam</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.dropdown-wrap').forEach(wrap => {
+    const button = wrap.querySelector('.dropdown-button');
+    const panel = wrap.querySelector('.dropdown-panel');
+    const toggles = wrap.querySelectorAll('.dropdown-toggle');
+    const navItems = panel.querySelectorAll('.dropdown-item:not(.dropdown-toggle)');
+
+    function closeAll() {
+      button.setAttribute('aria-expanded', 'false');
+      panel.classList.remove('open');
+      toggles.forEach(toggle => {
+        toggle.setAttribute('aria-expanded', 'false');
+        const sub = document.getElementById(toggle.getAttribute('aria-controls'));
+        if (sub) sub.classList.remove('open');
+      });
+    }
+
+    button.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = button.getAttribute('aria-expanded') === 'true';
+      if (isOpen) {
+        closeAll();
+      } else {
+        button.setAttribute('aria-expanded', 'true');
+        panel.classList.add('open');
+      }
+    });
+
+    toggles.forEach(toggle => {
+      const sub = document.getElementById(toggle.getAttribute('aria-controls'));
+      if (!sub) return;
+      toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', !isOpen);
+        sub.classList.toggle('open');
+      });
+    });
+
+    navItems.forEach(item => item.addEventListener('click', closeAll));
+
+    document.addEventListener('click', (e) => {
+      if (!wrap.contains(e.target)) closeAll();
+    });
+  });
+</script>
+</body>
+</html>

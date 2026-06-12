@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Scaling Futures — VECHTCLUB XL Schoolproject</title>
+  <title>Deelvraag 1 · Value Case — VECHTCLUB XL Schoolproject</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -48,10 +48,18 @@
     .fl { display:block; margin-bottom:.45rem; font-size:.875rem; font-weight:500; color:#fff; text-decoration:none; transition:color .15s; }
     .fl:hover { color:#55b8f7; }
 
+    .g-pn { display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:2rem; }
+    .g-footer { display:grid; grid-template-columns:1.2fr 1fr 1fr; gap:3rem; }
     .g-content { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; }
-    .g-themes  { display:grid; grid-template-columns:repeat(4,1fr); gap:1.25rem; }
-    .g-footer  { display:grid; grid-template-columns:1.2fr 1fr 1fr; gap:3rem; }
-    .g-pn      { display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:2rem; }
+
+    .g-roles { display:grid; grid-template-columns:repeat(2,1fr); gap:1.75rem; }
+    .role-card { background:#f3f1ee; border-radius:1.25rem; padding:2.25rem; }
+    .role-card h3 { font-size:1.35rem; font-weight:900; letter-spacing:-.025em; color:#000; margin-bottom:.75rem; }
+    .role-card .role-intro { font-size:.95rem; font-weight:500; color:#272625; line-height:1.7; margin-bottom:1.25rem; }
+    .role-card .role-dim { margin-bottom:1rem; }
+    .role-card .role-dim:last-child { margin-bottom:0; }
+    .role-card .role-label { display:block; font-size:.65rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:#55b8f7; margin-bottom:.35rem; }
+    .role-card .role-text { font-size:.875rem; font-weight:500; color:#272625; line-height:1.65; }
 
     #mob { display:none; position:absolute; opacity:0; pointer-events:none; }
     .mob-overlay { display:none; position:fixed; inset:0; background:#000; z-index:45; padding:5.5rem 2rem 3rem; flex-direction:column; overflow-y:auto; }
@@ -61,12 +69,11 @@
     .fu1{animation:fu .55s .1s ease both;} .fu2{animation:fu .55s .25s ease both;} .fu3{animation:fu .55s .4s ease both;}
 
     @media(max-width:960px){
+      .g-footer{grid-template-columns:1fr; gap:2rem;}
       .g-content{grid-template-columns:1fr; gap:2.5rem;}
       .img-right{order:-1;}
-      .g-themes{grid-template-columns:1fr 1fr;}
-      .g-footer{grid-template-columns:1fr; gap:2rem;}
+      .g-roles{grid-template-columns:1fr;}
     }
-    @media(max-width:600px){ .g-themes{grid-template-columns:1fr;} }
   </style>
 </head>
 <body>
@@ -135,7 +142,7 @@
 <div class="mob-overlay">
   <label for="mob" style="position:absolute;top:1.25rem;right:1.5rem;cursor:pointer;color:#fff;font-size:1.75rem;line-height:1;font-weight:300;">✕</label>
   <a href="index.html"           style="font-weight:900;font-size:2rem;color:#fff;text-decoration:none;margin-bottom:1.25rem;letter-spacing:-.035em;">HOME</a>
-  <a href="scaling-futures.html" style="font-weight:900;font-size:2rem;color:#55b8f7;text-decoration:none;margin-bottom:1.25rem;letter-spacing:-.035em;">SCALING FUTURES</a>
+  <a href="scaling-futures.html" style="font-weight:900;font-size:2rem;color:#fff;text-decoration:none;margin-bottom:1.25rem;letter-spacing:-.035em;">SCALING FUTURES</a>
   <p style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#55b8f7;margin:1.25rem 0 .75rem;">VERKENNING</p>
   <a href="deelvraag-1.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 1</a>
   <a href="deelvraag-2.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 2</a>
@@ -144,7 +151,7 @@
   <a href="deelvraag-5.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 5</a>
   <p style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#55b8f7;margin:1.25rem 0 .75rem;">VALUE CASE</p>
   <a href="value-case.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Overzicht</a>
-  <a href="valuecase-1.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 1</a>
+  <a href="valuecase-1.html" style="font-weight:700;font-size:1.5rem;color:#55b8f7;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 1</a>
   <a href="valuecase-2.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 2</a>
   <a href="valuecase-3.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 3</a>
   <a href="valuecase-4.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 4</a>
@@ -160,94 +167,168 @@
     <nav style="font-size:.8rem;font-weight:600;color:#272625;margin-bottom:1.5rem;letter-spacing:-.01em;">
       <a href="index.html" style="color:#272625;text-decoration:none;">Home</a>
       <span style="margin:0 .6rem;">／</span>
-      <span>Scaling Futures</span>
+      <a href="value-case.html" style="color:#272625;text-decoration:none;">Value Case</a>
+      <span style="margin:0 .6rem;">／</span>
+      <span>Deelvraag 1</span>
     </nav>
-    <p class="fu1" style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#272625;margin-bottom:1rem;">Onderzoek · VECHTCLUB XL</p>
-    <h1 class="display fu2" style="font-size:clamp(3rem,9vw,7.5rem);color:#000;max-width:14ch;">Scaling<br>Futures</h1>
+    <div class="fu1" style="display:flex;align-items:center;gap:.75rem;margin-bottom:1.25rem;flex-wrap:wrap;">
+      <span style="display:inline-block;background:#000;color:#fff;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;border-radius:10rem;padding:.3rem .8rem;">Deelvraag 1</span>
+      <span style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#272625;">Value Case · VECHTCLUB XL</span>
+    </div>
+    <h1 class="display fu2" style="font-size:clamp(2.75rem,8vw,6.5rem);color:#000;max-width:18ch;">Perspectieven<br>van de beroepsrollen</h1>
   </div>
 </section>
 
 
-<!-- ═══════ LEAD ALINEA ═══════ -->
+<!-- ═══════ LEAD ═══════ -->
 <section style="background:#f3f1ee;padding:5rem 1.5rem;">
   <div style="max-width:860px;margin:0 auto;">
-    <p style="font-size:clamp(1.2rem,2.5vw,1.65rem);font-weight:600;line-height:1.55;letter-spacing:-.02em;color:#272625;">
-      Vechtclub XL is meer dan een plek om te werken. Het is een broedplaats waar makers, creatieve ondernemers en culturele organisaties ruimte, kennis en energie delen. Maar hoe ziet de toekomst van deze ruimtes eruit in een stad waar vastgoedprijzen stijgen en stedelijke ruimte schaars wordt?
+    <p style="font-size:clamp(1.2rem,2.5vw,1.65rem);font-weight:600;line-height:1.55;letter-spacing:-.02em;color:#272625;margin-bottom:1.5rem;">
+      Zes verschillende beroepsrollen kijken op hun eigen manier naar de economische, sociale en maatschappelijke waarde die Vechtclub XL creëert. Samen laten ze zien hoe breed het begrip "waarde" eigenlijk is.
     </p>
-  </div>
-</section>
-
-
-<!-- ═══════ KERNTHEMA'S (uniek voor deze pagina) ═══════ -->
-<section style="background:#55b8f7;padding:6rem 1.5rem;">
-  <div style="max-width:1280px;margin:0 auto;">
-    <p style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#272625;margin-bottom:.75rem;">Framework</p>
-    <h2 class="display" style="font-size:clamp(2rem,5vw,3.5rem);margin-bottom:3rem;">Kernthema's</h2>
-    <div class="g-themes">
-      <div class="card-lift" style="background:#fff;border-radius:1.25rem;padding:2rem;">
-        <span class="display" style="font-size:2.5rem;color:#55b8f7;display:block;margin-bottom:1rem;">01</span>
-        <h3 style="font-size:1.1rem;font-weight:900;letter-spacing:-.025em;margin-bottom:.6rem;">Ruimte & Vastgoed</h3>
-        <p style="font-size:.875rem;font-weight:500;color:#a2a2a2;line-height:1.6;">Hoe kan Vechtclub XL haar fysieke basis behouden in een veranderende stedelijke context?</p>
-      </div>
-      <div class="card-lift" style="background:#fff;border-radius:1.25rem;padding:2rem;">
-        <span class="display" style="font-size:2.5rem;color:#55b8f7;display:block;margin-bottom:1rem;">02</span>
-        <h3 style="font-size:1.1rem;font-weight:900;letter-spacing:-.025em;margin-bottom:.6rem;">Economische Vitaliteit</h3>
-        <p style="font-size:.875rem;font-weight:500;color:#a2a2a2;line-height:1.6;">Hoe verdienen creatieven hun brood en groeien ondernemers op dit soort plekken?</p>
-      </div>
-      <div class="card-lift" style="background:#fff;border-radius:1.25rem;padding:2rem;">
-        <span class="display" style="font-size:2.5rem;color:#55b8f7;display:block;margin-bottom:1rem;">03</span>
-        <h3 style="font-size:1.1rem;font-weight:900;letter-spacing:-.025em;margin-bottom:.6rem;">Brede Welvaart</h3>
-        <p style="font-size:.875rem;font-weight:500;color:#a2a2a2;line-height:1.6;">Wat zijn de maatschappelijke voordelen van creatieve broedplaatsen voor buurt en stad?</p>
-      </div>
-      <div class="card-lift" style="background:#fff;border-radius:1.25rem;padding:2rem;">
-        <span class="display" style="font-size:2.5rem;color:#55b8f7;display:block;margin-bottom:1rem;">04</span>
-        <h3 style="font-size:1.1rem;font-weight:900;letter-spacing:-.025em;margin-bottom:.6rem;">Beleid & Bescherming</h3>
-        <p style="font-size:.875rem;font-weight:500;color:#a2a2a2;line-height:1.6;">Hoe kunnen gemeenten en beleidsmakers deze plekken actief beschermen en versterken?</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ═══════ INHOUDSBLOKKEN ═══════ -->
-<section style="background:#fff;padding:6rem 1.5rem;">
-  <div style="max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:6rem;">
-
-    <!-- Blok 1: tekst links, foto rechts -->
-    <div class="g-content">
-      <div>
-        <h2 class="display" style="font-size:clamp(1.75rem,4vw,2.75rem);margin-bottom:1.25rem;">Een broedplaats<br>onder druk</h2>
-        <p style="font-size:1rem;font-weight:500;color:#272625;line-height:1.7;">Vechtclub XL zit in een voormalig industrieel pand aan de Merwedekanaalzone in Utrecht. Hier wordt voortdurend iets gemaakt — in letterlijke en figuurlijke zin. Maar deze positie is niet vanzelfsprekend. Stijgende vastgoedprijzen en druk op stedelijke ruimte maken het voor broedplaatsen als Vechtclub XL steeds lastiger om te blijven bestaan. Commerciële ontwikkeling en woningbouw liggen constant op de loer.</p>
-      </div>
-      <iframe class="img-right" width="100%" height="480" src="https://www.youtube.com/embed/Y62N7fYmxa8" style="border-radius:1.25rem;display:block;" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
-
-    <!-- Blok 2: foto links, tekst rechts -->
-    <div class="g-content">
-      <img src="images/brederklimaat.png" alt="Breder klimaat" style="width:100%;border-radius:1.25rem;object-fit:cover;" />
-      <div>
-        <h2 class="display" style="font-size:clamp(1.75rem,4vw,2.75rem);margin-bottom:1.25rem;">Groeiend<br>inzicht</h2>
-        <p style="font-size:1rem;font-weight:500;color:#272625;line-height:1.7;">Tegelijkertijd groeit de erkenning dat plekken als Vechtclub XL onmisbaar zijn voor een levendige stad. Gemeenten zien steeds vaker wat creatieve werkruimtes bijdragen aan innovatie, ondernemerschap en stedelijke leefbaarheid. Voor Utrecht speelt dit letterlijk in de achtertuin: de Merwedekanaalzone is een van de grootste stedelijke transformaties van het land. Hoe die zone zich ontwikkelt, bepaalt mede of Vechtclub XL er een structurele plek in heeft.</p>
-      </div>
-    </div>
-
-    <!-- Pull quote -->
-    <blockquote style="background:#55b8f7;border-radius:1.5rem;padding:3.5rem;">
-      <p class="display" style="font-size:clamp(1.4rem,3.5vw,2.25rem);max-width:28ch;color:#000;">
-        "Plekken waar iets gemaakt wordt — dat is wat Vechtclub XL onmisbaar maakt."
-      </p>
-      <footer style="margin-top:1.25rem;font-size:.875rem;font-weight:700;color:#272625;letter-spacing:-.01em;">
-        — De toekomst van stedelijke broedplaatsen
-      </footer>
+    <blockquote style="border-left:4px solid #55b8f7;padding-left:1.5rem;">
+      <p style="font-size:1rem;font-weight:600;font-style:italic;color:#272625;line-height:1.6;">"Wat zijn perspectieven vanuit de beroepsrollen op waarden als economische, sociale, maatschappelijke waarden?"</p>
     </blockquote>
+  </div>
+</section>
 
-    <!-- Blok 3: tekst links, foto rechts -->
-    <div class="g-content">
-      <div>
-        <h2 class="display" style="font-size:clamp(1.75rem,4vw,2.75rem);margin-bottom:1.25rem;">Doorwerken<br>aan toekomst</h2>
-        <p style="font-size:1rem;font-weight:500;color:#272625;line-height:1.7;">De gemeente beschikt over de instrumenten om Vechtclub XL's positie te versterken: subsidies, bestemmingsplannen, convenanten. Of ze dat ook doet, is een van de bepalende vragen voor de toekomst. Ondertussen blijft Vechtclub XL gewoon draaien. Ondernemers werken er aan hun vak, ontmoeten elkaar, werken samen met studenten en onderwijsinstellingen, en bouwen aan iets wat moeilijk in een spreadsheet past. Dat is precies de kracht van de plek — en precies wat het de moeite waard maakt om voor te strijden.</p>
+
+<!-- ═══════ ROLLEN ═══════ -->
+<section style="background:#fff;padding:6rem 1.5rem;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <p style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a2a2a2;margin-bottom:.75rem;">Zes beroepsrollen</p>
+    <h2 class="display" style="font-size:clamp(1.6rem,3.5vw,2.5rem);color:#000;max-width:28ch;margin-bottom:3rem;">Hetzelfde gebouw, zes verschillende blikken</h2>
+
+    <div class="g-roles">
+
+      <div class="role-card card-lift">
+        <h3>Projectontwikkelaar</h3>
+        <p class="role-intro">Vanuit de rol van projectontwikkelaar worden economische, sociale en maatschappelijke waarden benaderd vanuit haalbaarheid en langetermijnpotentieel.</p>
+        <div class="role-dim">
+          <span class="role-label">Economisch</span>
+          <p class="role-text">Economische waarde draait niet puur om maximale grondopbrengst, maar om een rendabele businesscase die investeerders en financiers overtuigt. Een gezonde kosten-opbrengstenbalans, reële afzetrisico's en een solide exploitatieprognose staan daarbij centraal.</p>
+        </div>
+        <div class="role-dim">
+          <span class="role-label">Sociaal</span>
+          <p class="role-text">Sociale waarde zit vooral in hoeverre het programma en idee aansluiten op de behoeftes van toekomstige gebruikers. Welke functies en doelgroepen bijdragen aan een levendige omgeving, is mede bepalend voor de verkoopbaarheid en reputatie van het project.</p>
+        </div>
+        <div class="role-dim">
+          <span class="role-label">Maatschappelijk</span>
+          <p class="role-text">Maatschappelijke waarde richt zich op de bredere impact op de omgeving: toevoeging van werk- of woningaanbod, het verduurzamen van oude panden of het transformeren van bestaand vastgoed.</p>
+        </div>
       </div>
-      <img class="img-right" src="images/Doorwerken.png" alt="Doorwerken aan toekomst" style="width:100%;border-radius:1.25rem;object-fit:cover;" />
+
+      <div class="role-card card-lift">
+        <h3>Huisvestingsadviseur</h3>
+        <p class="role-intro">Vanuit de rol van huisvestingsadviseur worden waarden benaderd vanuit het optimaal afstemmen van huisvesting op de behoeften van gebruikers en organisaties — een balans tussen functionaliteit, kosten en maatschappelijke impact.</p>
+        <div class="role-dim">
+          <span class="role-label">Economisch</span>
+          <p class="role-text">Economische waarde draait om het efficiënt en effectief inzetten van beschikbare ruimtes: kostenbeheersing, betaalbaarheid en flexibiliteit van het vastgoed. Bij Vechtclub XL betekent dit dat werkruimtes betaalbaar, passend en functioneel zijn, zodat het vastgoed aantrekkelijk en rendabel blijft.</p>
+        </div>
+        <div class="role-dim">
+          <span class="role-label">Sociaal</span>
+          <p class="role-text">Sociale waarde wordt gezien in hoe huisvesting bijdraagt aan samenwerking, ontmoetingen en welzijn — bijvoorbeeld door gemeenschappelijke ruimtes en een prettige inrichting waarin huurders zich verbonden voelen met elkaar en met de locatie.</p>
+        </div>
+        <div class="role-dim">
+          <span class="role-label">Maatschappelijk</span>
+          <p class="role-text">Maatschappelijke waarde gaat over toegankelijkheid, duurzaamheid en de bijdrage aan de wijk of stad. Behoud van betaalbare werkruimtes en ondersteuning van creatieve initiatieven draagt bij aan de leefbaarheid en brede welvaart van de wijk.</p>
+        </div>
+      </div>
+
+      <div class="role-card card-lift">
+        <h3>Taxateur</h3>
+        <p class="role-intro">Vanuit de rol van taxateur worden waarden vooral objectief beoordeeld vanuit vastgoedwaarde en marktrisico's, met aandacht voor locatie, huurinkomsten, exploitatiemogelijkheden, vastgoedkwaliteit en marktontwikkelingen.</p>
+        <div class="role-dim">
+          <span class="role-label">Economisch</span>
+          <p class="role-text">Economische waarde speelt de grootste rol: de waardeontwikkeling van het vastgoed, de verhuurbaarheid van ruimtes en de aantrekkelijkheid van de locatie binnen de vastgoedmarkt. Een hoge bezettingsgraad en stabiele huurinkomsten hebben een positieve invloed op de marktwaarde.</p>
+        </div>
+        <div class="role-dim">
+          <span class="role-label">Sociaal &amp; maatschappelijk</span>
+          <p class="role-text">Deze waarden worden wel meegenomen, maar vooral voor zover ze invloed hebben op de vastgoedwaarde. Een sterke community, creatieve uitstraling en levendige omgeving kunnen bijdragen aan de aantrekkelijkheid van een gebied en daarmee indirect aan de waarde van het vastgoed.</p>
+        </div>
+        <div class="role-dim">
+          <span class="role-label">Bij Vechtclub XL</span>
+          <p class="role-text">Betaalbare werkruimtes, creatieve ondernemers en culturele activiteiten zijn relevant wanneer zij bijdragen aan een stabiele exploitatie, een aantrekkelijk vestigingsklimaat en een positieve waardeontwikkeling van het gebied.</p>
+        </div>
+      </div>
+
+      <div class="role-card card-lift">
+        <h3>Belegger</h3>
+        <p class="role-intro">Vanuit de rol van belegger worden waarden vooral benaderd vanuit een investeringsmodel, gericht op rendement en waardeontwikkeling van het vastgoed op de lange termijn.</p>
+        <div class="role-dim">
+          <span class="role-label">Economisch</span>
+          <p class="role-text">Economische waarde staat centraal en draait om rendement, stabiele huurinkomsten en waardeontwikkeling op lange termijn. Een hoge bezettingsgraad en langdurige huurrelaties, zoals bij Vechtclub XL, verlagen het risicoprofiel en maken de investering aantrekkelijker.</p>
+        </div>
+        <div class="role-dim">
+          <span class="role-label">Sociaal</span>
+          <p class="role-text">Sociale waarde wordt steeds vaker meegenomen als factor die het risicoprofiel beïnvloedt: een sterke community en tevreden huurders vergroten de kans dat huurders langdurig gevestigd blijven, wat de stabiliteit van de inkomstenstroom ten goede komt.</p>
+        </div>
+        <div class="role-dim">
+          <span class="role-label">Maatschappelijk</span>
+          <p class="role-text">Maatschappelijke waarde wordt vooral gewaardeerd via duurzaamheid, leefbaarheid en ESG-factoren. Deze dragen bij aan een lager risicoprofiel en een hogere waarde op lange termijn, passend bij de groeiende aandacht voor verantwoord beleggen.</p>
+        </div>
+      </div>
+
+      <div class="role-card card-lift">
+        <h3>Property manager</h3>
+        <p class="role-intro">Vanuit de rol van property manager worden waarden bekeken vanuit een beheer- en duurzaamheidsperspectief, gericht op een toekomstbestendig en exploitatiegericht vastgoedportfolio — waarin niet alleen de cijfers, maar ook de bijdrage aan stakeholders, omgeving en maatschappij centraal staan.</p>
+        <div class="role-dim">
+          <span class="role-label">Economisch</span>
+          <p class="role-text">Economische waarde draait om waarborging en continuïteit van het vastgoed: bezettingsgraad, huurinkomsten, tevredenheid van huurders en een aantrekkelijk vestigingsklimaat. Bij Vechtclub XL betekent dit het aanbieden van betaalbare werkruimtes, wat financiële stabiliteit en een sterk ecosysteem creëert.</p>
+        </div>
+        <div class="role-dim">
+          <span class="role-label">Sociaal</span>
+          <p class="role-text">Sociale waarde draagt indirect bij aan succes: wanneer huurders zich verbonden voelen, stijgt de kans dat zij langdurig gevestigd blijven. Door ontmoetingsplekken en voorzieningen te creëren ontstaan de randvoorwaarden hiervoor, wat de community én het vastgoed versterkt.</p>
+        </div>
+        <div class="role-dim">
+          <span class="role-label">Maatschappelijk</span>
+          <p class="role-text">Maatschappelijke waarde gaat over de bijdrage aan stad en omgeving — door betaalbare werkruimtes, culturele activiteiten en duurzame ontwikkeling te behouden en aan te wakkeren. Vastgoed wordt zo meer dan een financieel object: het vormt economische, sociale én maatschappelijke waarde.</p>
+        </div>
+      </div>
+
+      <div class="role-card card-lift">
+        <h3>Locatie manager</h3>
+        <p class="role-intro">Vanuit de rol van locatiemanager worden waarden benaderd vanuit het dagelijkse functioneren en de continuïteit van de locatie.</p>
+        <div class="role-dim">
+          <span class="role-label">Economisch</span>
+          <p class="role-text">Economische waarde draait niet om winstmaximalisatie, maar om een gezonde en stabiele exploitatie van de plek, waarbij een goede bezettingsgraad, betaalbaarheid van werkruimtes en het aantrekken van passende huurders centraal staan.</p>
+        </div>
+        <div class="role-dim">
+          <span class="role-label">Sociaal</span>
+          <p class="role-text">Sociale waarde wordt vooral gezien in de mate waarin een sterke en actieve community ontstaat, waarin huurders elkaar ontmoeten, samenwerken en zich verbonden voelen met de locatie.</p>
+        </div>
+        <div class="role-dim">
+          <span class="role-label">Maatschappelijk</span>
+          <p class="role-text">Maatschappelijke waarde richt zich op de betekenis van de plek voor de bredere omgeving: de bijdrage aan de wijk, toegankelijkheid voor publiek en de organisatie van culturele of sociale activiteiten. Het evenwicht tussen economische haalbaarheid, sociale dynamiek en maatschappelijke impact is bepalend voor het succes van de locatie.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════ FOTO + CONCLUSIE ═══════ -->
+<section style="background:#f3f1ee;padding:6rem 1.5rem;">
+  <div style="max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:4rem;">
+
+    <div class="g-content">
+      <img class="img-right" src="images/impressie.jpeg" alt="Impressie van Vechtclub XL" style="width:100%;border-radius:1.25rem;object-fit:cover;" />
+      <div>
+        <h2 class="display" style="font-size:clamp(1.6rem,3.5vw,2.5rem);margin-bottom:1.25rem;">Eén locatie, meerdere lenzen</h2>
+        <p style="font-size:1rem;font-weight:500;color:#272625;line-height:1.7;">Wat opvalt is dat geen van de beroepsrollen waarde puur financieel benadert. Economische, sociale en maatschappelijke waarde worden door iedereen genoemd — maar het accent verschuift per rol: van haalbaarheid en marktwaarde tot dagelijkse exploitatie en investeringsrisico.</p>
+        <p style="font-size:1rem;font-weight:500;color:#272625;line-height:1.7;margin-top:1.25rem;">Die verschillende perspectieven zijn niet tegenstrijdig, maar complementair: samen geven ze een vol beeld van wat Vechtclub XL waard is voor gebruikers, eigenaren en de wijk.</p>
+      </div>
+    </div>
+
+    <div style="border-radius:1.25rem;padding:2.5rem;background:#fff;border-left:4px solid #55b8f7;">
+      <p style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a2a2a2;margin-bottom:.75rem;">Conclusie</p>
+      <p class="display" style="font-size:clamp(1.2rem,2.5vw,1.6rem);max-width:760px;line-height:1.35;color:#000;margin-bottom:1rem;">
+        Alle zes beroepsrollen erkennen de samenhang tussen economische, sociale en maatschappelijke waarde — het verschil zit in de nadruk.
+      </p>
+      <p style="font-size:1rem;font-weight:500;color:#272625;line-height:1.7;">
+        De projectontwikkelaar en de belegger redeneren vanuit haalbaarheid en rendement op lange termijn, de taxateur vanuit marktwaarde en risico, en de huisvestingsadviseur, property manager en locatiemanager vanuit de dagelijkse exploitatie en het functioneren van de community. Sociale en maatschappelijke waarde worden door bijna iedere rol uiteindelijk vertaald naar een effect op de economische waarde — wat laat zien hoe nauw deze waarden bij Vechtclub XL met elkaar verbonden zijn.
+      </p>
     </div>
 
   </div>
@@ -257,13 +338,13 @@
 <!-- ═══════ VORIGE / VOLGENDE ═══════ -->
 <section style="background:#272625;padding:4rem 1.5rem;">
   <div class="g-pn" style="max-width:1280px;margin:0 auto;">
-    <a href="index.html" style="text-decoration:none;">
+    <a href="value-case.html" style="text-decoration:none;">
       <span style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a2a2a2;display:block;margin-bottom:.4rem;">← Vorige</span>
-      <span style="font-size:1.5rem;font-weight:900;color:#fff;letter-spacing:-.025em;display:block;">Home</span>
+      <span style="font-size:1.5rem;font-weight:900;color:#fff;letter-spacing:-.025em;display:block;">Value Case overzicht</span>
     </a>
-    <a href="deelvraag-1.html" style="text-decoration:none;text-align:right;">
+    <a href="valuecase-2.html" style="text-decoration:none;text-align:right;">
       <span style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a2a2a2;display:block;margin-bottom:.4rem;">Volgende →</span>
-      <span style="font-size:1.5rem;font-weight:900;color:#fff;letter-spacing:-.025em;display:block;">Deelvraag 1</span>
+      <span style="font-size:1.5rem;font-weight:900;color:#fff;letter-spacing:-.025em;display:block;">Deelvraag 2</span>
     </a>
   </div>
 </section>

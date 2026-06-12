@@ -27,6 +27,12 @@
     .dropdown-item{display:block;width:100%;padding:.6rem .85rem;font-size:.85rem;font-weight:600;color:#000;text-decoration:none;border-radius:.6rem;transition:all .15s ease;letter-spacing:-.01em;text-align:left;border:none;background:none;cursor:pointer;}
     .dropdown-item:hover{background:#f3f1ee;color:#55b8f7;}
     .dropdown-item:active{background:#e8e5e0;}
+    .dropdown-toggle{display:flex;align-items:center;justify-content:space-between;width:100%;}
+    .dropdown-toggle-chevron{transition:transform .2s ease;flex-shrink:0;margin-left:.4rem;}
+    .dropdown-toggle[aria-expanded="true"] .dropdown-toggle-chevron{transform:rotate(180deg);}
+    .dropdown-subpanel{max-height:0;overflow:hidden;transition:max-height .25s ease;}
+    .dropdown-subpanel.open{max-height:320px;}
+    .dropdown-subitem{padding-left:1.6rem;font-size:.8rem;}
     .display{letter-spacing:-.035em;line-height:1.05;font-weight:900;}
     .fl{display:block;margin-bottom:.45rem;font-size:.875rem;font-weight:500;color:#fff;text-decoration:none;transition:color .15s;}
     .fl:hover{color:#55b8f7;}
@@ -62,13 +68,31 @@
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
         <div class="dropdown-panel">
-          <a href="index.html" class="dropdown-item">Home</a>
-          <a href="scaling-futures.html" class="dropdown-item">Scaling Futures</a>
-          <a href="deelvraag-1.html" class="dropdown-item">Deelvraag 1</a>
-          <a href="deelvraag-2.html" class="dropdown-item">Deelvraag 2</a>
-          <a href="deelvraag-3.html" class="dropdown-item">Deelvraag 3</a>
-          <a href="deelvraag-4.html" class="dropdown-item">Deelvraag 4</a>
-          <a href="deelvraag-5.html" class="dropdown-item">Deelvraag 5</a>
+          <a href="index.html" class="dropdown-item">HOME</a>
+          <a href="scaling-futures.html" class="dropdown-item">SCALING FUTURES</a>
+          <button class="dropdown-item dropdown-toggle" type="button" aria-expanded="false" aria-controls="verkenning-panel">
+            <span>VERKENNING</span>
+            <svg class="dropdown-toggle-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="dropdown-subpanel" id="verkenning-panel">
+            <a href="deelvraag-1.html" class="dropdown-item dropdown-subitem">Deelvraag 1</a>
+            <a href="deelvraag-2.html" class="dropdown-item dropdown-subitem">Deelvraag 2</a>
+            <a href="deelvraag-3.html" class="dropdown-item dropdown-subitem">Deelvraag 3</a>
+            <a href="deelvraag-4.html" class="dropdown-item dropdown-subitem">Deelvraag 4</a>
+            <a href="deelvraag-5.html" class="dropdown-item dropdown-subitem">Deelvraag 5</a>
+          </div>
+          <button class="dropdown-item dropdown-toggle" type="button" aria-expanded="false" aria-controls="valuecase-panel">
+            <span>VALUE CASE</span>
+            <svg class="dropdown-toggle-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="dropdown-subpanel" id="valuecase-panel">
+            <a href="value-case.html" class="dropdown-item dropdown-subitem">Overzicht</a>
+            <a href="valuecase-1.html" class="dropdown-item dropdown-subitem">Deelvraag 1</a>
+            <a href="valuecase-2.html" class="dropdown-item dropdown-subitem">Deelvraag 2</a>
+            <a href="valuecase-3.html" class="dropdown-item dropdown-subitem">Deelvraag 3</a>
+            <a href="valuecase-4.html" class="dropdown-item dropdown-subitem">Deelvraag 4</a>
+            <a href="valuecase-5.html" class="dropdown-item dropdown-subitem">Deelvraag 5</a>
+          </div>
         </div>
       </li>
     </ul>
@@ -86,14 +110,21 @@
 
 <div class="mob-overlay">
   <label for="mob" style="position:absolute;top:1.25rem;right:1.5rem;cursor:pointer;color:#fff;font-size:1.75rem;line-height:1;font-weight:300;">✕</label>
-  <a href="index.html"           style="font-weight:900;font-size:2rem;color:#fff;text-decoration:none;margin-bottom:1.25rem;letter-spacing:-.035em;">Home</a>
-  <a href="scaling-futures.html" style="font-weight:900;font-size:2rem;color:#fff;text-decoration:none;margin-bottom:1.25rem;letter-spacing:-.035em;">Scaling Futures</a>
-  <p style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#55b8f7;margin:1.25rem 0 .75rem;">Deelvragen</p>
+  <a href="index.html"           style="font-weight:900;font-size:2rem;color:#fff;text-decoration:none;margin-bottom:1.25rem;letter-spacing:-.035em;">HOME</a>
+  <a href="scaling-futures.html" style="font-weight:900;font-size:2rem;color:#fff;text-decoration:none;margin-bottom:1.25rem;letter-spacing:-.035em;">SCALING FUTURES</a>
+  <p style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#55b8f7;margin:1.25rem 0 .75rem;">VERKENNING</p>
   <a href="deelvraag-1.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 1</a>
   <a href="deelvraag-2.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 2</a>
   <a href="deelvraag-3.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 3</a>
   <a href="deelvraag-4.html" style="font-weight:700;font-size:1.5rem;color:#55b8f7;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 4</a>
   <a href="deelvraag-5.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 5</a>
+  <p style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#55b8f7;margin:1.25rem 0 .75rem;">VALUE CASE</p>
+  <a href="value-case.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Overzicht</a>
+  <a href="valuecase-1.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 1</a>
+  <a href="valuecase-2.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 2</a>
+  <a href="valuecase-3.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 3</a>
+  <a href="valuecase-4.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 4</a>
+  <a href="valuecase-5.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 5</a>
 </div>
 <div style="height:4rem;"></div>
 
@@ -184,7 +215,7 @@
     </div>
     <div>
       <h4 style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a2a2a2;margin-bottom:1.25rem;">Pagina's</h4>
-      <a href="index.html" class="fl">Home</a><a href="scaling-futures.html" class="fl">Scaling Futures</a><a href="deelvraag-1.html" class="fl">Deelvraag 1</a><a href="deelvraag-2.html" class="fl">Deelvraag 2</a><a href="deelvraag-3.html" class="fl">Deelvraag 3</a><a href="deelvraag-4.html" class="fl">Deelvraag 4</a><a href="deelvraag-5.html" class="fl">Deelvraag 5</a>
+      <a href="index.html" class="fl">HOME</a><a href="scaling-futures.html" class="fl">SCALING FUTURES</a><p style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a2a2a2;margin:.9rem 0 .45rem;">VERKENNING</p><a href="deelvraag-1.html" class="fl">Deelvraag 1</a><a href="deelvraag-2.html" class="fl">Deelvraag 2</a><a href="deelvraag-3.html" class="fl">Deelvraag 3</a><a href="deelvraag-4.html" class="fl">Deelvraag 4</a><a href="deelvraag-5.html" class="fl">Deelvraag 5</a><p style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a2a2a2;margin:.9rem 0 .45rem;">VALUE CASE</p><a href="value-case.html" class="fl">Overzicht</a><a href="valuecase-1.html" class="fl">Deelvraag 1</a><a href="valuecase-2.html" class="fl">Deelvraag 2</a><a href="valuecase-3.html" class="fl">Deelvraag 3</a><a href="valuecase-4.html" class="fl">Deelvraag 4</a><a href="valuecase-5.html" class="fl">Deelvraag 5</a>
     </div>
     <div>
       <h4 style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a2a2a2;margin-bottom:1.25rem;">Locatie</h4>
@@ -202,27 +233,45 @@
   document.querySelectorAll('.dropdown-wrap').forEach(wrap => {
     const button = wrap.querySelector('.dropdown-button');
     const panel = wrap.querySelector('.dropdown-panel');
-    const items = panel.querySelectorAll('.dropdown-item');
+    const toggles = wrap.querySelectorAll('.dropdown-toggle');
+    const navItems = panel.querySelectorAll('.dropdown-item:not(.dropdown-toggle)');
+
+    function closeAll() {
+      button.setAttribute('aria-expanded', 'false');
+      panel.classList.remove('open');
+      toggles.forEach(toggle => {
+        toggle.setAttribute('aria-expanded', 'false');
+        const sub = document.getElementById(toggle.getAttribute('aria-controls'));
+        if (sub) sub.classList.remove('open');
+      });
+    }
 
     button.addEventListener('click', (e) => {
       e.stopPropagation();
       const isOpen = button.getAttribute('aria-expanded') === 'true';
-      button.setAttribute('aria-expanded', !isOpen);
-      panel.classList.toggle('open');
+      if (isOpen) {
+        closeAll();
+      } else {
+        button.setAttribute('aria-expanded', 'true');
+        panel.classList.add('open');
+      }
     });
 
-    items.forEach(item => {
-      item.addEventListener('click', () => {
-        button.setAttribute('aria-expanded', 'false');
-        panel.classList.remove('open');
+    toggles.forEach(toggle => {
+      const sub = document.getElementById(toggle.getAttribute('aria-controls'));
+      if (!sub) return;
+      toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', !isOpen);
+        sub.classList.toggle('open');
       });
     });
 
+    navItems.forEach(item => item.addEventListener('click', closeAll));
+
     document.addEventListener('click', (e) => {
-      if (!wrap.contains(e.target)) {
-        button.setAttribute('aria-expanded', 'false');
-        panel.classList.remove('open');
-      }
+      if (!wrap.contains(e.target)) closeAll();
     });
   });
 </script>

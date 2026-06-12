@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Deelvraag 4 · Value Case — VECHTCLUB XL Schoolproject</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,900;1,500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --xl-blue:#55b8f7; --xl-dark:#272625; --xl-bg:#f3f1ee; --xl-meta:#a2a2a2;
+      --color-background-primary:#fff;
+      --color-background-secondary:#f3f1ee;
+      --color-text-primary:#272625;
+      --color-text-secondary:#a2a2a2;
+      --color-border-tertiary:#e8e5e0;
+      --color-border-success:#bfe6cd;
+      --color-border-danger:#f5c5c1;
+      --color-background-success:#e7f7ee;
+      --color-text-success:#1f9d55;
+      --color-background-danger:#fdecec;
+      --color-text-danger:#e0473b;
+      --border-radius-lg:1rem;
+      --border-radius-md:.6rem;
+      --font-sans:'Montserrat',sans-serif;
+    }
+    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+    html { scroll-behavior:smooth; }
+    body { font-family:'Montserrat',sans-serif; background:#f3f1ee; color:#000; letter-spacing:-.02em; line-height:1.5; overflow-x:hidden; }
+    ::selection { background:#55b8f7; }
+    .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+
+    .nav-frosted { backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); background:rgba(243,241,238,.9); }
+    .nav-link { font-family:'Montserrat',sans-serif; font-weight:600; font-size:.875rem; color:#000; text-decoration:none; letter-spacing:-.01em; transition:color .15s ease; background:none; border:none; cursor:pointer; padding:0; }
+    .nav-link:hover { color:#55b8f7; }
+    .nav-link:focus-visible { outline:2px solid #55b8f7; outline-offset:3px; border-radius:3px; }
+
+    .dropdown-wrap { position:relative; display:inline-block; }
+    .dropdown-button { display:flex; align-items:center; gap:.3rem; padding:0; background:none; border:none; cursor:pointer; font-family:inherit; font-weight:600; font-size:.875rem; color:#000; transition:color .15s ease; }
+    .dropdown-button:hover { color:#55b8f7; }
+    .dropdown-button svg { transition:transform .2s ease; }
+    .dropdown-button[aria-expanded="true"] svg { transform:rotate(180deg); }
+    .dropdown-panel { position:absolute; top:calc(100% + 0.8rem); left:50%; transform:translateX(-50%); width:200px; background:#fff; border-radius:1rem; box-shadow:0 12px 48px rgba(0,0,0,.15),0 2px 8px rgba(0,0,0,.08); padding:.5rem; opacity:0; visibility:hidden; pointer-events:none; transition:opacity .2s ease,visibility .2s ease; z-index:60; }
+    .dropdown-panel.open { opacity:1; visibility:visible; pointer-events:auto; }
+    .dropdown-item { display:block; width:100%; padding:.6rem .85rem; font-size:.85rem; font-weight:600; color:#000; text-decoration:none; border-radius:.6rem; transition:all .15s ease; letter-spacing:-.01em; text-align:left; border:none; background:none; cursor:pointer; }
+    .dropdown-item:hover { background:#f3f1ee; color:#55b8f7; }
+    .dropdown-item:active { background:#e8e5e0; }
+    .dropdown-toggle { display:flex; align-items:center; justify-content:space-between; width:100%; }
+    .dropdown-toggle-chevron { transition:transform .2s ease; flex-shrink:0; margin-left:.4rem; }
+    .dropdown-toggle[aria-expanded="true"] .dropdown-toggle-chevron { transform:rotate(180deg); }
+    .dropdown-subpanel { max-height:0; overflow:hidden; transition:max-height .25s ease; }
+    .dropdown-subpanel.open { max-height:320px; }
+    .dropdown-subitem { padding-left:1.6rem; font-size:.8rem; }
+
+    .display { letter-spacing:-.035em; line-height:1.05; font-weight:900; }
+    .card-lift { transition:box-shadow .25s ease,transform .25s ease; }
+    .card-lift:hover { box-shadow:0 20px 48px rgba(0,0,0,.1),0 4px 12px rgba(0,0,0,.06); transform:translateY(-4px); }
+
+    .pill { display:inline-flex; align-items:center; gap:.4rem; border-radius:10rem; padding:.7rem 1.5rem; font-family:'Montserrat',sans-serif; font-size:.875rem; font-weight:700; text-decoration:none; letter-spacing:-.01em; transition:transform .15s ease,box-shadow .15s ease; cursor:pointer; }
+    .pill:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,.16); }
+    .pill-black { background:#000; color:#fff; border:2px solid #000; }
+
+    .fl { display:block; margin-bottom:.45rem; font-size:.875rem; font-weight:500; color:#fff; text-decoration:none; transition:color .15s; }
+    .fl:hover { color:#55b8f7; }
+
+    .g-pn { display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:2rem; }
+    .g-footer { display:grid; grid-template-columns:1.2fr 1fr 1fr; gap:3rem; }
+
+    .g-loop { display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:.75rem; }
+    .loop-card { background:#fff; border-radius:1rem; padding:1.1rem 1.4rem; font-weight:700; font-size:.9rem; text-align:center; min-width:160px; letter-spacing:-.01em; }
+    .loop-arrow { font-size:1.5rem; color:#55b8f7; font-weight:900; }
+
+    .g-compare { display:grid; grid-template-columns:1fr 1fr; gap:2rem; }
+    .compare-card { background:#fff; border-radius:1.25rem; padding:2.25rem; display:flex; flex-direction:column; gap:1rem; }
+    .compare-card h3 { font-size:1.25rem; font-weight:900; letter-spacing:-.02em; }
+    .compare-card p { font-size:.95rem; font-weight:500; color:#272625; line-height:1.7; }
+
+    #mob { display:none; position:absolute; opacity:0; pointer-events:none; }
+    .mob-overlay { display:none; position:fixed; inset:0; background:#000; z-index:45; padding:5.5rem 2rem 3rem; flex-direction:column; overflow-y:auto; }
+    #mob:checked ~ .mob-overlay { display:flex; }
+
+    @keyframes fu { from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);} }
+    .fu1{animation:fu .55s .1s ease both;} .fu2{animation:fu .55s .25s ease both;} .fu3{animation:fu .55s .4s ease both;}
+
+    @media(max-width:960px){
+      .g-footer{grid-template-columns:1fr; gap:2rem;}
+      .g-compare{grid-template-columns:1fr;}
+    }
+
+    /* ═══════ WIDGET: Meetmodel Vechtclub XL ═══════ */
+    .m-wrap{background:#fff;border-radius:1.5rem;padding:1.75rem;box-shadow:0 2px 8px rgba(0,0,0,.04);}
+    .m-hd{background:#1e3a5f;color:#fff;padding:10px 14px;border-radius:var(--border-radius-lg) var(--border-radius-lg) 0 0;display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+    .m-hd h3{margin:0;font-size:14px;font-weight:500;color:#fff}
+    .m-sub{font-size:9px;color:rgba(255,255,255,.55);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:2px}
+    .m-btn{padding:6px 11px;border-radius:var(--border-radius-md);border:.5px solid rgba(255,255,255,.35);background:transparent;color:#fff;cursor:pointer;font-size:10px;font-weight:500;font-family:var(--font-sans)}
+    .m-btn:hover,.m-btn.on{background:rgba(255,255,255,.18)}
+    .m-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-bottom:14px}
+    .sl{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--color-text-secondary);margin-bottom:9px}
+    .kc{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:10px 12px;margin-bottom:7px;border-left:3px solid var(--ac)}
+    .kc-hd{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px}
+    .kc-lbl{font-size:11px;font-weight:600;color:var(--color-text-primary)}
+    .kc-desc{font-size:10px;color:var(--color-text-secondary);margin-top:1px}
+    .kc-vg{display:flex;align-items:baseline;gap:4px;flex-shrink:0;margin-left:8px}
+    .kc-v{font-size:17px;font-weight:700}
+    .kc-u{font-size:10px;color:var(--color-text-secondary)}
+    .badge{font-size:9px;font-weight:700;padding:2px 6px;border-radius:20px}
+    .ok{background:var(--color-background-success);color:var(--color-text-success)}
+    .wa{background:var(--color-background-danger);color:var(--color-text-danger)}
+    .th-row{display:flex;justify-content:space-between;font-size:9px;margin-top:2px}
+    .th-mid{color:var(--color-text-danger);font-weight:600}
+    .th-edge{color:var(--color-text-secondary)}
+    .m-card{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:10px 12px;margin-bottom:10px}
+    .sb-row{padding:7px 0;border-bottom:.5px solid var(--color-border-tertiary)}
+    .sb-row:last-child{border:none}
+    .sb-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+    .sb-lbl{font-size:11px;color:var(--color-text-secondary);display:flex;align-items:center;gap:6px}
+    .dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+    .sb-rv{display:flex;align-items:center;gap:5px}
+    .sb-sc{font-size:12px;font-weight:700}
+    .sb-df{font-size:10px;font-weight:600}
+    .track{height:4px;background:var(--color-border-tertiary);border-radius:2px;overflow:visible;position:relative}
+    .fill{height:100%;border-radius:2px;transition:width .2s ease;position:absolute;top:0;left:0}
+    .aa{background:var(--color-background-danger);border:.5px solid var(--color-border-danger);border-radius:var(--border-radius-md);padding:7px 10px;margin-bottom:6px;font-size:10px;color:var(--color-text-danger)}
+    .ag{background:var(--color-background-success);border:.5px solid var(--color-border-success);border-radius:var(--border-radius-md);padding:7px 10px;font-size:10px;color:var(--color-text-success)}
+    .sg{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:10px}
+    .sc{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:8px 6px;border-top:2.5px solid var(--sc)}
+    .sn{width:17px;height:17px;border-radius:50%;background:#1e3a5f;color:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;margin-bottom:5px}
+    .st{font-size:10px;font-weight:600;color:var(--color-text-primary);line-height:1.3;margin-bottom:2px}
+    .sd{font-size:9px;color:var(--color-text-secondary);line-height:1.35}
+    .mbar{display:flex;flex-wrap:wrap;gap:8px;background:var(--color-background-secondary);border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:7px 12px;font-size:9px;color:var(--color-text-secondary)}
+    .leg{display:flex;gap:12px;font-size:10px;color:var(--color-text-secondary);margin-bottom:8px}
+    .leg-i{display:flex;align-items:center;gap:5px}
+    .leg-dot{width:10px;height:2px;flex-shrink:0}
+    @media(max-width:640px){ .sg{grid-template-columns:repeat(2,1fr);} }
+  </style>
+</head>
+<body>
+
+<input type="checkbox" id="mob" />
+
+<!-- NAV -->
+<nav class="nav-frosted" style="position:fixed; top:0; left:0; width:100%; z-index:50; border-bottom:1px solid rgba(0,0,0,.08);">
+  <div style="max-width:1280px; margin:0 auto; padding:0 1.5rem; height:4rem; display:flex; align-items:center; justify-content:center; position:relative;">
+
+    <!-- Logo (Centered) -->
+    <a href="index.html" style="display:flex; align-items:center; gap:.5rem; text-decoration:none;">
+      <span style="font-weight:900; font-size:1.1rem; letter-spacing:-.035em; color:#000;">VECHTCLUB</span>
+      <span style="font-weight:900; font-size:1.1rem; letter-spacing:-.035em; background:#55b8f7; color:#000; padding:.12rem .5rem; border-radius:6px;">XL</span>
+    </a>
+
+    <!-- Desktop links (Right) -->
+    <ul class="hidden md:flex" style="align-items:center; gap:2rem; list-style:none; position:absolute; right:1.5rem;">
+      <li class="dropdown-wrap">
+        <button class="dropdown-button" aria-expanded="false" aria-haspopup="true">
+          Over VECHTCLUB XL
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="dropdown-panel">
+          <a href="index.html" class="dropdown-item">HOME</a>
+          <a href="scaling-futures.html" class="dropdown-item">SCALING FUTURES</a>
+          <button class="dropdown-item dropdown-toggle" type="button" aria-expanded="false" aria-controls="verkenning-panel">
+            <span>VERKENNING</span>
+            <svg class="dropdown-toggle-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="dropdown-subpanel" id="verkenning-panel">
+            <a href="deelvraag-1.html" class="dropdown-item dropdown-subitem">Deelvraag 1</a>
+            <a href="deelvraag-2.html" class="dropdown-item dropdown-subitem">Deelvraag 2</a>
+            <a href="deelvraag-3.html" class="dropdown-item dropdown-subitem">Deelvraag 3</a>
+            <a href="deelvraag-4.html" class="dropdown-item dropdown-subitem">Deelvraag 4</a>
+            <a href="deelvraag-5.html" class="dropdown-item dropdown-subitem">Deelvraag 5</a>
+          </div>
+          <button class="dropdown-item dropdown-toggle" type="button" aria-expanded="false" aria-controls="valuecase-panel">
+            <span>VALUE CASE</span>
+            <svg class="dropdown-toggle-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="dropdown-subpanel" id="valuecase-panel">
+            <a href="value-case.html" class="dropdown-item dropdown-subitem">Overzicht</a>
+            <a href="valuecase-1.html" class="dropdown-item dropdown-subitem">Deelvraag 1</a>
+            <a href="valuecase-2.html" class="dropdown-item dropdown-subitem">Deelvraag 2</a>
+            <a href="valuecase-3.html" class="dropdown-item dropdown-subitem">Deelvraag 3</a>
+            <a href="valuecase-4.html" class="dropdown-item dropdown-subitem">Deelvraag 4</a>
+            <a href="valuecase-5.html" class="dropdown-item dropdown-subitem">Deelvraag 5</a>
+          </div>
+        </div>
+      </li>
+    </ul>
+
+    <!-- Hamburger -->
+    <label for="mob" class="md:hidden" style="cursor:pointer; padding:.5rem; z-index:51; position:absolute; right:1.5rem;">
+      <svg width="24" height="18" viewBox="0 0 24 18" fill="none" aria-label="Menu openen">
+        <rect width="24" height="2" rx="1" fill="#000"/>
+        <rect y="8" width="24" height="2" rx="1" fill="#000"/>
+        <rect y="16" width="16" height="2" rx="1" fill="#000"/>
+      </svg>
+    </label>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mob-overlay">
+  <label for="mob" style="position:absolute;top:1.25rem;right:1.5rem;cursor:pointer;color:#fff;font-size:1.75rem;line-height:1;font-weight:300;">✕</label>
+  <a href="index.html"           style="font-weight:900;font-size:2rem;color:#fff;text-decoration:none;margin-bottom:1.25rem;letter-spacing:-.035em;">HOME</a>
+  <a href="scaling-futures.html" style="font-weight:900;font-size:2rem;color:#fff;text-decoration:none;margin-bottom:1.25rem;letter-spacing:-.035em;">SCALING FUTURES</a>
+  <p style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#55b8f7;margin:1.25rem 0 .75rem;">VERKENNING</p>
+  <a href="deelvraag-1.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 1</a>
+  <a href="deelvraag-2.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 2</a>
+  <a href="deelvraag-3.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 3</a>
+  <a href="deelvraag-4.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 4</a>
+  <a href="deelvraag-5.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 5</a>
+  <p style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#55b8f7;margin:1.25rem 0 .75rem;">VALUE CASE</p>
+  <a href="value-case.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Overzicht</a>
+  <a href="valuecase-1.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 1</a>
+  <a href="valuecase-2.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 2</a>
+  <a href="valuecase-3.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 3</a>
+  <a href="valuecase-4.html" style="font-weight:700;font-size:1.5rem;color:#55b8f7;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 4</a>
+  <a href="valuecase-5.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 5</a>
+</div>
+
+<div style="height:4rem;"></div>
+
+
+<!-- ═══════ HERO ═══════ -->
+<section style="background:#55b8f7;padding:5rem 1.5rem;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <nav style="font-size:.8rem;font-weight:600;color:#272625;margin-bottom:1.5rem;letter-spacing:-.01em;">
+      <a href="index.html" style="color:#272625;text-decoration:none;">Home</a>
+      <span style="margin:0 .6rem;">／</span>
+      <a href="value-case.html" style="color:#272625;text-decoration:none;">Value Case</a>
+      <span style="margin:0 .6rem;">／</span>
+      <span>Deelvraag 4</span>
+    </nav>
+    <div class="fu1" style="display:flex;align-items:center;gap:.75rem;margin-bottom:1.25rem;flex-wrap:wrap;">
+      <span style="display:inline-block;background:#000;color:#fff;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;border-radius:10rem;padding:.3rem .8rem;">Deelvraag 4</span>
+      <span style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#272625;">Value Case · VECHTCLUB XL</span>
+    </div>
+    <h1 class="display fu2" style="font-size:clamp(3rem,9vw,7.5rem);color:#000;max-width:14ch;">Het<br>meetmodel</h1>
+  </div>
+</section>
+
+
+<!-- ═══════ LEAD ═══════ -->
+<section style="background:#f3f1ee;padding:5rem 1.5rem;">
+  <div style="max-width:860px;margin:0 auto;">
+    <blockquote style="border-left:4px solid #55b8f7;padding-left:1.5rem;margin-bottom:1.5rem;">
+      <p style="font-size:1rem;font-weight:600;font-style:italic;color:#272625;line-height:1.6;">"Hoe kan een model eruitzien waarin deze waarden gemeten worden?"</p>
+    </blockquote>
+    <p style="font-size:clamp(1.2rem,2.5vw,1.65rem);font-weight:600;line-height:1.55;letter-spacing:-.02em;color:#272625;margin-bottom:1.5rem;">
+      Het meetmodel voor Vechtclub XL is opgebouwd als een cyclisch monitoringsinstrument. Het combineert de zes waardegebieden uit deelvraag 2 met de vijf systemisch relevante indicatoren uit deelvraag 3, en vertaalt dit naar een uitvoerbare meetprocedure. Het model is niet eenmalig, maar herhaald toe te passen zodat ontwikkeling over tijd zichtbaar wordt.
+    </p>
+    <p style="font-size:1rem;font-weight:500;line-height:1.75;letter-spacing:-.01em;color:#272625;">
+      Het model sluit aan op de brede welvaartsbenadering van het PBL en de meervoudige waardecreatie zoals gehanteerd in de Merwedekanaalzonestrategie. Het is specifiek ontworpen voor locaties als Vechtclub XL: relatief kleinschalig, community-gestuurd, en met zowel economische als sociale en culturele functies.
+    </p>
+  </div>
+</section>
+
+
+<!-- ═══════ INTERACTIEF MEETMODEL ═══════ -->
+<section style="background:#fff;padding:6rem 1.5rem;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <p style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a2a2a2;margin-bottom:.75rem;">Interactief</p>
+    <h2 class="display" style="font-size:clamp(1.6rem,3.5vw,2.5rem);color:#000;max-width:32ch;margin-bottom:1rem;">Probeer het meetmodel zelf uit</h2>
+    <p style="font-size:1rem;font-weight:500;color:#272625;line-height:1.7;max-width:760px;margin-bottom:2.5rem;">Versleep de schuifregelaars van de vijf kern-indicatoren (KPI's) en de kennisontwikkeling-score, en zie direct hoe het waardeprofiel — het spinnenwebdiagram met de zes waardegebieden uit deelvraag 2 — verandert. Zakt een KPI onder de drempelwaarde, dan verschijnt deze automatisch bij de actiepunten. Klik op "Opslaan als nulmeting" om het huidige profiel als referentie vast te leggen en latere metingen ermee te vergelijken.</p>
+
+    <div class="m-wrap">
+
+<h2 class="sr-only">Interactief meetmodel Vechtclub XL — brede welvaart meten in de Merwedekanaalzone. Pas de KPI-sliders aan om het waardeprofiel te zien.</h2>
+
+<div>
+<div class="m-hd">
+  <div>
+    <div class="m-sub">Brede welvaart · Merwedekanaalzone Utrecht</div>
+    <h3>Meetmodel Vechtclub XL</h3>
+  </div>
+  <button class="m-btn" id="nmBtn" onclick="toggleNulmeting()">Opslaan als nulmeting</button>
+</div>
+
+<div class="m-grid">
+  <div>
+    <div class="sl">Kern-indicatoren (KPI's)</div>
+    <div id="kpiArea"></div>
+  </div>
+  <div>
+    <div class="sl">Waardeprofiel</div>
+    <div class="m-card">
+      <div id="legRow" style="display:none" class="leg">
+        <div class="leg-i"><div class="leg-dot" style="background:#1e3a5f"></div>Huidig</div>
+        <div class="leg-i"><div class="leg-dot" style="background:#aaa;border-top:1.5px dashed #aaa;margin-top:1px"></div>Nulmeting</div>
+      </div>
+      <div style="position:relative;height:240px"><canvas id="rc" role="img" aria-label="Radardiagram met scores voor zes waardegebieden van Vechtclub XL, schaal 0 tot 10"></canvas></div>
+    </div>
+    <div class="m-card"><div id="sbArea"></div></div>
+    <div id="aaArea"></div>
+  </div>
+</div>
+
+<div class="sl">Cyclisch meetproces (7 stappen)</div>
+<div class="sg" id="stGrid"></div>
+
+<div class="mbar">
+  <span><strong>Meetfrequentie:</strong> jaarlijks</span>
+  <span><strong>Verantwoordelijk:</strong> Vechtclub XL i.s.m. Gemeente Utrecht</span>
+  <span><strong>Stakeholders:</strong> Gemeente, Broedplaatsennetwerk, Vastgoedeigenaar, Buurt</span>
+</div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════ TOEPASBAARHEID ═══════ -->
+<section style="background:#f3f1ee;padding:6rem 1.5rem;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <h2 class="display" style="font-size:clamp(1.6rem,3.5vw,2.5rem);margin-bottom:1.25rem;">Toepasbaarheid elders</h2>
+    <p style="font-size:1rem;font-weight:500;color:#272625;line-height:1.7;max-width:860px;">Het model is in essentie overdraagbaar naar vergelijkbare broedplaatsen. De zes waardegebieden en de structuur van dimensie-indicator-meetinstrument zijn generiek. De specifieke indicatoren kunnen per locatie worden aangepast op basis van de lokale context, het type huurders en de beleidsdoelen van de gemeente. Vechtclub XL dient daarmee als referentiecase voor brede welvaartsmeting bij creatieve broedplaatsen in Nederland.</p>
+  </div>
+</section>
+
+
+<!-- ═══════ FEEDBACKLOOPS ═══════ -->
+<section style="background:#fff;padding:6rem 1.5rem;">
+  <div style="max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:3rem;">
+
+    <div>
+      <p style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a2a2a2;margin-bottom:.75rem;">Conclusie</p>
+      <h2 class="display" style="font-size:clamp(1.6rem,3.5vw,2.5rem);color:#000;max-width:32ch;margin-bottom:1.5rem;">Indicatoren versterken elkaar — in twee richtingen</h2>
+      <div style="display:flex;flex-direction:column;gap:1.25rem;max-width:860px;">
+        <p style="font-size:1rem;font-weight:500;color:#272625;line-height:1.7;">In dit meetmodel wordt duidelijk dat verschillende indicatoren sterk met elkaar samenhangen en elkaar wederzijds beïnvloeden. Zo heeft de bezettingsgraad van betaalbare werkruimte directe invloed op de gemiddelde verblijfsduur van huurders: wanneer ruimtes betaalbaar en aantrekkelijk blijven, blijven huurders langer. Een langere verblijfsduur versterkt vervolgens de community, wat leidt tot meer samenwerkingsprojecten tussen huurders. Deze samenwerking stimuleert op zijn beurt creatieve productie en vergroot het aantal culturele evenementen, wat weer bijdraagt aan de zichtbaarheid en aantrekkelijkheid van de locatie.</p>
+        <p style="font-size:1rem;font-weight:500;color:#272625;line-height:1.7;">Een positieve ontwikkeling in één indicator kan leiden tot verbeteringen in andere indicatoren. Bijvoorbeeld: meer samenwerking leidt tot meer innovatie en evenementen, wat de aantrekkingskracht van de locatie vergroot en weer zorgt voor een hogere bezettingsgraad. Andersom geldt ook dat negatieve ontwikkelingen, zoals stijgende huurprijzen, kunnen leiden tot een lagere bezetting, kortere verblijfsduur en een afname van de community, waardoor het gehele systeem onder druk komt te staan.</p>
+      </div>
+    </div>
+
+    <div>
+      <h3 style="font-size:1.1rem;font-weight:900;letter-spacing:-.02em;margin-bottom:1.25rem;">Positieve feedbackloop</h3>
+      <div class="g-loop">
+        <div class="loop-card">Betaalbare werkruimte</div>
+        <span class="loop-arrow">→</span>
+        <div class="loop-card">Community vorming</div>
+        <span class="loop-arrow">→</span>
+        <div class="loop-card">Samenwerking</div>
+        <span class="loop-arrow">→</span>
+        <div class="loop-card">Aantrekkelijkheid van de locatie</div>
+        <span class="loop-arrow">→</span>
+        <div class="loop-card" style="background:#55b8f7;">Hogere bezetting</div>
+        <span class="loop-arrow">↺</span>
+      </div>
+      <p style="font-size:.95rem;font-weight:500;color:#272625;line-height:1.7;max-width:860px;margin-top:1.5rem;">Binnen het model zijn duidelijke feedbackloops zichtbaar. Een belangrijke positieve feedbackloop is die tussen betaalbare werkruimte, community vorming en samenwerking: betaalbare ruimte trekt de juiste doelgroep aan, die vervolgens samenwerkt en de community versterkt, wat de locatie weer aantrekkelijker maakt. Een negatieve feedbackloop kan ontstaan wanneer betaalbaarheid afneemt, waardoor huurders vertrekken, samenwerking afneemt en de aantrekkelijkheid van de locatie verder daalt.</p>
+      <p style="font-size:.95rem;font-weight:500;color:#272625;line-height:1.7;max-width:860px;margin-top:1.25rem;">Op de lange termijn brengt het model in beeld hoe de balans tussen economische, sociale en culturele waarden zich ontwikkelt. Het laat zien of Vechtclub XL haar functie als broedplaats behoudt of juist verschuift richting een meer commerciële invulling. Daarnaast maakt het model inzichtelijk hoe externe factoren, zoals vastgoeddruk, invloed hebben op de duurzaamheid van de locatie. Door deze ontwikkelingen structureel te monitoren, kan tijdig worden bijgestuurd om de kernwaarden van de broedplaats te behouden en te versterken.</p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════ KRACHT / BEPERKING ═══════ -->
+<section style="background:#f3f1ee;padding:6rem 1.5rem;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <p style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a2a2a2;margin-bottom:.75rem;">Reflectie op het model</p>
+    <h2 class="display" style="font-size:clamp(1.6rem,3.5vw,2.5rem);color:#000;max-width:32ch;margin-bottom:2.5rem;">Grootste kracht & grootste beperking</h2>
+
+    <div class="g-compare">
+      <div class="compare-card card-lift">
+        <h3 style="color:#1f9d55;">Grootste kracht</h3>
+        <p>De grootste kracht van het model is dat het verschillende vormen van waarde met elkaar verbindt. Traditionele vastgoedmodellen richten zich voornamelijk op financiële prestaties; dit model zorgt voor een samenhang van economische, sociale, culturele, ecologische, kennis- en ruimtelijke waarden.</p>
+        <p>Daarnaast sluit het model aan bij systeemdenken doordat niet alleen afzonderlijke indicatoren worden gemeten, maar ook de relaties tussen deze indicatoren zichtbaar worden gemaakt. Hierdoor ontstaat een completer beeld van de werkelijke impact van Vechtclub XL.</p>
+        <p>Een tweede kracht is dat het model relatief eenvoudig toepasbaar is op andere creatieve broedplaatsen of gebiedsontwikkelingen. De indicatoren zijn concreet, meetbaar en gebaseerd op bestaande gegevens, enquêtes en interviews.</p>
+      </div>
+      <div class="compare-card card-lift">
+        <h3 style="color:#e0473b;">Grootste beperking</h3>
+        <p>De grootste beperking van het model is dat niet alle vormen van waarde volledig objectief meetbaar zijn. Met name sociale cohesie, creativiteit, inspiratie en culturele betekenis zijn moeilijk uit te drukken in cijfers.</p>
+        <p>Daarnaast zijn voor een aantal indicatoren geen openbare gegevens beschikbaar. Hierdoor is in sommige gevallen gewerkt met schattingen en aannames. Hoewel deze een bruikbaar beeld geven van de situatie, kunnen zij niet dezelfde nauwkeurigheid bieden als langdurige monitoring of uitgebreid onderzoek.</p>
+        <p>Een tweede beperking is dat het model wel inzicht geeft in de aanwezigheid van waarde, maar minder goed in de precieze omvang van de maatschappelijke impact. Het model maakt zichtbaar dát waarde ontstaat, maar niet altijd exact hoeveel maatschappelijke opbrengst daar tegenover staat.</p>
+      </div>
+    </div>
+
+    <div style="border-radius:1.25rem;padding:2.5rem;background:#fff;border-left:4px solid #55b8f7;margin-top:3rem;">
+      <p style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a2a2a2;margin-bottom:.75rem;">Slotconclusie</p>
+      <p class="display" style="font-size:clamp(1.2rem,2.5vw,1.6rem);max-width:760px;line-height:1.35;color:#000;margin-bottom:1rem;">
+        Creatieve broedplaatsen zijn systemen van meervoudige waardecreatie.
+      </p>
+      <p style="font-size:1rem;font-weight:500;color:#272625;line-height:1.7;">
+        De toepassing van de Value Case op Vechtclub XL laat zien dat creatieve broedplaatsen functioneren als systemen van meervoudige waardecreatie. Het model maakt deze samenhang zichtbaar en laat zien dat de maatschappelijke betekenis van Vechtclub XL veel verder reikt dan de financiële prestaties van het vastgoed alleen. Daarmee biedt de Value Case een waardevol instrument voor vastgoedprofessionals, facility managers en beleidsmakers die brede welvaart willen meenemen in besluitvorming over gebiedsontwikkeling.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════ VORIGE / VOLGENDE ═══════ -->
+<section style="background:#272625;padding:4rem 1.5rem;">
+  <div class="g-pn" style="max-width:1280px;margin:0 auto;">
+    <a href="valuecase-3.html" style="text-decoration:none;">
+      <span style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a2a2a2;display:block;margin-bottom:.4rem;">← Vorige</span>
+      <span style="font-size:1.5rem;font-weight:900;color:#fff;letter-spacing:-.025em;display:block;">Deelvraag 3</span>
+    </a>
+    <a href="valuecase-5.html" style="text-decoration:none;text-align:right;">
+      <span style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a2a2a2;display:block;margin-bottom:.4rem;">Volgende →</span>
+      <span style="font-size:1.5rem;font-weight:900;color:#fff;letter-spacing:-.025em;display:block;">Deelvraag 5</span>
+    </a>
+  </div>
+</section>
+
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer style="background:#272625;">
+  <div class="g-footer" style="max-width:1280px;margin:0 auto;padding:4.5rem 1.5rem;">
+    <div>
+      <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:1.25rem;">
+        <span style="font-weight:900;font-size:1rem;letter-spacing:-.035em;color:#fff;">VECHTCLUB</span>
+        <span style="font-weight:900;font-size:1rem;letter-spacing:-.035em;background:#55b8f7;color:#000;padding:.12rem .45rem;border-radius:6px;">XL</span>
+      </div>
+      <p style="font-size:.875rem;font-weight:500;color:#a2a2a2;line-height:1.75;">Schoolproject<br>Groep 36<br>Hogeschool Rotterdam</p>
+    </div>
+    <div>
+      <h4 style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a2a2a2;margin-bottom:1.25rem;">Pagina's</h4>
+      <a href="index.html"           class="fl">HOME</a>
+      <a href="scaling-futures.html" class="fl">SCALING FUTURES</a>
+      <p style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a2a2a2;margin:.9rem 0 .45rem;">VERKENNING</p>
+      <a href="deelvraag-1.html"     class="fl">Deelvraag 1</a>
+      <a href="deelvraag-2.html"     class="fl">Deelvraag 2</a>
+      <a href="deelvraag-3.html"     class="fl">Deelvraag 3</a>
+      <a href="deelvraag-4.html"     class="fl">Deelvraag 4</a>
+      <a href="deelvraag-5.html"     class="fl">Deelvraag 5</a>
+      <p style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a2a2a2;margin:.9rem 0 .45rem;">VALUE CASE</p>
+      <a href="value-case.html"  class="fl">Overzicht</a>
+      <a href="valuecase-1.html" class="fl">Deelvraag 1</a>
+      <a href="valuecase-2.html" class="fl">Deelvraag 2</a>
+      <a href="valuecase-3.html" class="fl">Deelvraag 3</a>
+      <a href="valuecase-4.html" class="fl">Deelvraag 4</a>
+      <a href="valuecase-5.html" class="fl">Deelvraag 5</a>
+    </div>
+    <div>
+      <h4 style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a2a2a2;margin-bottom:1.25rem;">Locatie</h4>
+      <address style="font-style:normal;font-size:.875rem;font-weight:500;color:#a2a2a2;line-height:1.85;">Pijlkruidstraat 2<br>3554 XE Utrecht<br><a href="https://vechtclubxl.nl" style="color:#55b8f7;text-decoration:none;">vechtclubxl.nl</a></address>
+    </div>
+  </div>
+  <div style="border-top:1px solid rgba(255,255,255,.1);padding:.875rem 1.5rem;">
+    <div style="max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.75rem;color:#a2a2a2;font-weight:500;">
+      <span>Schoolproject - Groep 36 - Hogeschool Rotterdam</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const AREAS=[
+  {id:"economisch",label:"Economische vitaliteit",short:"Economisch",color:"#2e6fad"},
+  {id:"community",label:"Community vorming",short:"Community",color:"#e8832a"},
+  {id:"creatief",label:"Creatieve identiteit",short:"Creatief",color:"#c23b7a"},
+  {id:"kennis",label:"Kennisontwikkeling",short:"Kennis",color:"#c99a0a"},
+  {id:"duurzaam",label:"Duurzame ontwikkeling",short:"Duurzaam",color:"#2e7d66"},
+  {id:"ruimtelijk",label:"Ruimtelijke kwaliteit",short:"Ruimtelijk",color:"#7b4ea0"},
+];
+const KPIS=[
+  {id:"bezetting",label:"Bezette betaalbare werkruimte",unit:"%",min:50,max:100,step:1,thresh:85,tl:"< 85%",def:88,aid:"economisch",desc:"Betaalbare ruimte beschikbaar én bezet",norm:v=>+(Math.min(10,v/100*10).toFixed(1))},
+  {id:"verblijf",label:"Gem. verblijfsduur huurders",unit:"jaar",min:0,max:8,step:.1,thresh:2,tl:"< 2 jaar",def:3.5,aid:"ruimtelijk",desc:"Stabiliteit en vertrouwen van huurders",norm:v=>+(Math.min(10,v/6*10).toFixed(1))},
+  {id:"samenw",label:"Samenwerkingsprojecten",unit:"/jaar",min:0,max:30,step:1,thresh:10,tl:"< 10/jaar",def:15,aid:"community",desc:"Samenwerking tussen huurders",norm:v=>+(Math.min(10,v/25*10).toFixed(1))},
+  {id:"event",label:"Culturele evenementen",unit:"/jaar",min:0,max:50,step:1,thresh:20,tl:"< 20/jaar",def:28,aid:"creatief",desc:"Zichtbare verbinding met publiek",norm:v=>+(Math.min(10,v/40*10).toFixed(1))},
+  {id:"keten",label:"Huurders actief in keten",unit:"%",min:0,max:100,step:1,thresh:70,tl:"< 70%",def:74,aid:"duurzaam",desc:"Diversiteit in creatieve keten",norm:v=>+(Math.min(10,v/100*10).toFixed(1))},
+];
+const STEPS=[
+  {n:1,t:"Definieer waarden",d:"Welke waardetypen zijn relevant?",c:"#2e6fad"},
+  {n:2,t:"Verbind dimensies",d:"Koppel aan meetbare dimensies",c:"#e8832a"},
+  {n:3,t:"Formuleer indicatoren",d:"Wat, bij wie, hoe vaak?",c:"#c23b7a"},
+  {n:4,t:"Koppel instrumenten",d:"Enquête, registratie, observatie",c:"#c99a0a"},
+  {n:5,t:"Verzamel data",d:"Voer de jaarlijkse meting uit",c:"#2e7d66"},
+  {n:6,t:"Analyseer",d:"Vergelijk met nulmeting",c:"#7b4ea0"},
+  {n:7,t:"Rapporteer & stuur",d:"Waarderapport naar stakeholders",c:"#2e6fad"},
+];
+
+let vals=Object.fromEntries(KPIS.map(k=>[k.id,k.def]));
+let ks=6.0;
+let base=null,bks=null;
+let chart;
+
+function score(aid,v,k){
+  if(aid==="kennis")return k;
+  const q=KPIS.find(x=>x.aid===aid);
+  return q?q.norm(v[q.id]):0;
+}
+function allScores(v,k){return AREAS.map(a=>score(a.id,v,k));}
+function fv(v,step){return step<1?v.toFixed(1):String(v);}
+
+function isDark(){return window.matchMedia&&window.matchMedia('(prefers-color-scheme:dark)').matches;}
+
+function buildKPIs(){
+  const el=document.getElementById("kpiArea");
+  el.innerHTML="";
+  KPIS.forEach(k=>{
+    const a=AREAS.find(x=>x.id===k.aid);
+    const v=vals[k.id],ok=v>=k.thresh;
+    const tp=((k.thresh-k.min)/(k.max-k.min)*100).toFixed(1);
+    const d=document.createElement("div");
+    d.className="kc";d.style.setProperty("--ac",a.color);
+    d.innerHTML=`<div class="kc-hd"><div><div class="kc-lbl">${k.label}</div><div class="kc-desc">${k.desc}</div></div><div class="kc-vg"><span class="kc-v" id="v-${k.id}" style="color:${ok?"#27ae60":"#e74c3c"}">${fv(v,k.step)}</span><span class="kc-u">${k.unit}</span><span class="badge ${ok?"ok":"wa"}" id="b-${k.id}">${ok?"✓ OK":"⚠ Actie"}</span></div></div><div style="position:relative;margin:6px 0 2px"><div style="position:absolute;left:${tp}%;top:-2px;width:1.5px;height:20px;background:#e74c3c;opacity:.35;transform:translateX(-50%);border-radius:1px;pointer-events:none"></div><input type="range" min="${k.min}" max="${k.max}" step="${k.step}" value="${v}" style="width:100%;accent-color:${a.color}" oninput="upd('${k.id}',parseFloat(this.value))"></div><div class="th-row"><span class="th-edge">${k.min}</span><span class="th-mid">drempel: ${k.tl}</span><span class="th-edge">${k.max}</span></div>`;
+    el.appendChild(d);
+  });
+  const ka=AREAS.find(a=>a.id==="kennis");
+  const kd=document.createElement("div");
+  kd.className="kc";kd.style.setProperty("--ac",ka.color);
+  kd.innerHTML=`<div class="kc-hd"><div><div class="kc-lbl">Kennisontwikkeling</div><div class="kc-desc">Expert oordeel — geen directe KPI</div></div><div class="kc-vg"><span class="kc-v" id="v-kennis" style="color:${ka.color}">${ks.toFixed(1)}</span><span class="kc-u">/10</span></div></div><input type="range" min="0" max="10" step="0.5" value="${ks}" style="width:100%;accent-color:${ka.color};margin:6px 0 2px" oninput="updK(parseFloat(this.value))"><div class="th-row"><span class="th-edge">0</span><span style="font-size:9px;color:var(--color-text-secondary)">score 0–10</span><span class="th-edge">10</span></div>`;
+  el.appendChild(kd);
+}
+
+function buildBars(){
+  const el=document.getElementById("sbArea");
+  el.innerHTML="";
+  AREAS.forEach((a,i)=>{
+    const s=score(a.id,vals,ks);
+    const b=base?score(a.id,base,bks):null;
+    const df=b!==null?s-b:null;
+    const row=document.createElement("div");
+    row.className="sb-row";
+    const dfHtml=df!==null?`<span class="sb-df" style="color:${df>=0?"#27ae60":"#e74c3c"}">${df>=0?"+":""}${df.toFixed(1)}</span>`:"";
+    row.innerHTML=`<div class="sb-meta"><div class="sb-lbl"><div class="dot" style="background:${a.color}"></div>${a.label}</div><div class="sb-rv">${dfHtml}<span class="sb-sc" style="color:${a.color}" id="ss-${a.id}">${s.toFixed(1)}</span></div></div><div class="track">${b!==null?`<div class="fill" style="width:${Math.round(b*10)}%;background:rgba(160,160,160,.4)"></div>`:""}<div class="fill" id="sf-${a.id}" style="width:${Math.round(s*10)}%;background:${a.color};opacity:.9"></div></div>`;
+    el.appendChild(row);
+  });
+}
+
+function buildAlerts(){
+  const el=document.getElementById("aaArea");
+  const act=KPIS.filter(k=>vals[k.id]<k.thresh);
+  if(!act.length){el.innerHTML=`<div class="ag">✓ Alle KPI's boven drempelwaarde — geen actiepunten</div>`;return;}
+  el.innerHTML=`<div style="font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--color-text-danger);margin-bottom:5px">⚠ Actiepunten (${act.length})</div>`;
+  act.forEach(k=>{
+    const d=document.createElement("div");
+    d.className="aa";
+    d.innerHTML=`<strong>${k.label}:</strong> ${fv(vals[k.id],k.step)} ${k.unit} — drempel: ${k.tl}`;
+    el.appendChild(d);
+  });
+}
+
+function buildSteps(){
+  const el=document.getElementById("stGrid");
+  STEPS.forEach(s=>{
+    const d=document.createElement("div");
+    d.className="sc";d.style.setProperty("--sc",s.c);
+    d.innerHTML=`<div class="sn">${s.n}</div><div class="st">${s.t}</div><div class="sd">${s.d}</div>`;
+    el.appendChild(d);
+  });
+}
+
+function initChart(){
+  const dk=isDark();
+  const lc=dk?"rgba(255,255,255,.12)":"rgba(0,0,0,.06)";
+  const tc=dk?"#aaa":"#555";
+  const tkc=dk?"#777":"#999";
+  const sc=allScores(vals,ks);
+  chart=new Chart(document.getElementById("rc"),{
+    type:"radar",
+    data:{
+      labels:AREAS.map(a=>a.short),
+      datasets:[{label:"Huidig",data:sc,borderColor:"#1e3a5f",backgroundColor:"rgba(46,111,173,.15)",borderWidth:2,pointBackgroundColor:"#2e6fad",pointBorderColor:dk?"#222":"#fff",pointBorderWidth:1.5,pointRadius:4}]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.dataset.label}: ${c.parsed.r.toFixed(1)}`}}},
+      scales:{r:{min:0,max:10,ticks:{stepSize:2,font:{size:9},color:tkc,backdropColor:"transparent"},grid:{color:lc},pointLabels:{font:{size:11,weight:"500"},color:tc},angleLines:{color:lc}}}
+    }
+  });
+}
+
+function upd(id,v){
+  vals[id]=v;
+  const k=KPIS.find(x=>x.id===id);
+  const ok=v>=k.thresh;
+  const ve=document.getElementById("v-"+id);
+  const be=document.getElementById("b-"+id);
+  if(ve){ve.textContent=fv(v,k.step);ve.style.color=ok?"#27ae60":"#e74c3c";}
+  if(be){be.textContent=ok?"✓ OK":"⚠ Actie";be.className="badge "+(ok?"ok":"wa");}
+  updViz();
+}
+function updK(v){
+  ks=v;
+  const el=document.getElementById("v-kennis");
+  if(el)el.textContent=v.toFixed(1);
+  updViz();
+}
+function updViz(){
+  AREAS.forEach(a=>{
+    const s=score(a.id,vals,ks);
+    const fe=document.getElementById("sf-"+a.id);
+    const se=document.getElementById("ss-"+a.id);
+    if(fe)fe.style.width=Math.round(s*10)+"%";
+    if(se)se.textContent=s.toFixed(1);
+  });
+  if(chart){
+    chart.data.datasets[0].data=allScores(vals,ks);
+    chart.update("none");
+  }
+  buildAlerts();
+}
+
+function toggleNulmeting(){
+  const btn=document.getElementById("nmBtn");
+  const leg=document.getElementById("legRow");
+  if(base){
+    base=null;bks=null;
+    btn.textContent="Opslaan als nulmeting";btn.classList.remove("on");
+    leg.style.display="none";
+    if(chart&&chart.data.datasets.length>1){chart.data.datasets.splice(1,1);chart.update("none");}
+  }else{
+    base={...vals};bks=ks;
+    btn.textContent="✓ Nulmeting actief — wis";btn.classList.add("on");
+    leg.style.display="flex";
+    const bs=allScores(base,bks);
+    if(chart){
+      if(chart.data.datasets.length<2){
+        chart.data.datasets.push({label:"Nulmeting",data:bs,borderColor:"#aaa",backgroundColor:"rgba(150,150,150,.08)",borderWidth:1.5,borderDash:[4,3],pointBackgroundColor:"#bbb",pointBorderColor:isDark()?"#222":"#fff",pointBorderWidth:1,pointRadius:3});
+      }else{chart.data.datasets[1].data=bs;}
+      chart.update("none");
+    }
+  }
+  buildBars();
+}
+
+buildKPIs();
+buildBars();
+buildAlerts();
+buildSteps();
+requestAnimationFrame(initChart);
+</script>
+
+<script>
+  document.querySelectorAll('.dropdown-wrap').forEach(wrap => {
+    const button = wrap.querySelector('.dropdown-button');
+    const panel = wrap.querySelector('.dropdown-panel');
+    const toggles = wrap.querySelectorAll('.dropdown-toggle');
+    const navItems = panel.querySelectorAll('.dropdown-item:not(.dropdown-toggle)');
+
+    function closeAll() {
+      button.setAttribute('aria-expanded', 'false');
+      panel.classList.remove('open');
+      toggles.forEach(toggle => {
+        toggle.setAttribute('aria-expanded', 'false');
+        const sub = document.getElementById(toggle.getAttribute('aria-controls'));
+        if (sub) sub.classList.remove('open');
+      });
+    }
+
+    button.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = button.getAttribute('aria-expanded') === 'true';
+      if (isOpen) {
+        closeAll();
+      } else {
+        button.setAttribute('aria-expanded', 'true');
+        panel.classList.add('open');
+      }
+    });
+
+    toggles.forEach(toggle => {
+      const sub = document.getElementById(toggle.getAttribute('aria-controls'));
+      if (!sub) return;
+      toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', !isOpen);
+        sub.classList.toggle('open');
+      });
+    });
+
+    navItems.forEach(item => item.addEventListener('click', closeAll));
+
+    document.addEventListener('click', (e) => {
+      if (!wrap.contains(e.target)) closeAll();
+    });
+  });
+</script>
+</body>
+</html>

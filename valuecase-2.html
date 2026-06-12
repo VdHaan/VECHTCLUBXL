@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Deelvraag 2 · Value Case — VECHTCLUB XL Schoolproject</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,900;1,500&display=swap" rel="stylesheet" />
+  <style>
+    :root { --xl-blue:#55b8f7; --xl-dark:#272625; --xl-bg:#f3f1ee; --xl-meta:#a2a2a2; }
+    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+    html { scroll-behavior:smooth; }
+    body { font-family:'Montserrat',sans-serif; background:#f3f1ee; color:#000; letter-spacing:-.02em; line-height:1.5; overflow-x:hidden; }
+    ::selection { background:#55b8f7; }
+
+    .nav-frosted { backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); background:rgba(243,241,238,.9); }
+    .nav-link { font-family:'Montserrat',sans-serif; font-weight:600; font-size:.875rem; color:#000; text-decoration:none; letter-spacing:-.01em; transition:color .15s ease; background:none; border:none; cursor:pointer; padding:0; }
+    .nav-link:hover { color:#55b8f7; }
+    .nav-link:focus-visible { outline:2px solid #55b8f7; outline-offset:3px; border-radius:3px; }
+
+    .dropdown-wrap { position:relative; display:inline-block; }
+    .dropdown-button { display:flex; align-items:center; gap:.3rem; padding:0; background:none; border:none; cursor:pointer; font-family:inherit; font-weight:600; font-size:.875rem; color:#000; transition:color .15s ease; }
+    .dropdown-button:hover { color:#55b8f7; }
+    .dropdown-button svg { transition:transform .2s ease; }
+    .dropdown-button[aria-expanded="true"] svg { transform:rotate(180deg); }
+    .dropdown-panel { position:absolute; top:calc(100% + 0.8rem); left:50%; transform:translateX(-50%); width:200px; background:#fff; border-radius:1rem; box-shadow:0 12px 48px rgba(0,0,0,.15),0 2px 8px rgba(0,0,0,.08); padding:.5rem; opacity:0; visibility:hidden; pointer-events:none; transition:opacity .2s ease,visibility .2s ease; z-index:60; }
+    .dropdown-panel.open { opacity:1; visibility:visible; pointer-events:auto; }
+    .dropdown-item { display:block; width:100%; padding:.6rem .85rem; font-size:.85rem; font-weight:600; color:#000; text-decoration:none; border-radius:.6rem; transition:all .15s ease; letter-spacing:-.01em; text-align:left; border:none; background:none; cursor:pointer; }
+    .dropdown-item:hover { background:#f3f1ee; color:#55b8f7; }
+    .dropdown-item:active { background:#e8e5e0; }
+    .dropdown-toggle { display:flex; align-items:center; justify-content:space-between; width:100%; }
+    .dropdown-toggle-chevron { transition:transform .2s ease; flex-shrink:0; margin-left:.4rem; }
+    .dropdown-toggle[aria-expanded="true"] .dropdown-toggle-chevron { transform:rotate(180deg); }
+    .dropdown-subpanel { max-height:0; overflow:hidden; transition:max-height .25s ease; }
+    .dropdown-subpanel.open { max-height:320px; }
+    .dropdown-subitem { padding-left:1.6rem; font-size:.8rem; }
+
+    .display { letter-spacing:-.035em; line-height:1.05; font-weight:900; }
+    .card-lift { transition:box-shadow .25s ease,transform .25s ease; }
+    .card-lift:hover { box-shadow:0 20px 48px rgba(0,0,0,.1),0 4px 12px rgba(0,0,0,.06); transform:translateY(-4px); }
+
+    .pill { display:inline-flex; align-items:center; gap:.4rem; border-radius:10rem; padding:.7rem 1.5rem; font-family:'Montserrat',sans-serif; font-size:.875rem; font-weight:700; text-decoration:none; letter-spacing:-.01em; transition:transform .15s ease,box-shadow .15s ease; cursor:pointer; }
+    .pill:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,.16); }
+    .pill-black { background:#000; color:#fff; border:2px solid #000; }
+
+    .fl { display:block; margin-bottom:.45rem; font-size:.875rem; font-weight:500; color:#fff; text-decoration:none; transition:color .15s; }
+    .fl:hover { color:#55b8f7; }
+
+    .g-pn { display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:2rem; }
+    .g-footer { display:grid; grid-template-columns:1.2fr 1fr 1fr; gap:3rem; }
+
+    .g-steps { display:grid; grid-template-columns:repeat(4,1fr); gap:1.5rem; }
+    .step-card { background:#fff; border-radius:1.25rem; padding:1.85rem; }
+    .step-card .step-num { font-size:2.25rem; font-weight:900; color:#55b8f7; margin-bottom:.5rem; display:block; letter-spacing:-.03em; }
+    .step-card h4 { font-size:1rem; font-weight:900; margin-bottom:.5rem; letter-spacing:-.02em; }
+    .step-card p { font-size:.85rem; color:#272625; line-height:1.6; }
+
+    .g-wg { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
+    .wg-card { background:#272625; border-radius:1.25rem; padding:1.85rem; color:#fff; }
+    .wg-card h4 { font-size:1.1rem; font-weight:900; margin-bottom:.5rem; color:#55b8f7; letter-spacing:-.02em; }
+    .wg-card p { font-size:.875rem; color:#fff; opacity:.85; line-height:1.6; }
+
+    details.vc-acc { background:#fff; border-radius:1.25rem; overflow:hidden; }
+    details.vc-acc + details.vc-acc { margin-top:1rem; }
+    details.vc-acc summary { cursor:pointer; padding:1.5rem 2rem; font-weight:900; font-size:1.1rem; letter-spacing:-.02em; list-style:none; display:flex; justify-content:space-between; align-items:center; gap:1rem; }
+    details.vc-acc summary::-webkit-details-marker { display:none; }
+    details.vc-acc summary .acc-icon { font-size:1.4rem; color:#55b8f7; flex-shrink:0; transition:transform .2s ease; }
+    details.vc-acc[open] summary .acc-icon { transform:rotate(45deg); }
+    .vc-table-wrap { overflow-x:auto; padding:0 .5rem 1.5rem; }
+    .vc-table { width:100%; border-collapse:collapse; font-size:.85rem; min-width:560px; }
+    .vc-table th { background:#272625; color:#fff; text-align:left; padding:.75rem 1rem; font-size:.65rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; }
+    .vc-table th:first-child { border-radius:.6rem 0 0 0; }
+    .vc-table th:last-child { border-radius:0 .6rem 0 0; }
+    .vc-table td { padding:.75rem 1rem; font-weight:500; color:#272625; }
+    .vc-table tr:nth-child(even) td { background:#f3f1ee; }
+
+    #mob { display:none; position:absolute; opacity:0; pointer-events:none; }
+    .mob-overlay { display:none; position:fixed; inset:0; background:#000; z-index:45; padding:5.5rem 2rem 3rem; flex-direction:column; overflow-y:auto; }
+    #mob:checked ~ .mob-overlay { display:flex; }
+
+    @keyframes fu { from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);} }
+    .fu1{animation:fu .55s .1s ease both;} .fu2{animation:fu .55s .25s ease both;} .fu3{animation:fu .55s .4s ease both;}
+
+    @media(max-width:960px){
+      .g-footer{grid-template-columns:1fr; gap:2rem;}
+      .g-steps{grid-template-columns:1fr 1fr;}
+      .g-wg{grid-template-columns:1fr;}
+    }
+    @media(max-width:640px){
+      .g-steps{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+
+<input type="checkbox" id="mob" />
+
+<!-- NAV -->
+<nav class="nav-frosted" style="position:fixed; top:0; left:0; width:100%; z-index:50; border-bottom:1px solid rgba(0,0,0,.08);">
+  <div style="max-width:1280px; margin:0 auto; padding:0 1.5rem; height:4rem; display:flex; align-items:center; justify-content:center; position:relative;">
+
+    <!-- Logo (Centered) -->
+    <a href="index.html" style="display:flex; align-items:center; gap:.5rem; text-decoration:none;">
+      <span style="font-weight:900; font-size:1.1rem; letter-spacing:-.035em; color:#000;">VECHTCLUB</span>
+      <span style="font-weight:900; font-size:1.1rem; letter-spacing:-.035em; background:#55b8f7; color:#000; padding:.12rem .5rem; border-radius:6px;">XL</span>
+    </a>
+
+    <!-- Desktop links (Right) -->
+    <ul class="hidden md:flex" style="align-items:center; gap:2rem; list-style:none; position:absolute; right:1.5rem;">
+      <li class="dropdown-wrap">
+        <button class="dropdown-button" aria-expanded="false" aria-haspopup="true">
+          Over VECHTCLUB XL
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="dropdown-panel">
+          <a href="index.html" class="dropdown-item">HOME</a>
+          <a href="scaling-futures.html" class="dropdown-item">SCALING FUTURES</a>
+          <button class="dropdown-item dropdown-toggle" type="button" aria-expanded="false" aria-controls="verkenning-panel">
+            <span>VERKENNING</span>
+            <svg class="dropdown-toggle-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="dropdown-subpanel" id="verkenning-panel">
+            <a href="deelvraag-1.html" class="dropdown-item dropdown-subitem">Deelvraag 1</a>
+            <a href="deelvraag-2.html" class="dropdown-item dropdown-subitem">Deelvraag 2</a>
+            <a href="deelvraag-3.html" class="dropdown-item dropdown-subitem">Deelvraag 3</a>
+            <a href="deelvraag-4.html" class="dropdown-item dropdown-subitem">Deelvraag 4</a>
+            <a href="deelvraag-5.html" class="dropdown-item dropdown-subitem">Deelvraag 5</a>
+          </div>
+          <button class="dropdown-item dropdown-toggle" type="button" aria-expanded="false" aria-controls="valuecase-panel">
+            <span>VALUE CASE</span>
+            <svg class="dropdown-toggle-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="dropdown-subpanel" id="valuecase-panel">
+            <a href="value-case.html" class="dropdown-item dropdown-subitem">Overzicht</a>
+            <a href="valuecase-1.html" class="dropdown-item dropdown-subitem">Deelvraag 1</a>
+            <a href="valuecase-2.html" class="dropdown-item dropdown-subitem">Deelvraag 2</a>
+            <a href="valuecase-3.html" class="dropdown-item dropdown-subitem">Deelvraag 3</a>
+            <a href="valuecase-4.html" class="dropdown-item dropdown-subitem">Deelvraag 4</a>
+            <a href="valuecase-5.html" class="dropdown-item dropdown-subitem">Deelvraag 5</a>
+          </div>
+        </div>
+      </li>
+    </ul>
+
+    <!-- Hamburger -->
+    <label for="mob" class="md:hidden" style="cursor:pointer; padding:.5rem; z-index:51; position:absolute; right:1.5rem;">
+      <svg width="24" height="18" viewBox="0 0 24 18" fill="none" aria-label="Menu openen">
+        <rect width="24" height="2" rx="1" fill="#000"/>
+        <rect y="8" width="24" height="2" rx="1" fill="#000"/>
+        <rect y="16" width="16" height="2" rx="1" fill="#000"/>
+      </svg>
+    </label>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mob-overlay">
+  <label for="mob" style="position:absolute;top:1.25rem;right:1.5rem;cursor:pointer;color:#fff;font-size:1.75rem;line-height:1;font-weight:300;">✕</label>
+  <a href="index.html"           style="font-weight:900;font-size:2rem;color:#fff;text-decoration:none;margin-bottom:1.25rem;letter-spacing:-.035em;">HOME</a>
+  <a href="scaling-futures.html" style="font-weight:900;font-size:2rem;color:#fff;text-decoration:none;margin-bottom:1.25rem;letter-spacing:-.035em;">SCALING FUTURES</a>
+  <p style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#55b8f7;margin:1.25rem 0 .75rem;">VERKENNING</p>
+  <a href="deelvraag-1.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 1</a>
+  <a href="deelvraag-2.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 2</a>
+  <a href="deelvraag-3.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 3</a>
+  <a href="deelvraag-4.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 4</a>
+  <a href="deelvraag-5.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 5</a>
+  <p style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#55b8f7;margin:1.25rem 0 .75rem;">VALUE CASE</p>
+  <a href="value-case.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Overzicht</a>
+  <a href="valuecase-1.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 1</a>
+  <a href="valuecase-2.html" style="font-weight:700;font-size:1.5rem;color:#55b8f7;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 2</a>
+  <a href="valuecase-3.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 3</a>
+  <a href="valuecase-4.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 4</a>
+  <a href="valuecase-5.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 5</a>
+</div>
+
+<div style="height:4rem;"></div>
+
+
+<!-- ═══════ HERO ═══════ -->
+<section style="background:#55b8f7;padding:5rem 1.5rem;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <nav style="font-size:.8rem;font-weight:600;color:#272625;margin-bottom:1.5rem;letter-spacing:-.01em;">
+      <a href="index.html" style="color:#272625;text-decoration:none;">Home</a>
+      <span style="margin:0 .6rem;">／</span>
+      <a href="value-case.html" style="color:#272625;text-decoration:none;">Value Case</a>
+      <span style="margin:0 .6rem;">／</span>
+      <span>Deelvraag 2</span>
+    </nav>
+    <div class="fu1" style="display:flex;align-items:center;gap:.75rem;margin-bottom:1.25rem;flex-wrap:wrap;">
+      <span style="display:inline-block;background:#000;color:#fff;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;border-radius:10rem;padding:.3rem .8rem;">Deelvraag 2</span>
+      <span style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#272625;">Value Case · VECHTCLUB XL</span>
+    </div>
+    <h1 class="display fu2" style="font-size:clamp(2.5rem,7.5vw,6rem);color:#000;max-width:20ch;">Operationalisatie van brede welvaart</h1>
+  </div>
+</section>
+
+
+<!-- ═══════ LEAD ═══════ -->
+<section style="background:#f3f1ee;padding:5rem 1.5rem;">
+  <div style="max-width:860px;margin:0 auto;">
+    <blockquote style="border-left:4px solid #55b8f7;padding-left:1.5rem;margin-bottom:1.5rem;">
+      <p style="font-size:1rem;font-weight:600;font-style:italic;color:#272625;line-height:1.6;">"Op welke manier kan brede welvaart en de waarde voor de wijk in kaart gebracht worden, gemeten en gemonitord?"</p>
+    </blockquote>
+    <p style="font-size:clamp(1.2rem,2.5vw,1.65rem);font-weight:600;line-height:1.55;letter-spacing:-.02em;color:#272625;">
+      Brede welvaart is meer dan economische prestaties alleen. Om de waarde van Vechtclub XL voor het gebied (Merwedekanaalzone) concreet te maken, is het nodig de waarde te vertalen naar meetbare grootheden. Dat vraagt om een gelaagde aanpak: van abstracte waarden naar concrete indicatoren.
+    </p>
+  </div>
+</section>
+
+
+<!-- ═══════ AANPAK ═══════ -->
+<section style="background:#fff;padding:6rem 1.5rem;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <p style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a2a2a2;margin-bottom:.75rem;">Aanpak</p>
+    <h2 class="display" style="font-size:clamp(1.6rem,3.5vw,2.5rem);color:#000;max-width:30ch;margin-bottom:3rem;">In vier stappen van waarde naar meetinstrument</h2>
+
+    <div class="g-steps">
+      <div class="step-card card-lift">
+        <span class="step-num">01</span>
+        <h4>Waardegebieden vaststellen</h4>
+        <p>Het vaststellen van relevante waardegebieden voor Vechtclub XL en de Merwedekanaalzone.</p>
+      </div>
+      <div class="step-card card-lift">
+        <span class="step-num">02</span>
+        <h4>Dimensies formuleren</h4>
+        <p>Het formuleren van dimensies per waardegebied, die samen de breedte van die waarde afdekken.</p>
+      </div>
+      <div class="step-card card-lift">
+        <span class="step-num">03</span>
+        <h4>Indicatoren koppelen</h4>
+        <p>Het koppelen van concrete, meetbare indicatoren aan elke dimensie.</p>
+      </div>
+      <div class="step-card card-lift">
+        <span class="step-num">04</span>
+        <h4>Meetinstrument aanwijzen</h4>
+        <p>Het aanwijzen van een passend meetinstrument per indicator — aansluitend op de Regionale Monitor Brede Welvaart van het PBL.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════ WAARDEGEBIEDEN ═══════ -->
+<section style="background:#f3f1ee;padding:6rem 1.5rem;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <p style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a2a2a2;margin-bottom:.75rem;">Zes waardegebieden voor Vechtclub XL</p>
+    <h2 class="display" style="font-size:clamp(1.6rem,3.5vw,2.5rem);color:#000;max-width:32ch;margin-bottom:3rem;">Samen dekken ze de brede welvaart van de locatie en omgeving af</h2>
+
+    <div class="g-wg">
+      <div class="wg-card card-lift">
+        <h4>Economische vitaliteit</h4>
+        <p>Ondernemerschap, werkgelegenheid en vastgoedprestatie.</p>
+      </div>
+      <div class="wg-card card-lift">
+        <h4>Community vorming</h4>
+        <p>Sociale verbinding, participatie en samenwerking.</p>
+      </div>
+      <div class="wg-card card-lift">
+        <h4>Creatieve gebiedsidentiteit</h4>
+        <p>Culturele programmering, creatieve productie en waardering.</p>
+      </div>
+      <div class="wg-card card-lift">
+        <h4>Kennisontwikkeling</h4>
+        <p>Kennisdeling, onderwijs, talentontwikkeling en innovatie.</p>
+      </div>
+      <div class="wg-card card-lift">
+        <h4>Duurzame gebiedsontwikkeling</h4>
+        <p>Circulariteit, duurzaam ondernemen en lokale productie.</p>
+      </div>
+      <div class="wg-card card-lift">
+        <h4>Ruimtelijke kwaliteit</h4>
+        <p>Beschikbaarheid werkruimte, gebiedskwaliteit en functiemenging.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════ OVERZICHT TABELLEN ═══════ -->
+<section style="background:#fff;padding:6rem 1.5rem;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <p style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a2a2a2;margin-bottom:.75rem;">Overzicht</p>
+    <h2 class="display" style="font-size:clamp(1.6rem,3.5vw,2.5rem);color:#000;max-width:34ch;margin-bottom:1rem;">Dimensies, indicatoren en meetinstrumenten</h2>
+    <p style="font-size:1rem;font-weight:500;color:#272625;line-height:1.7;max-width:760px;margin-bottom:2.5rem;">Onderstaand model koppelt elke waarde aan meetbare indicatoren en de bijbehorende meetmethode. Dit vormt de basis voor het monitoren van brede welvaart bij Vechtclub XL. Klik op een waardegebied om de tabel te openen.</p>
+
+    <details class="vc-acc" open>
+      <summary>Economische vitaliteit <span class="acc-icon">+</span></summary>
+      <div class="vc-table-wrap">
+        <table class="vc-table">
+          <thead><tr><th>Dimensie</th><th>Indicator</th><th>Meetinstrument</th></tr></thead>
+          <tbody>
+            <tr><td>Ondernemerschap</td><td>Aantal gevestigde bedrijven</td><td>Huurdersbestand</td></tr>
+            <tr><td>Ondernemerschap</td><td>Aantal nieuwe ondernemingen per jaar</td><td>Registratie Vechtclub XL</td></tr>
+            <tr><td>Vastgoedprestatie</td><td>Percentage bezette werkruimtes</td><td>Vastgoeddata</td></tr>
+            <tr><td>Vastgoedprestatie</td><td>Gemiddelde verblijfsduur huurders</td><td>Vastgoedadministratie</td></tr>
+            <tr><td>Werkgelegenheid</td><td>Aantal betaalde arbeidsplaatsen</td><td>Enquête ondernemers</td></tr>
+            <tr><td>Samenwerking &amp; spin-off</td><td>Aantal opdrachten tussen huurders onderling</td><td>Enquête</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <details class="vc-acc">
+      <summary>Community vorming <span class="acc-icon">+</span></summary>
+      <div class="vc-table-wrap">
+        <table class="vc-table">
+          <thead><tr><th>Dimensie</th><th>Indicator</th><th>Meetinstrument</th></tr></thead>
+          <tbody>
+            <tr><td>Gemeenschapsvorming</td><td>Gemiddelde score verbondenheid (1-5)</td><td>Enquête</td></tr>
+            <tr><td>Gemeenschapsvorming</td><td>Frequentie informele ontmoetingen per week</td><td>Enquête</td></tr>
+            <tr><td>Participatie</td><td>Aantal gezamenlijke evenementen per jaar</td><td>Evenementenregistratie</td></tr>
+            <tr><td>Participatie</td><td>Gemiddeld aantal bezoekers per evenement</td><td>Registratie</td></tr>
+            <tr><td>Samenwerking</td><td>% huurders dat samenwerkt met andere huurders</td><td>Enquête</td></tr>
+            <tr><td>Samenwerking</td><td>Aantal samenwerkingsprojecten met buurtinitiatieven</td><td>Interview beheerder</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <details class="vc-acc">
+      <summary>Creatieve gebiedsidentiteit <span class="acc-icon">+</span></summary>
+      <div class="vc-table-wrap">
+        <table class="vc-table">
+          <thead><tr><th>Dimensie</th><th>Indicator</th><th>Meetinstrument</th></tr></thead>
+          <tbody>
+            <tr><td>Culturele programmering</td><td>Aantal culturele evenementen per jaar</td><td>Agenda Vechtclub XL</td></tr>
+            <tr><td>Culturele programmering</td><td>Aantal exposities, workshops en optredens</td><td>Registratie</td></tr>
+            <tr><td>Creatieve productie</td><td>Aantal kunstenaars/makers op locatie</td><td>Huurdersbestand</td></tr>
+            <tr><td>Creatieve productie</td><td>Aantal verschillende creatieve disciplines</td><td>Huurdersanalyse</td></tr>
+            <tr><td>Culturele waardering</td><td>% bezoekers dat locatie cultureel waardevol beoordeelt</td><td>Enquête</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <details class="vc-acc">
+      <summary>Kennisontwikkeling <span class="acc-icon">+</span></summary>
+      <div class="vc-table-wrap">
+        <table class="vc-table">
+          <thead><tr><th>Dimensie</th><th>Indicator</th><th>Meetinstrument</th></tr></thead>
+          <tbody>
+            <tr><td>Kennisdeling</td><td>Aantal kennisdelingssessies per jaar</td><td>Registratie</td></tr>
+            <tr><td>Kennisdeling</td><td>% huurders dat kennis deelt met andere ondernemers</td><td>Enquête</td></tr>
+            <tr><td>Onderwijs &amp; talentontwikkeling</td><td>Aantal stageplaatsen per jaar</td><td>Enquête bedrijven</td></tr>
+            <tr><td>Onderwijs &amp; talentontwikkeling</td><td>Aantal samenwerkingen met onderwijsinstellingen</td><td>Interview</td></tr>
+            <tr><td>Innovatie</td><td>Aantal innovatieprojecten binnen Vechtclub XL</td><td>Interview</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <details class="vc-acc">
+      <summary>Duurzame gebiedsontwikkeling <span class="acc-icon">+</span></summary>
+      <div class="vc-table-wrap">
+        <table class="vc-table">
+          <thead><tr><th>Dimensie</th><th>Indicator</th><th>Meetinstrument</th></tr></thead>
+          <tbody>
+            <tr><td>Circulariteit</td><td>% hergebruik van bestaand vastgoed</td><td>Deskresearch</td></tr>
+            <tr><td>Circulariteit</td><td>% ondernemers dat circulaire materialen gebruikt</td><td>Enquête</td></tr>
+            <tr><td>Duurzaam ondernemen</td><td>Aantal duurzame projecten per jaar</td><td>Registratie</td></tr>
+            <tr><td>Duurzaam ondernemen</td><td>Aantal circulaire initiatieven op locatie</td><td>Interview</td></tr>
+            <tr><td>Lokale productie</td><td>% lokaal geproduceerde producten/diensten</td><td>Enquête</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <details class="vc-acc">
+      <summary>Ruimtelijke kwaliteit <span class="acc-icon">+</span></summary>
+      <div class="vc-table-wrap">
+        <table class="vc-table">
+          <thead><tr><th>Dimensie</th><th>Indicator</th><th>Meetinstrument</th></tr></thead>
+          <tbody>
+            <tr><td>Beschikbaarheid werkruimte</td><td>Oppervlakte betaalbare werkruimte (m²)</td><td>Vastgoeddata</td></tr>
+            <tr><td>Beschikbaarheid werkruimte</td><td>% werkruimte voor makers t.o.v. totaal oppervlak</td><td>Vastgoedanalyse</td></tr>
+            <tr><td>Gebiedskwaliteit</td><td>Waardering aantrekkelijkheid locatie (1-10)</td><td>Enquête</td></tr>
+            <tr><td>Gebiedskwaliteit</td><td>Aantal bezoekers aan het terrein per maand</td><td>Bezoekregistratie</td></tr>
+            <tr><td>Multifunctioneel gebruik</td><td>Aantal multifunctioneel gebruikte ruimtes</td><td>Vastgoedanalyse</td></tr>
+            <tr><td>Multifunctioneel gebruik</td><td>Mate van functiemenging (werken, cultuur, horeca, events)</td><td>Observatie</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+  </div>
+</section>
+
+
+<!-- ═══════ MONITORING + CONCLUSIE ═══════ -->
+<section style="background:#f3f1ee;padding:6rem 1.5rem;">
+  <div style="max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:4rem;">
+
+    <div class="g-content" style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:flex-start;">
+      <div>
+        <h2 class="display" style="font-size:clamp(1.6rem,3.5vw,2.5rem);margin-bottom:1.25rem;">Monitoring</h2>
+        <ul style="font-size:1rem;font-weight:500;color:#272625;line-height:1.8;padding-left:1.25rem;display:flex;flex-direction:column;gap:.5rem;">
+          <li>Meting vindt bij voorkeur jaarlijks plaats, met een nulmeting als vertrekpunt.</li>
+          <li>Enquêtes worden afgenomen bij huurders en bezoekers.</li>
+          <li>Registratiedata worden bijgehouden door het beheer van Vechtclub XL.</li>
+          <li>Vastgoedanalyses worden uitgevoerd op basis van het huurdersbestand en de m²-administratie.</li>
+          <li>Interviews met de beheerder en sleutelpartners leveren kwalitatieve verdieping.</li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="display" style="font-size:clamp(1.6rem,3.5vw,2.5rem);margin-bottom:1.25rem;">Compleet beeld over tijd</h2>
+        <p style="font-size:1rem;font-weight:500;color:#272625;line-height:1.7;">Door de combinatie van kwantitatieve indicatoren (aantallen, percentages, m²) en kwalitatieve scores (enquête 1-5 of 1-10) ontstaat een volledig beeld van de brede welvaartsontwikkeling over tijd.</p>
+      </div>
+    </div>
+
+    <div style="border-radius:1.25rem;padding:2.5rem;background:#fff;border-left:4px solid #55b8f7;">
+      <p style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a2a2a2;margin-bottom:.75rem;">Conclusie</p>
+      <p class="display" style="font-size:clamp(1.2rem,2.5vw,1.6rem);max-width:760px;line-height:1.35;color:#000;margin-bottom:1rem;">
+        Zes waardegebieden, vier stappen, één meetbaar geheel.
+      </p>
+      <p style="font-size:1rem;font-weight:500;color:#272625;line-height:1.7;margin-bottom:1rem;">
+        Om brede welvaart in kaart te brengen zijn zes waarden gemeten: economische vitaliteit, community vorming, creatieve gebiedsidentiteit, kennisontwikkeling, duurzame gebiedsontwikkeling en ruimtelijke kwaliteit. Deze waarden zijn relevant omdat Vechtclub XL meer doet dan alleen ruimte verhuren: de locatie faciliteert samenwerking tussen makers, verzorgt bijeenkomsten en draagt hierdoor op andere manieren bij aan de ontwikkeling van de Merwedekanaalzone. Om die bijdrage in kaart te brengen, is meer nodig dan alleen financiële data.
+      </p>
+      <p style="font-size:1rem;font-weight:500;color:#272625;line-height:1.7;">
+        De vertaling naar meetbare grootheden verliep in vier stappen: per waarde zijn dimensies bepaald, per dimensie zijn indicatoren geformuleerd, en per indicator is een meetinstrument aangewezen zoals een enquête, vastgoeddata of een interview met de beheerder. Deze aanpak sluit aan op de werkwijze van het PBL in de Regionale Monitor Brede Welvaart.
+      </p>
+    </div>
+
+    <div style="border-radius:1.25rem;padding:2rem 2.5rem;background:#272625;">
+      <p style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#55b8f7;margin-bottom:.75rem;">Buiten scope</p>
+      <p style="font-size:1rem;font-weight:500;color:#fff;line-height:1.7;">Buiten scope zijn indicatoren die niet direct aan Vechtclub XL toe te schrijven zijn, zoals huizenprijzen in de omgeving of regionale arbeidsmarktcijfers. Ook subjectieve welzijnsindicatoren zoals ervaren geluk zijn bewust niet meegenomen, omdat dit soort indicatoren niet zinvol en relevant zijn om aan een locatie te koppelen.</p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════ VORIGE / VOLGENDE ═══════ -->
+<section style="background:#272625;padding:4rem 1.5rem;">
+  <div class="g-pn" style="max-width:1280px;margin:0 auto;">
+    <a href="valuecase-1.html" style="text-decoration:none;">
+      <span style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a2a2a2;display:block;margin-bottom:.4rem;">← Vorige</span>
+      <span style="font-size:1.5rem;font-weight:900;color:#fff;letter-spacing:-.025em;display:block;">Deelvraag 1</span>
+    </a>
+    <a href="valuecase-3.html" style="text-decoration:none;text-align:right;">
+      <span style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a2a2a2;display:block;margin-bottom:.4rem;">Volgende →</span>
+      <span style="font-size:1.5rem;font-weight:900;color:#fff;letter-spacing:-.025em;display:block;">Deelvraag 3</span>
+    </a>
+  </div>
+</section>
+
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer style="background:#272625;">
+  <div class="g-footer" style="max-width:1280px;margin:0 auto;padding:4.5rem 1.5rem;">
+    <div>
+      <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:1.25rem;">
+        <span style="font-weight:900;font-size:1rem;letter-spacing:-.035em;color:#fff;">VECHTCLUB</span>
+        <span style="font-weight:900;font-size:1rem;letter-spacing:-.035em;background:#55b8f7;color:#000;padding:.12rem .45rem;border-radius:6px;">XL</span>
+      </div>
+      <p style="font-size:.875rem;font-weight:500;color:#a2a2a2;line-height:1.75;">Schoolproject<br>Groep 36<br>Hogeschool Rotterdam</p>
+    </div>
+    <div>
+      <h4 style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a2a2a2;margin-bottom:1.25rem;">Pagina's</h4>
+      <a href="index.html"           class="fl">HOME</a>
+      <a href="scaling-futures.html" class="fl">SCALING FUTURES</a>
+      <p style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a2a2a2;margin:.9rem 0 .45rem;">VERKENNING</p>
+      <a href="deelvraag-1.html"     class="fl">Deelvraag 1</a>
+      <a href="deelvraag-2.html"     class="fl">Deelvraag 2</a>
+      <a href="deelvraag-3.html"     class="fl">Deelvraag 3</a>
+      <a href="deelvraag-4.html"     class="fl">Deelvraag 4</a>
+      <a href="deelvraag-5.html"     class="fl">Deelvraag 5</a>
+      <p style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a2a2a2;margin:.9rem 0 .45rem;">VALUE CASE</p>
+      <a href="value-case.html"  class="fl">Overzicht</a>
+      <a href="valuecase-1.html" class="fl">Deelvraag 1</a>
+      <a href="valuecase-2.html" class="fl">Deelvraag 2</a>
+      <a href="valuecase-3.html" class="fl">Deelvraag 3</a>
+      <a href="valuecase-4.html" class="fl">Deelvraag 4</a>
+      <a href="valuecase-5.html" class="fl">Deelvraag 5</a>
+    </div>
+    <div>
+      <h4 style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a2a2a2;margin-bottom:1.25rem;">Locatie</h4>
+      <address style="font-style:normal;font-size:.875rem;font-weight:500;color:#a2a2a2;line-height:1.85;">Pijlkruidstraat 2<br>3554 XE Utrecht<br><a href="https://vechtclubxl.nl" style="color:#55b8f7;text-decoration:none;">vechtclubxl.nl</a></address>
+    </div>
+  </div>
+  <div style="border-top:1px solid rgba(255,255,255,.1);padding:.875rem 1.5rem;">
+    <div style="max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.75rem;color:#a2a2a2;font-weight:500;">
+      <span>Schoolproject - Groep 36 - Hogeschool Rotterdam</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.dropdown-wrap').forEach(wrap => {
+    const button = wrap.querySelector('.dropdown-button');
+    const panel = wrap.querySelector('.dropdown-panel');
+    const toggles = wrap.querySelectorAll('.dropdown-toggle');
+    const navItems = panel.querySelectorAll('.dropdown-item:not(.dropdown-toggle)');
+
+    function closeAll() {
+      button.setAttribute('aria-expanded', 'false');
+      panel.classList.remove('open');
+      toggles.forEach(toggle => {
+        toggle.setAttribute('aria-expanded', 'false');
+        const sub = document.getElementById(toggle.getAttribute('aria-controls'));
+        if (sub) sub.classList.remove('open');
+      });
+    }
+
+    button.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = button.getAttribute('aria-expanded') === 'true';
+      if (isOpen) {
+        closeAll();
+      } else {
+        button.setAttribute('aria-expanded', 'true');
+        panel.classList.add('open');
+      }
+    });
+
+    toggles.forEach(toggle => {
+      const sub = document.getElementById(toggle.getAttribute('aria-controls'));
+      if (!sub) return;
+      toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', !isOpen);
+        sub.classList.toggle('open');
+      });
+    });
+
+    navItems.forEach(item => item.addEventListener('click', closeAll));
+
+    document.addEventListener('click', (e) => {
+      if (!wrap.contains(e.target)) closeAll();
+    });
+  });
+</script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Scaling Futures — VECHTCLUB XL Schoolproject</title>
+  <title>Deelvraag 3 · Value Case — VECHTCLUB XL Schoolproject</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -48,10 +48,21 @@
     .fl { display:block; margin-bottom:.45rem; font-size:.875rem; font-weight:500; color:#fff; text-decoration:none; transition:color .15s; }
     .fl:hover { color:#55b8f7; }
 
-    .g-content { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; }
-    .g-themes  { display:grid; grid-template-columns:repeat(4,1fr); gap:1.25rem; }
-    .g-footer  { display:grid; grid-template-columns:1.2fr 1fr 1fr; gap:3rem; }
-    .g-pn      { display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:2rem; }
+    .g-pn { display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:2rem; }
+    .g-footer { display:grid; grid-template-columns:1.2fr 1fr 1fr; gap:3rem; }
+
+    .g-steps { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
+    .step-card { background:#fff; border-radius:1.25rem; padding:1.85rem; }
+    .step-card .step-num { font-size:2.25rem; font-weight:900; color:#55b8f7; margin-bottom:.5rem; display:block; letter-spacing:-.03em; }
+    .step-card p { font-size:.95rem; font-weight:500; color:#272625; line-height:1.65; }
+
+    .g-ind { display:flex; flex-direction:column; gap:1.5rem; }
+    .ind-card { display:grid; grid-template-columns:110px 1fr; gap:2rem; background:#fff; border-radius:1.25rem; padding:2.25rem; align-items:start; }
+    .ind-card .ind-num { font-size:3.75rem; font-weight:900; color:#55b8f7; letter-spacing:-.04em; line-height:1; }
+    .ind-card h3 { font-size:1.3rem; font-weight:900; margin-bottom:.75rem; letter-spacing:-.02em; }
+    .ind-card p { font-size:.95rem; font-weight:500; color:#272625; line-height:1.7; }
+    .ind-card .ind-tags { margin-top:1rem; display:flex; flex-wrap:wrap; gap:.5rem; }
+    .ind-card .ind-tag { font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:#55b8f7; background:#f3f1ee; border-radius:10rem; padding:.3rem .8rem; }
 
     #mob { display:none; position:absolute; opacity:0; pointer-events:none; }
     .mob-overlay { display:none; position:fixed; inset:0; background:#000; z-index:45; padding:5.5rem 2rem 3rem; flex-direction:column; overflow-y:auto; }
@@ -61,12 +72,11 @@
     .fu1{animation:fu .55s .1s ease both;} .fu2{animation:fu .55s .25s ease both;} .fu3{animation:fu .55s .4s ease both;}
 
     @media(max-width:960px){
-      .g-content{grid-template-columns:1fr; gap:2.5rem;}
-      .img-right{order:-1;}
-      .g-themes{grid-template-columns:1fr 1fr;}
       .g-footer{grid-template-columns:1fr; gap:2rem;}
+      .g-steps{grid-template-columns:1fr;}
+      .ind-card{grid-template-columns:1fr;gap:.5rem;}
+      .ind-card .ind-num{font-size:2.5rem;}
     }
-    @media(max-width:600px){ .g-themes{grid-template-columns:1fr;} }
   </style>
 </head>
 <body>
@@ -135,7 +145,7 @@
 <div class="mob-overlay">
   <label for="mob" style="position:absolute;top:1.25rem;right:1.5rem;cursor:pointer;color:#fff;font-size:1.75rem;line-height:1;font-weight:300;">✕</label>
   <a href="index.html"           style="font-weight:900;font-size:2rem;color:#fff;text-decoration:none;margin-bottom:1.25rem;letter-spacing:-.035em;">HOME</a>
-  <a href="scaling-futures.html" style="font-weight:900;font-size:2rem;color:#55b8f7;text-decoration:none;margin-bottom:1.25rem;letter-spacing:-.035em;">SCALING FUTURES</a>
+  <a href="scaling-futures.html" style="font-weight:900;font-size:2rem;color:#fff;text-decoration:none;margin-bottom:1.25rem;letter-spacing:-.035em;">SCALING FUTURES</a>
   <p style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#55b8f7;margin:1.25rem 0 .75rem;">VERKENNING</p>
   <a href="deelvraag-1.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 1</a>
   <a href="deelvraag-2.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 2</a>
@@ -146,7 +156,7 @@
   <a href="value-case.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Overzicht</a>
   <a href="valuecase-1.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 1</a>
   <a href="valuecase-2.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 2</a>
-  <a href="valuecase-3.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 3</a>
+  <a href="valuecase-3.html" style="font-weight:700;font-size:1.5rem;color:#55b8f7;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 3</a>
   <a href="valuecase-4.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 4</a>
   <a href="valuecase-5.html" style="font-weight:700;font-size:1.5rem;color:#fff;text-decoration:none;margin-bottom:.9rem;letter-spacing:-.02em;">Deelvraag 5</a>
 </div>
@@ -160,94 +170,152 @@
     <nav style="font-size:.8rem;font-weight:600;color:#272625;margin-bottom:1.5rem;letter-spacing:-.01em;">
       <a href="index.html" style="color:#272625;text-decoration:none;">Home</a>
       <span style="margin:0 .6rem;">／</span>
-      <span>Scaling Futures</span>
+      <a href="value-case.html" style="color:#272625;text-decoration:none;">Value Case</a>
+      <span style="margin:0 .6rem;">／</span>
+      <span>Deelvraag 3</span>
     </nav>
-    <p class="fu1" style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#272625;margin-bottom:1rem;">Onderzoek · VECHTCLUB XL</p>
-    <h1 class="display fu2" style="font-size:clamp(3rem,9vw,7.5rem);color:#000;max-width:14ch;">Scaling<br>Futures</h1>
+    <div class="fu1" style="display:flex;align-items:center;gap:.75rem;margin-bottom:1.25rem;flex-wrap:wrap;">
+      <span style="display:inline-block;background:#000;color:#fff;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;border-radius:10rem;padding:.3rem .8rem;">Deelvraag 3</span>
+      <span style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#272625;">Value Case · VECHTCLUB XL</span>
+    </div>
+    <h1 class="display fu2" style="font-size:clamp(2.5rem,7.5vw,6.5rem);color:#000;max-width:18ch;">Systemisch relevante indicatoren</h1>
   </div>
 </section>
 
 
-<!-- ═══════ LEAD ALINEA ═══════ -->
+<!-- ═══════ LEAD ═══════ -->
 <section style="background:#f3f1ee;padding:5rem 1.5rem;">
   <div style="max-width:860px;margin:0 auto;">
     <p style="font-size:clamp(1.2rem,2.5vw,1.65rem);font-weight:600;line-height:1.55;letter-spacing:-.02em;color:#272625;">
-      Vechtclub XL is meer dan een plek om te werken. Het is een broedplaats waar makers, creatieve ondernemers en culturele organisaties ruimte, kennis en energie delen. Maar hoe ziet de toekomst van deze ruimtes eruit in een stad waar vastgoedprijzen stijgen en stedelijke ruimte schaars wordt?
+      Deze deelvraag onderzoekt welke indicatoren systemisch relevant zijn voor Vechtclub XL en waarom deze belangrijk zijn voor het functioneren van de broedplaats. De indicatoren zijn opgesteld op basis van de verkenning, interviews en analyse van de locatie. Hiermee wordt inzicht gegeven in de bijdrage van Vechtclub XL aan brede welvaart, leefbaarheid en creatieve stedelijke ontwikkeling.
     </p>
   </div>
 </section>
 
 
-<!-- ═══════ KERNTHEMA'S (uniek voor deze pagina) ═══════ -->
-<section style="background:#55b8f7;padding:6rem 1.5rem;">
+<!-- ═══════ WAT MAAKT EEN INDICATOR SYSTEMISCH RELEVANT ═══════ -->
+<section style="background:#fff;padding:6rem 1.5rem;">
   <div style="max-width:1280px;margin:0 auto;">
-    <p style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#272625;margin-bottom:.75rem;">Framework</p>
-    <h2 class="display" style="font-size:clamp(2rem,5vw,3.5rem);margin-bottom:3rem;">Kernthema's</h2>
-    <div class="g-themes">
-      <div class="card-lift" style="background:#fff;border-radius:1.25rem;padding:2rem;">
-        <span class="display" style="font-size:2.5rem;color:#55b8f7;display:block;margin-bottom:1rem;">01</span>
-        <h3 style="font-size:1.1rem;font-weight:900;letter-spacing:-.025em;margin-bottom:.6rem;">Ruimte & Vastgoed</h3>
-        <p style="font-size:.875rem;font-weight:500;color:#a2a2a2;line-height:1.6;">Hoe kan Vechtclub XL haar fysieke basis behouden in een veranderende stedelijke context?</p>
+    <p style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a2a2a2;margin-bottom:.75rem;">Selectiecriteria</p>
+    <h2 class="display" style="font-size:clamp(1.6rem,3.5vw,2.5rem);color:#000;max-width:32ch;margin-bottom:1.5rem;">Wat maakt een indicator systemisch relevant?</h2>
+    <p style="font-size:1rem;font-weight:500;color:#272625;line-height:1.7;max-width:760px;margin-bottom:3rem;">Een indicator is systemisch relevant als die belangrijk is voor het geheel van de locatie. Dat betekent dat zo'n indicator invloed heeft op meerdere waardegebieden tegelijk, of zo essentieel is dat als hij wegvalt, de hele waarde van de locatie onder druk komt te staan. Voor Vechtclub XL gaat het vooral om indicatoren die de kern van de broedplaats bepalen, zoals betaalbare werkruimte, een sterke community en voldoende creatieve activiteit. De gekozen indicatoren zijn gebaseerd op drie criteria:</p>
+
+    <div class="g-steps">
+      <div class="step-card card-lift">
+        <span class="step-num">01</span>
+        <p>Ze hebben effect op meerdere onderdelen van de locatie.</p>
       </div>
-      <div class="card-lift" style="background:#fff;border-radius:1.25rem;padding:2rem;">
-        <span class="display" style="font-size:2.5rem;color:#55b8f7;display:block;margin-bottom:1rem;">02</span>
-        <h3 style="font-size:1.1rem;font-weight:900;letter-spacing:-.025em;margin-bottom:.6rem;">Economische Vitaliteit</h3>
-        <p style="font-size:.875rem;font-weight:500;color:#a2a2a2;line-height:1.6;">Hoe verdienen creatieven hun brood en groeien ondernemers op dit soort plekken?</p>
+      <div class="step-card card-lift">
+        <span class="step-num">02</span>
+        <p>Ze zijn direct verbonden met het doel van de broedplaats.</p>
       </div>
-      <div class="card-lift" style="background:#fff;border-radius:1.25rem;padding:2rem;">
-        <span class="display" style="font-size:2.5rem;color:#55b8f7;display:block;margin-bottom:1rem;">03</span>
-        <h3 style="font-size:1.1rem;font-weight:900;letter-spacing:-.025em;margin-bottom:.6rem;">Brede Welvaart</h3>
-        <p style="font-size:.875rem;font-weight:500;color:#a2a2a2;line-height:1.6;">Wat zijn de maatschappelijke voordelen van creatieve broedplaatsen voor buurt en stad?</p>
-      </div>
-      <div class="card-lift" style="background:#fff;border-radius:1.25rem;padding:2rem;">
-        <span class="display" style="font-size:2.5rem;color:#55b8f7;display:block;margin-bottom:1rem;">04</span>
-        <h3 style="font-size:1.1rem;font-weight:900;letter-spacing:-.025em;margin-bottom:.6rem;">Beleid & Bescherming</h3>
-        <p style="font-size:.875rem;font-weight:500;color:#a2a2a2;line-height:1.6;">Hoe kunnen gemeenten en beleidsmakers deze plekken actief beschermen en versterken?</p>
+      <div class="step-card card-lift">
+        <span class="step-num">03</span>
+        <p>Ze reageren op externe ontwikkelingen, zoals stijgende huurprijzen of veranderingen in de omgeving.</p>
       </div>
     </div>
   </div>
 </section>
 
 
-<!-- ═══════ INHOUDSBLOKKEN ═══════ -->
+<!-- ═══════ DE VIJF INDICATOREN ═══════ -->
+<section style="background:#f3f1ee;padding:6rem 1.5rem;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <p style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a2a2a2;margin-bottom:.75rem;">De kern van het systeem</p>
+    <h2 class="display" style="font-size:clamp(1.6rem,3.5vw,2.5rem);color:#000;max-width:32ch;margin-bottom:3rem;">De vijf systemisch relevante indicatoren</h2>
+
+    <div class="g-ind">
+      <div class="ind-card card-lift">
+        <span class="ind-num">01</span>
+        <div>
+          <h3>Percentage bezette betaalbare werkruimte (m²)</h3>
+          <p>Dit is de meest directe indicator voor de kern van Vechtclub XL: het bieden van betaalbare ruimte aan creatieve makers. Een hoge bezettingsgraad betekent dat de markt voor de locatie kiest. Een dalende bezettingsgraad signaleert dat huren te hoog worden of dat de doelgroep wegtrekt. Dit raakt direct aan economische vitaliteit en ruimtelijke kwaliteit, en indirect aan community en creatieve identiteit.</p>
+          <div class="ind-tags">
+            <span class="ind-tag">Economische vitaliteit</span>
+            <span class="ind-tag">Ruimtelijke kwaliteit</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ind-card card-lift">
+        <span class="ind-num">02</span>
+        <div>
+          <h3>Gemiddelde verblijfsduur huurders (jaren)</h3>
+          <p>Langdurige huurders wijzen op stabiliteit, vertrouwen en een functionerende community. Vechtclub XL geeft in het interview aan dat de bezetting al jaren hoog is, wat duidt op sterke retentie. Korte verblijfsduren kunnen een teken zijn van financiële druk, onvrede of gebrek aan community. Dit raakt aan economische vitaliteit, community vorming en kennisontwikkeling.</p>
+          <div class="ind-tags">
+            <span class="ind-tag">Economische vitaliteit</span>
+            <span class="ind-tag">Community vorming</span>
+            <span class="ind-tag">Kennisontwikkeling</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ind-card card-lift">
+        <span class="ind-num">03</span>
+        <div>
+          <h3>Aantal samenwerkingsprojecten tussen huurders onderling</h3>
+          <p>Wanneer huurders enkel hun eigen ruimte huren zonder interactie, is er geen broedplaats maar gewone kantoorverhuur. Het aantal interne samenwerkingsprojecten meet of de community daadwerkelijk functioneert. Dit raakt aan community vorming, kennisontwikkeling, economische spin-off en creatieve productie.</p>
+          <div class="ind-tags">
+            <span class="ind-tag">Community vorming</span>
+            <span class="ind-tag">Kennisontwikkeling</span>
+            <span class="ind-tag">Economische spin-off</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ind-card card-lift">
+        <span class="ind-num">04</span>
+        <div>
+          <h3>Aantal culturele evenementen en publieksprogrammering per jaar</h3>
+          <p>Vechtclub XL heeft een publieke functie via Beton-T en de community keuken. Evenementen zijn de zichtbare uiting van de creatieve identiteit en de verbinding met de wijk en stad. Een afname in programmering wijst op teruglopende middelen of een verlies van de open community-functie. Dit raakt aan creatieve gebiedsidentiteit, community en ruimtelijke gebiedskwaliteit.</p>
+          <div class="ind-tags">
+            <span class="ind-tag">Creatieve gebiedsidentiteit</span>
+            <span class="ind-tag">Community vorming</span>
+            <span class="ind-tag">Ruimtelijke kwaliteit</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ind-card card-lift">
+        <span class="ind-num">05</span>
+        <div>
+          <h3>Percentage huurders actief in keten van ontwerp tot productie</h3>
+          <p>Vechtclub XL streeft bewust naar een gevarieerde huurderssamenstelling die de hele creatieve keten beslaat. Wanneer te veel huurders uit dezelfde discipline komen, verliest de locatie haar broedplaatskarakter. Dit raakt aan creatieve gebiedsidentiteit, economische vitaliteit en kennisontwikkeling. Het interview met Vechtclub XL bevestigt dat hierop actief wordt gestuurd bij selectie van nieuwe huurders.</p>
+          <div class="ind-tags">
+            <span class="ind-tag">Creatieve gebiedsidentiteit</span>
+            <span class="ind-tag">Economische vitaliteit</span>
+            <span class="ind-tag">Kennisontwikkeling</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════ ONDERLINGE SAMENHANG + CONCLUSIE ═══════ -->
 <section style="background:#fff;padding:6rem 1.5rem;">
-  <div style="max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:6rem;">
+  <div style="max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:4rem;">
 
-    <!-- Blok 1: tekst links, foto rechts -->
-    <div class="g-content">
-      <div>
-        <h2 class="display" style="font-size:clamp(1.75rem,4vw,2.75rem);margin-bottom:1.25rem;">Een broedplaats<br>onder druk</h2>
-        <p style="font-size:1rem;font-weight:500;color:#272625;line-height:1.7;">Vechtclub XL zit in een voormalig industrieel pand aan de Merwedekanaalzone in Utrecht. Hier wordt voortdurend iets gemaakt — in letterlijke en figuurlijke zin. Maar deze positie is niet vanzelfsprekend. Stijgende vastgoedprijzen en druk op stedelijke ruimte maken het voor broedplaatsen als Vechtclub XL steeds lastiger om te blijven bestaan. Commerciële ontwikkeling en woningbouw liggen constant op de loer.</p>
-      </div>
-      <iframe class="img-right" width="100%" height="480" src="https://www.youtube.com/embed/Y62N7fYmxa8" style="border-radius:1.25rem;display:block;" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <div>
+      <h2 class="display" style="font-size:clamp(1.6rem,3.5vw,2.5rem);margin-bottom:1.25rem;">Onderlinge samenhang</h2>
+      <p style="font-size:1rem;font-weight:500;color:#272625;line-height:1.7;max-width:860px;">De vijf indicatoren zijn onderling verbonden. Betaalbare werkruimte is de randvoorwaarde. Verblijfsduur en samenwerking zijn maten voor de kwaliteit van de community. Programmering is de externe gezichtskaart. Ketendiversiteit garandeert de inhoudelijke breedte. Samen geven ze een compleet beeld van of Vechtclub XL haar rol als creatieve broedplaats en bijdrage aan brede welvaart daadwerkelijk waarmaakt.</p>
     </div>
 
-    <!-- Blok 2: foto links, tekst rechts -->
-    <div class="g-content">
-      <img src="images/brederklimaat.png" alt="Breder klimaat" style="width:100%;border-radius:1.25rem;object-fit:cover;" />
-      <div>
-        <h2 class="display" style="font-size:clamp(1.75rem,4vw,2.75rem);margin-bottom:1.25rem;">Groeiend<br>inzicht</h2>
-        <p style="font-size:1rem;font-weight:500;color:#272625;line-height:1.7;">Tegelijkertijd groeit de erkenning dat plekken als Vechtclub XL onmisbaar zijn voor een levendige stad. Gemeenten zien steeds vaker wat creatieve werkruimtes bijdragen aan innovatie, ondernemerschap en stedelijke leefbaarheid. Voor Utrecht speelt dit letterlijk in de achtertuin: de Merwedekanaalzone is een van de grootste stedelijke transformaties van het land. Hoe die zone zich ontwikkelt, bepaalt mede of Vechtclub XL er een structurele plek in heeft.</p>
-      </div>
-    </div>
-
-    <!-- Pull quote -->
-    <blockquote style="background:#55b8f7;border-radius:1.5rem;padding:3.5rem;">
-      <p class="display" style="font-size:clamp(1.4rem,3.5vw,2.25rem);max-width:28ch;color:#000;">
-        "Plekken waar iets gemaakt wordt — dat is wat Vechtclub XL onmisbaar maakt."
+    <div style="border-radius:1.25rem;padding:2.5rem;background:#f3f1ee;border-left:4px solid #55b8f7;">
+      <p style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a2a2a2;margin-bottom:.75rem;">Conclusie</p>
+      <p class="display" style="font-size:clamp(1.2rem,2.5vw,1.6rem);max-width:760px;line-height:1.35;color:#000;margin-bottom:1rem;">
+        Betaalbare werkruimte is de basis — maar de echte kracht zit in samenwerking en publieke activiteiten.
       </p>
-      <footer style="margin-top:1.25rem;font-size:.875rem;font-weight:700;color:#272625;letter-spacing:-.01em;">
-        — De toekomst van stedelijke broedplaatsen
-      </footer>
-    </blockquote>
-
-    <!-- Blok 3: tekst links, foto rechts -->
-    <div class="g-content">
-      <div>
-        <h2 class="display" style="font-size:clamp(1.75rem,4vw,2.75rem);margin-bottom:1.25rem;">Doorwerken<br>aan toekomst</h2>
-        <p style="font-size:1rem;font-weight:500;color:#272625;line-height:1.7;">De gemeente beschikt over de instrumenten om Vechtclub XL's positie te versterken: subsidies, bestemmingsplannen, convenanten. Of ze dat ook doet, is een van de bepalende vragen voor de toekomst. Ondertussen blijft Vechtclub XL gewoon draaien. Ondernemers werken er aan hun vak, ontmoeten elkaar, werken samen met studenten en onderwijsinstellingen, en bouwen aan iets wat moeilijk in een spreadsheet past. Dat is precies de kracht van de plek — en precies wat het de moeite waard maakt om voor te strijden.</p>
-      </div>
-      <img class="img-right" src="images/Doorwerken.png" alt="Doorwerken aan toekomst" style="width:100%;border-radius:1.25rem;object-fit:cover;" />
+      <p style="font-size:1rem;font-weight:500;color:#272625;line-height:1.7;margin-bottom:1rem;">
+        De gekozen indicatoren geven samen een breed beeld van de economische, sociale, culturele en ruimtelijke waarde van Vechtclub XL. Vooral betaalbare werkruimte blijkt een essentiële indicator, omdat deze direct invloed heeft op de bezettingsgraad, de community, samenwerking en de creatieve identiteit van de broedplaats. Zonder betaalbare ruimte wordt het moeilijk om creatieve ondernemers en makers aan de locatie te binden.
+      </p>
+      <p style="font-size:1rem;font-weight:500;color:#272625;line-height:1.7;margin-bottom:1rem;">
+        Daarnaast laat de analyse zien dat de kracht van Vechtclub XL niet alleen zit in de fysieke werkruimtes, maar vooral in de samenwerking, kennisdeling en publieke activiteiten die op de locatie plaatsvinden. De indicatoren hangen daarom sterk met elkaar samen en versterken elkaar onderling. Tegelijkertijd blijkt dat sommige indicatoren, zoals samenwerking tussen huurders, lastig meetbaar zijn doordat veel interacties informeel plaatsvinden.
+      </p>
+      <p style="font-size:1rem;font-weight:500;color:#272625;line-height:1.7;">
+        Op basis van de verkenning kan worden geconcludeerd dat Vechtclub XL een belangrijke bijdrage levert aan brede welvaart en duurzame stedelijke ontwikkeling binnen Utrecht. De broedplaats combineert economische activiteit, sociale verbinding, culturele identiteit en creatieve innovatie binnen één gebied. Hierdoor vormt Vechtclub XL een sterk voorbeeld van hoe creatieve werkplekken kunnen bijdragen aan een leefbare en toekomstbestendige stad.
+      </p>
     </div>
 
   </div>
@@ -257,13 +325,13 @@
 <!-- ═══════ VORIGE / VOLGENDE ═══════ -->
 <section style="background:#272625;padding:4rem 1.5rem;">
   <div class="g-pn" style="max-width:1280px;margin:0 auto;">
-    <a href="index.html" style="text-decoration:none;">
+    <a href="valuecase-2.html" style="text-decoration:none;">
       <span style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a2a2a2;display:block;margin-bottom:.4rem;">← Vorige</span>
-      <span style="font-size:1.5rem;font-weight:900;color:#fff;letter-spacing:-.025em;display:block;">Home</span>
+      <span style="font-size:1.5rem;font-weight:900;color:#fff;letter-spacing:-.025em;display:block;">Deelvraag 2</span>
     </a>
-    <a href="deelvraag-1.html" style="text-decoration:none;text-align:right;">
+    <a href="valuecase-4.html" style="text-decoration:none;text-align:right;">
       <span style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#a2a2a2;display:block;margin-bottom:.4rem;">Volgende →</span>
-      <span style="font-size:1.5rem;font-weight:900;color:#fff;letter-spacing:-.025em;display:block;">Deelvraag 1</span>
+      <span style="font-size:1.5rem;font-weight:900;color:#fff;letter-spacing:-.025em;display:block;">Deelvraag 4</span>
     </a>
   </div>
 </section>
